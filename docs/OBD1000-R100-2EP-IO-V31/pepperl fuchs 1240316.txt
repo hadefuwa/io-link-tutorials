@@ -1,0 +1,548 @@
+Diffuse mode sensor
+
+OBD1000-R100-2EP-IO-V31
+Dimensions
+21.5
+
+5.5
+
+8.7
+
+14.5
+
+19.95
+
+15.9
+
+Emitter
+
+ø 3.2
+
+10
+
+Reveiver
+
+7.4
+
+25.4
+
+37.1
+
+44.5
+
+3.2
+
+3.2
+
+14.2
+
+M3 (2x)
+
+11
+
+Model Number
+OBD1000-R100-2EP-IO-V31
+Diffuse mode sensor
+
+Electrical connection
+
+with 4-pin, M8 x 1 connector
+
+1
+
+Features
+
+C/Q
+
+2
+
+• Miniature design with versatile
+mounting options
+• Extended temperature range
+-40°C ... 60°C
+
+L+
+
+4
+
+Q
+
+3
+
+L-
+
+Pinout
+
+• High degree of protection IP69K
+
+Wire colors in accordance with EN 60947-5-2
+
+• IO-link interface for service and
+process data
+
+2
+1
+
+1
+2
+3
+4
+
+4
+3
+
+BN
+WH
+BU
+BK
+
+(brown)
+(white)
+(blue)
+(black)
+
+The R100 series miniature optical sensors
+are the first devices of their kind to offer an
+end-to-end solution in a small single standard
+design — from thru-beam sensor through to a
+distance measurement device. As a result of
+this design, the sensors are able to perform
+practically all standard automation tasks.
+The entire series enables sensors to
+communicate via IO-Link.
+The DuraBeam laser sensors are durable and
+can be used in the same way as a standard
+sensor.
+The use of Multi Pixel Technology gives the
+standard sensors a high level of flexibility and
+enables them to adapt more effectively to
+their operating environment.
+
+Indicators/operating means
+1
+
+2
+3
+
+1 Light-on/Dark-on changeover switch
+2 Sensitivity adjuster
+
+4
+
+Receiver
+
+5
+
+Emitter
+
+3 Operating indicator / dark on
+4 Signal indicator
+5 Operating indicator / light on
+
+Release date: 2018-10-08 10:29
+
+Date of issue: 2018-10-08
+
+267075-0127_eng.xml
+
+Product information
+
+Refer to “General Notes Relating to Pepperl+Fuchs Product Information”.
+Pepperl+Fuchs Group
+USA: +1 330 486 0001
+Germany: +49 621 776 4411
+fa-info@de.pepperl-fuchs.com
+www.pepperl-fuchs.com
+fa-info@us.pepperl-fuchs.com
+
+Singapore: +65 6779 9091
+fa-info@sg.pepperl-fuchs.com
+
+1
+
+Diffuse mode sensor
+
+OBD1000-R100-2EP-IO-V31
+
+Technical data
+
+Accessories
+
+Functional safety related parameters
+MTTFd
+Mission Time (TM)
+Diagnostic Coverage (DC)
+
+724 a
+20 a
+0%
+
+Indicators/operating means
+Operation indicator
+
+Control elements
+Control elements
+UB
+I0
+
+Interface
+Interface type
+Transfer rate
+IO-Link Revision
+Min. cycle time
+Process data witdh
+
+OMH-R10X-02
+Mounting bracket
+OMH-R10X-04
+Mounting bracket
+OMH-R10X-10
+Mounting bracket
+OMH-ML100-03
+Mounting aid for round steel ø 12 mm or
+sheet 1.5 mm ... 3 mm
+OMH-ML100-031
+Mounting aid for round steel
+ø 10 ... 14 mm or sheet 1 mm ... 5 mm
+V31-GM-2M-PUR
+Female cordset, M8, 4-pin, PUR cable
+
+10 ... 30 V DC
+max. 10 %
+< 25 mA at 24 V supply voltage
+III
+
+V31-WM-2M-PUR
+Female cordset, M8, 4-pin, PUR cable
+Other suitable accessories can be found at
+www.pepperl-fuchs.com
+
+IO-Link ( via C/Q = pin 4 )
+COM 2 (38.4 kBaud)
+1.1
+2.3 ms
+Process data input 1 Bit
+Process data output 2 Bit
+yes
+0x110101 (1114369)
+A
+
+Output
+Switching type
+
+Signal output
+
+Ud
+f
+
+The switching type of the sensor is adjustable. The default
+setting is:
+C/Q - Pin4: NPN normally open / light-on, PNP normally closed /
+dark-on, IO-Link
+/Q - Pin2: NPN normally closed / dark-on, PNP normally open /
+light-on
+2 push-pull (4 in 1)outputs, short-circuit protected, reverse
+polarity protected, overvoltage protected
+max. 30 V DC
+max. 100 mA , resistive load
+DC-12 and DC-13
+≤ 1.5 V DC
+1000 Hz
+0.5 ms
+
+Conformity
+Communication interface
+Product standard
+
+IEC 61131-9
+EN 60947-5-2
+
+Ambient conditions
+Ambient temperature
+Storage temperature
+
+-40 ... 60 °C (-40 ... 140 °F)
+-40 ... 70 °C (-40 ... 158 °F)
+
+Date of issue: 2018-10-08
+
+SIO mode support
+Device ID
+Compatible master port type
+
+Switching voltage
+Switching current
+Usage category
+Voltage drop
+Switching frequency
+Response time
+
+OMH-R10X-01
+Mounting bracket
+
+LED green:
+constantly on - power on
+flashing (4Hz) - short circuit
+flashing with short break (1 Hz) - IO-Link mode
+LED yellow:
+constantly on - object detected
+constantly off - object not detected
+Light-on/dark-on changeover switch
+Sensing range adjuster
+
+Function indicator
+
+Electrical specifications
+Operating voltage
+Ripple
+No-load supply current
+Protection class
+
+IO-Link-Master02-USB
+IO-Link master, supply via USB port or
+separate power supply, LED indicators,
+M12 plug for sensor connection
+
+Mechanical specifications
+Housing width
+Housing height
+Housing depth
+Degree of protection
+Connection
+Material
+Housing
+Optical face
+Mass
+
+PC (Polycarbonate)
+PMMA
+approx. 10 g
+
+Approvals and certificates
+UL approval
+
+E87056 , cULus Listed , class 2 power supply , type rating 1
+
+2
+
+11 mm
+44.5 mm
+21.5 mm
+IP67 / IP69 / IP69K
+M8 x 1 connector, 4-pin
+
+Refer to “General Notes Relating to Pepperl+Fuchs Product Information”.
+Pepperl+Fuchs Group
+USA: +1 330 486 0001
+Germany: +49 621 776 4411
+fa-info@de.pepperl-fuchs.com
+www.pepperl-fuchs.com
+fa-info@us.pepperl-fuchs.com
+
+267075-0127_eng.xml
+
+2 ... 1000 mm
+20 ... 50 mm
+50 ... 1000 mm
+standard white, 100 mm x 100 mm
+LED
+modulated visible red light
+exempt group
+approx. 65 mm at a distance of 1000 mm
+3.7 °
+EN 60947-5-2
+
+Singapore: +65 6779 9091
+fa-info@sg.pepperl-fuchs.com
+
+Release date: 2018-10-08 10:29
+
+General specifications
+Detection range
+Detection range min.
+Adjustment range
+Reference target
+Light source
+Light type
+LED risk group labelling
+Diameter of the light spot
+Angle of divergence
+Ambient light limit
+
+Diffuse mode sensor
+
+OBD1000-R100-2EP-IO-V31
+
+Curves/Diagrams
+
+Characteristic response curve
+Offset Y [mm]
+15
+10
+5
+0
+-5
+-10
+-15
+
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+Distance X [mm]
+
+X
+white 90 %
+Y
+
+grey 18 %
+
+Relative received light strength
+Excess gain
+
+1000
+
+100
+
+10
+
+1
+
+0
+
+200
+
+400
+
+600
+
+X
+
+800
+
+1000
+1200
+Distance X [mm]
+
+white 90 %
+grey 18 %
+
+Detection ranges
+Object colour
+white
+90%
+
+black
+6%
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+1200
+
+Detection range [mm]
+X
+
+Functions and Operation
+1
+
+2
+
+1 - Light-on / dark-on changeover switch
+2 - Sensing range / sensitivity adjuster
+3 - Operating indicator / dark on
+4 - Signal indicator
+
+L
+
+5 - Operating indicator / light on
+
+R100
+D
+
+Release date: 2018-10-08 10:29
+
+Date of issue: 2018-10-08
+
+267075-0127_eng.xml
+
+grey
+18%
+
+5
+
+4
+
+3
+
+Refer to “General Notes Relating to Pepperl+Fuchs Product Information”.
+Pepperl+Fuchs Group
+USA: +1 330 486 0001
+Germany: +49 621 776 4411
+fa-info@de.pepperl-fuchs.com
+www.pepperl-fuchs.com
+fa-info@us.pepperl-fuchs.com
+
+Singapore: +65 6779 9091
+fa-info@sg.pepperl-fuchs.com
+
+3
+
+Diffuse mode sensor
+
+OBD1000-R100-2EP-IO-V31
+
+To unlock the adjustment functions turn the sensing range /sensitivity adjuster for more than 180 degrees.
+
+Sensing Range / Sensitivity
+Turn sensing range / sensitivity adjuster clockwise to increase sensing range / sensitivity.
+Turn sensing range / sensitivity adjuster counter clockwise to decrease sensing range / sensitivity.
+If the end of the adjustment range is reached, the signal indicator starts flashing with 8 Hz.
+
+Light-on / Dark-on Configuration
+Press the light-on / dark-on changeover switch for more than 1 second (less than 4 seconds). The light-on / dark-on mode changes and the operating indicators are activated accordingly.
+If you press the light-on / dark-on changeover switch for more than 4 seconds, the light-on /dark-on mode changes back to the
+original setting. On release of the light-on / dark-on changeover switch the current state is activated.
+
+Restore Factory Settings
+Press the light-on / dark-on changeover switch for more than 10 seconds (less than 30 seconds) until all LEDs turn off. On release
+of the light-on / dark-on changeover switch the signal indicator turns on. After 5 seconds the sensor resumes operation with
+factory default settings.
+
+Release date: 2018-10-08 10:29
+
+Date of issue: 2018-10-08
+
+267075-0127_eng.xml
+
+After 5 minutes of inactivity the sensing range / sensitivity adjustment is locked. In order to reactivate the sensing range / sensitivity adjustment, turn the sensing range /sensitivity adjuster for more than 180 degrees.
+
+4
+
+Refer to “General Notes Relating to Pepperl+Fuchs Product Information”.
+Pepperl+Fuchs Group
+USA: +1 330 486 0001
+Germany: +49 621 776 4411
+fa-info@de.pepperl-fuchs.com
+www.pepperl-fuchs.com
+fa-info@us.pepperl-fuchs.com
+
+Singapore: +65 6779 9091
+fa-info@sg.pepperl-fuchs.com
+
+

@@ -1,0 +1,305 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IO-Link Dashboard — OBD1000 · Hamed Adefuwa</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3441;
+    --text:#e6edf3; --muted:#8b949e; --accent:#2f81f7;
+    --on:#3fb950; --off:#484f58; --warn:#d29922; --bad:#f85149;
+    --q0:#f85149; --q1:#d29922; --q2:#3fb950; --q3:#2f81f7;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#11161f,#0d1117);position:sticky;top:0;z-index:5}
+  header h1{font-size:17px;margin:0;font-weight:600}
+  header .sub{color:var(--muted);font-size:12px;margin-top:2px}
+  .spacer{flex:1}
+  .conn{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--off)}
+  .dot.ok{background:var(--on);box-shadow:0 0 10px 1px rgba(63,185,80,.7)}
+  .dot.err{background:var(--bad);box-shadow:0 0 10px 1px rgba(248,81,73,.6)}
+  .ipbox{display:flex;align-items:center;gap:6px}
+  input,select{background:#0b0f14;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:7px 9px;font-size:13px;font-family:inherit}
+  input.mono{font-family:ui-monospace,Consolas,monospace}
+  button{cursor:pointer;font-size:13px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:7px 12px}
+  button:hover{border-color:var(--accent)}
+  button.apply{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.apply:hover{filter:brightness(1.1)}
+  main{padding:22px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px;max-width:1240px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .card h2{margin:0 0 14px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .col-3{grid-column:span 3}.col-4{grid-column:span 4}.col-5{grid-column:span 5}
+  .col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
+  @media(max-width:1000px){.card{grid-column:span 12 !important}}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .kv:last-child{border-bottom:0}.kv .k{color:var(--muted)}.kv .v{font-family:ui-monospace,Consolas,monospace;text-align:right}
+
+  /* Detection LED */
+  .led{width:74px;height:74px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 30%,#20262e,#0b0f14);border:2px solid var(--line);transition:.12s}
+  .led.on{background:radial-gradient(circle at 35% 30%,#5ff08a,#1f9d43);border-color:#3fb950;box-shadow:0 0 24px 4px rgba(63,185,80,.55)}
+  .hero{display:flex;align-items:center;gap:18px}
+  .hero .label{font-size:17px;font-weight:600}
+  .hero .state{font-size:13px;color:var(--muted);margin-top:2px}
+  .hero .state.on{color:var(--on)}
+  .counter{margin-top:14px;display:flex;align-items:baseline;gap:8px}
+  .counter .n{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+  .counter .lbl{font-size:12px;color:var(--muted)}
+
+  /* Big value + bar */
+  .bigval{font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+  .unit{font-size:15px;color:var(--muted);font-weight:500;margin-left:6px}
+  .bar{height:10px;border-radius:6px;background:#0b0f14;border:1px solid var(--line);overflow:hidden;margin-top:12px}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,#2f81f7,#3fb950);width:0;transition:width .2s}
+  .rangelbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+
+  /* Signal quality segments */
+  .sqi{display:flex;gap:5px;margin-top:6px}
+  .sqi .seg{flex:1;height:16px;border-radius:4px;background:#0b0f14;border:1px solid var(--line)}
+  .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line);font-weight:600}
+
+  /* gauge */
+  .temp{display:flex;align-items:baseline;gap:6px}
+  .temp .n{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+  .pill{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+  .pill.ok{color:var(--on);border-color:rgba(63,185,80,.4)}
+  .pill.bad{color:var(--bad);border-color:rgba(248,81,73,.4)}
+
+  /* config rows */
+  .cfg{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .cfg:last-child{border-bottom:0}
+  .cfg .meta .name{font-size:14px;font-weight:600}
+  .cfg .meta .desc{font-size:11px;color:var(--muted)}
+  .cfg .ctl{display:flex;gap:6px;align-items:center}
+  .cfg input{width:90px}.cfg input.tag{width:150px}
+  .ok-flash{animation:flash 1s}
+  @keyframes flash{0%{background:rgba(63,185,80,.25)}100%{background:transparent}}
+
+  .log{grid-column:span 12;background:#0b0f14;border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--muted);max-height:150px;overflow:auto;white-space:pre-wrap}
+  .foot{grid-column:span 12;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;border-top:1px solid var(--line);margin-top:4px;padding-top:16px}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:var(--text)}
+  .brand:hover b{color:#fff}
+  .brand b{font-size:15px;font-weight:700}
+  .brand .handle{color:#ff4d4d}
+  .hbrand{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);text-decoration:none;color:var(--text);font-size:12px;font-weight:600}
+  .hbrand:hover{border-color:#ff4d4d}
+  .hbrand .handle{color:#ff4d4d}
+</style>
+
+<header>
+  <div>
+    <h1>IO-Link Live Dashboard</h1>
+    <div class="sub">Pepperl+Fuchs OBD1000 &nbsp;·&nbsp; ifm AL1350 &nbsp;·&nbsp; Port <span id="portLabel">X01</span></div>
+  </div>
+  <div class="spacer"></div>
+  <a class="hbrand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener" title="Hamed Adefuwa on YouTube">
+    <svg width="22" height="16" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span class="handle">@hamedadefuwa</span>
+  </a>
+  <div class="ipbox"><span class="sub">Master IP</span><input id="ip" class="mono" value="192.168.7.4" spellcheck="false" style="width:120px"><button id="save">Save</button></div>
+  <div class="conn"><span id="dot" class="dot"></span><span id="connText">connecting…</span></div>
+</header>
+
+<main>
+  <!-- Detection -->
+  <section class="card col-4">
+    <h2>Detection · Process Data In</h2>
+    <div class="hero">
+      <div id="sscLed" class="led"></div>
+      <div>
+        <div class="label">Switching Signal</div>
+        <div class="state" id="sscState">—</div>
+        <div class="state" style="font-size:11px">raw PDin <span id="pdinRaw">--</span></div>
+      </div>
+    </div>
+    <div class="counter"><span class="n" id="count">0</span><span class="lbl">detections</span>
+      <div class="spacer"></div><button id="resetCount">Reset</button></div>
+  </section>
+
+  <!-- Measurement -->
+  <section class="card col-4">
+    <h2>Signal Level</h2>
+    <div style="display:flex;align-items:baseline;gap:8px"><span class="bigval" id="measVal">--</span><span class="spacer"></span><span class="pill" id="measStatus" style="align-self:center">—</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px">reflected-signal strength — rises as the target gets closer / more reflective</div>
+    <div class="bar" style="position:relative;margin-top:12px"><span id="measBar"></span><span title="switching threshold" style="position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--warn)"></span></div>
+    <div class="rangelbl"><span>0</span><span>threshold <b id="thLbl">1000</b></span><span id="th2">2000</span></div>
+    <div style="margin-top:14px;font-size:12px;color:var(--muted)">Signal quality: <span class="badge" id="sqiBadge">—</span></div>
+    <div class="sqi" id="sqiSegs"><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+  </section>
+
+  <!-- Diagnostics -->
+  <section class="card col-4">
+    <h2>Diagnostics</h2>
+    <div class="temp"><span class="n" id="temp">--</span><span class="unit">°C</span>
+      <div class="spacer"></div><span class="pill" id="tempStatus">—</span></div>
+    <div class="kv" style="margin-top:8px"><span class="k">Max temp seen</span><span class="v" id="maxTemp">—</span></div>
+    <div class="kv"><span class="k">Operating hours</span><span class="v" id="operHours">—</span></div>
+    <div class="kv"><span class="k">Device faults</span><span class="v" id="faults">—</span></div>
+  </section>
+
+  <!-- Configuration -->
+  <section class="card col-8">
+    <h2>Configuration <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">writes to the sensor</span></h2>
+    <div class="cfg">
+      <div class="meta"><div class="name">Switching threshold (SP1)</div><div class="desc">SSC switches when Signal Level reaches this · 1–1000 · higher = target must be closer</div></div>
+      <div class="ctl"><input id="sp1" type="number" min="1" max="1000" class="mono"><button class="apply" id="sp1Apply">Set</button></div>
+    </div>
+    <div class="cfg">
+      <div class="meta"><div class="name">Switching logic</div><div class="desc">output polarity when object detected</div></div>
+      <div class="ctl"><select id="logic"><option value="0">Active-high (light-on / NO)</option><option value="1">Active-low (dark-on / NC)</option></select><button class="apply" id="logicApply">Set</button></div>
+    </div>
+    <div class="cfg">
+      <div class="meta"><div class="name">Device tag / name</div><div class="desc">custom label stored in the sensor · max 32 chars</div></div>
+      <div class="ctl"><input id="tag" class="tag" maxlength="32"><button class="apply" id="tagApply">Set</button></div>
+    </div>
+    <div class="cfg">
+      <div class="meta"><div class="name">Process Data Out (CSC1/CSC2)</div><div class="desc">transducer-disable / evaluation-hold</div></div>
+      <div class="ctl"><span class="pill" id="pdoutNote">not served by this port</span></div>
+    </div>
+  </section>
+
+  <!-- Identity -->
+  <section class="card col-4">
+    <h2>Identity</h2>
+    <div class="kv"><span class="k">Vendor</span><span class="v" id="vendor">Pepperl+Fuchs</span></div>
+    <div class="kv"><span class="k">Product</span><span class="v" id="product">—</span></div>
+    <div class="kv"><span class="k">Device ID</span><span class="v" id="deviceid">—</span></div>
+    <div class="kv"><span class="k">Serial</span><span class="v" id="serial">—</span></div>
+    <div class="kv"><span class="k">Firmware</span><span class="v" id="fw">—</span></div>
+    <div class="kv"><span class="k">Detection range</span><span class="v" id="detRange">—</span></div>
+    <div class="kv"><span class="k">Master</span><span class="v" id="mProduct">—</span></div>
+  </section>
+
+  <div class="log" id="log">starting…</div>
+  <div class="foot">
+    <a class="brand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+      <svg width="34" height="24" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+      <span><b>Hamed Adefuwa</b> &nbsp;<span class="handle">@hamedadefuwa</span></span>
+    </a>
+    <span>IO-Link tutorial series · reads/writes via ifm IoT Core ISDU, decoded from the OBD1000 IODD</span>
+  </div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+let PORT = 1, cid = 1, POLL_FAST = 500, POLL_SLOW = 3000;
+let identityLoaded=false, cfgLoaded=false, prevSsc=0, count=0, rngMin=5, rngMax=1000, threshold=1000;
+const dev = () => `/iolinkmaster/port[${PORT}]/iolinkdevice`;
+
+function log(m){ const el=$('log'); const t=new Date().toLocaleTimeString(); el.textContent=`[${t}] ${m}\n`+el.textContent.split('\n').slice(0,50).join('\n'); }
+async function al(body){ const r=await fetch('/api/al',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); return r.json(); }
+async function get(adr){ const j=await al({code:'request',cid:cid++,adr}); if(j&&j.code===503) throw{unreachable:true,ip:j.masterIp}; return (j&&j.code===200&&j.data)?j.data.value:undefined; }
+async function readIsdu(index,sub=0){ const j=await al({code:'request',cid:cid++,adr:`${dev()}/iolreadacyclic`,data:{index,subindex:sub}}); return (j&&j.code===200&&j.data)?j.data.value:undefined; }
+async function writeIsdu(index,hex,sub=0){ const j=await al({code:'request',cid:cid++,adr:`${dev()}/iolwriteacyclic`,data:{index,subindex:sub,value:hex}}); return j&&j.code===200; }
+
+// hex helpers
+const bytes = h => { h=(''+h).replace(/^0x/i,''); const a=[]; for(let i=0;i<h.length;i+=2)a.push(parseInt(h.substr(i,2),16)); return a; };
+const u = (b,s,n)=>{ let v=0; for(let i=0;i<n;i++)v=(v<<8)|b[s+i]; return v>>>0; };
+const i8 = v => v>127? v-256 : v;
+const i16 = (b,s)=>{ let v=u(b,s,2); return v>32767? v-65536 : v; };
+const hex16 = n => { n=n&0xFFFF; return n.toString(16).toUpperCase().padStart(4,'0'); };
+const strToHex = s => Array.from(new TextEncoder().encode(s)).map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();
+const hexToStr = h => new TextDecoder().decode(new Uint8Array(bytes(h))).replace(/\0+$/,'');
+
+function setConn(ok,text){ $('dot').className='dot '+(ok===true?'ok':ok===false?'err':''); $('connText').textContent=text; }
+function flash(el){ el.classList.remove('ok-flash'); void el.offsetWidth; el.classList.add('ok-flash'); }
+
+async function fetchIdentity(){
+  try{
+    const [vendor,product,deviceid,serial,fw,mProduct] = await Promise.all([
+      get(`${dev()}/vendorname/getdata`), get(`${dev()}/productname/getdata`), get(`${dev()}/deviceid/getdata`),
+      get(`${dev()}/serial/getdata`), readIsdu(23), get(`/deviceinfo/productcode/getdata`)
+    ]);
+    if(vendor) $('vendor').textContent=vendor;
+    if(product) $('product').textContent=product;
+    if(deviceid!=null) $('deviceid').textContent=deviceid+' (0x'+Number(deviceid).toString(16).toUpperCase()+')';
+    if(serial) $('serial').textContent=serial;
+    if(fw) $('fw').textContent=hexToStr(fw);
+    if(mProduct) $('mProduct').textContent=mProduct;
+    // detection range (idx 232): int16 min, int16 max
+    const dc = await readIsdu(232); if(dc){ const b=bytes(dc); rngMin=i16(b,0); rngMax=i16(b,2); $('detRange').textContent=rngMin+'–'+rngMax+' mm'; }
+    identityLoaded=true;
+  }catch(e){}
+}
+
+async function loadConfig(){
+  try{
+    const sp1=await readIsdu(70); if(sp1){ const v=i16(bytes(sp1),0); $('sp1').value=v; threshold=v; $('thLbl').textContent=v; $('th2').textContent=2*v; }
+    const lg =await readIsdu(71); if(lg!=null) $('logic').value = ''+ (bytes(lg)[0]);
+    const tag=await readIsdu(192); if(tag) $('tag').value = hexToStr(tag);
+    cfgLoaded=true;
+  }catch(e){}
+}
+
+async function pollFast(){
+  let pdinHex, connected=false;
+  try{ pdinHex=await get(`${dev()}/pdin/getdata`); connected=pdinHex!==undefined; }
+  catch(e){ setConn(false, e&&e.unreachable?('AL1350 unreachable ('+e.ip+')'):'server unreachable'); return; }
+
+  if(!identityLoaded) fetchIdentity();
+  if(!cfgLoaded) loadConfig();
+  setConn(connected, connected?'connected · '+($('product').textContent||'device'):'no device on port');
+
+  const ssc = pdinHex==null?0:(bytes(pdinHex)[0]&1);
+  if(ssc===1 && prevSsc===0){ count++; $('count').textContent=count; }
+  prevSsc=ssc;
+  $('sscLed').className='led'+(ssc?' on':'');
+  $('sscState').textContent=ssc?'ACTIVE — object detected':'inactive — clear';
+  $('sscState').className='state'+(ssc?' on':'');
+  $('pdinRaw').textContent=pdinHex==null?'--':('0x'+(''+pdinHex).toUpperCase());
+
+  // Measurement + signal quality (idx 236)
+  try{
+    const md=await readIsdu(236);
+    if(md){ const b=bytes(md); const sig=i16(b,0), sqi=b[2];
+      $('measVal').textContent=sig;
+      const detected = sig>=threshold;
+      $('measStatus').textContent = detected?'above threshold':'below threshold';
+      $('measStatus').style.color = detected?'var(--on)':'var(--muted)';
+      $('measStatus').style.borderColor = detected?'rgba(63,185,80,.4)':'var(--line)';
+      const pct=Math.max(0,Math.min(100, sig/(2*threshold)*100));
+      $('measBar').style.width=pct+'%';
+      const names=['insufficient','acceptable','good','excellent']; const cols=['var(--q0)','var(--q1)','var(--q2)','var(--q3)'];
+      $('sqiBadge').textContent=names[sqi]??sqi; $('sqiBadge').style.color=cols[sqi]||'var(--muted)'; $('sqiBadge').style.borderColor=cols[sqi]||'var(--line)';
+      [...$('sqiSegs').children].forEach((s,idx)=>{ s.style.background = idx<=sqi ? cols[sqi] : '#0b0f14'; });
+    }
+  }catch(e){}
+}
+
+async function pollSlow(){
+  try{
+    const om=await readIsdu(226);           // OperMonitor: [ovtHours32][ovtCount16][maxTemp8][curTemp8]
+    if(om){ const b=bytes(om); $('temp').textContent=i8(b[7]); $('maxTemp').textContent=i8(b[6])+' °C'; }
+    const oh=await readIsdu(224); if(oh) $('operHours').textContent=u(bytes(oh),0,4)+' h';
+    const ti=await readIsdu(225);
+    if(ti!=null){ const v=bytes(ti)[0]; const names=['safe','critical high','over-temperature','critical low','under-temperature'];
+      tempFault = v!==0; $('tempStatus').textContent=names[v]??('code '+v);
+      $('tempStatus').className='pill '+(v===0?'ok':'bad'); }
+    const ds=await readIsdu(37);
+    if(ds!=null){ const active = bytes(ds).some(x=>x!==0); $('faults').textContent=active?'ACTIVE':'none'; $('faults').style.color=active?'var(--bad)':'var(--on)'; }
+  }catch(e){}
+}
+
+// writes
+$('sp1Apply').addEventListener('click', async ()=>{
+  const v=parseInt($('sp1').value,10); if(isNaN(v)||v<1||v>1000){ log('threshold must be 1–1000'); return; }
+  if(await writeIsdu(70,hex16(v))){ threshold=v; $('thLbl').textContent=v; $('th2').textContent=2*v; log('switching threshold set to '+v); flash($('sp1')); } else log('threshold write failed');
+});
+$('logicApply').addEventListener('click', async ()=>{
+  const v=$('logic').value; if(await writeIsdu(71,(+v).toString(16).padStart(2,'0'))){ log('switching logic set to '+($('logic').selectedOptions[0].text)); flash($('logic')); } else log('logic write failed');
+});
+$('tagApply').addEventListener('click', async ()=>{
+  const s=$('tag').value; if(await writeIsdu(192,strToHex(s))){ log('device tag set to "'+s+'"'); flash($('tag')); } else log('tag write failed');
+});
+$('resetCount').addEventListener('click', ()=>{ count=0; $('count').textContent='0'; });
+$('save').addEventListener('click', async ()=>{ const ip=$('ip').value.trim(); await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({masterIp:ip,port:PORT})}); log('master IP saved: '+ip+' (restart not needed)'); identityLoaded=cfgLoaded=false; });
+
+async function init(){
+  try{ const c=await(await fetch('/api/config')).json(); if(c.masterIp)$('ip').value=c.masterIp; if(c.port){PORT=c.port;$('portLabel').textContent='X0'+PORT;} }catch(e){}
+  log('dashboard started');
+  const fast=async()=>{ try{await pollFast();}catch(e){} setTimeout(fast,POLL_FAST); };
+  const slow=async()=>{ try{await pollSlow();}catch(e){} setTimeout(slow,POLL_SLOW); };
+  fast(); slow();
+}
+init();
+</script>

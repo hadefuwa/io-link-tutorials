@@ -1,0 +1,169 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Same Sensor Job, Different IO-Link Version — Hamed Adefuwa</title>
+<style>
+  :root{--bg:#0d1117;--panel:#161b22;--line:#2a3441;--text:#e6edf3;--muted:#8b949e;
+    --ok:#3fb950;--warn:#e8890c;--bad:#f85149;--red:#ff4d4d;--r:14px}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--text);
+    background:radial-gradient(120% 120% at 12% 6%,#161c26 0%,#0b0f16 55%,#05070a 100%);min-height:100vh}
+  header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 30px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#11161f,#0d1117)}
+  h1{margin:0;font-size:24px;font-weight:900}
+  h1 .g{color:var(--ok)} h1 .o{color:var(--warn)}
+  .sub{color:var(--muted);font-size:13px;margin-top:3px}
+  .spacer{flex:1}
+  .hbrand{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;
+    background:var(--panel);font-size:13px;font-weight:800;text-decoration:none;color:var(--text)}
+  .hbrand .h{color:var(--red)}
+  main{max-width:1500px;margin:0 auto;padding:24px 30px 60px}
+  .sect{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;margin:26px 0 12px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+  .card.ok{border-top:4px solid var(--ok)} .card.warn{border-top:4px solid var(--warn)}
+
+  /* sensor header cards */
+  .dev{display:flex;align-items:center;gap:16px}
+  .devname{font-size:19px;font-weight:900;line-height:1.2}
+  .devmeta{font-size:13px;color:var(--muted);margin-top:3px}
+  .vbig{font-size:52px;font-weight:900;line-height:1;flex:none}
+  .vok{color:var(--ok)} .vwarn{color:var(--warn)}
+  .same{display:inline-block;margin-top:12px;font-size:13px;color:var(--muted);background:#0b0f14;border:1px dashed var(--line);
+    border-radius:8px;padding:7px 11px}
+
+  /* code line */
+  pre{background:#0b0f14;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0 0;
+    font-family:ui-monospace,Consolas,monospace;font-size:13.5px;color:#9fb0c2;overflow-x:auto}
+  pre b.ok{color:var(--ok)} pre b.warn{color:var(--warn)}
+
+  /* stat bars */
+  .stat{margin-top:14px}
+  .stat .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .stat .lbl b{color:var(--text);font-family:ui-monospace,Consolas,monospace}
+  .track{height:12px;background:#0b0f14;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .track>span{display:block;height:100%;border-radius:7px}
+  .fok{background:linear-gradient(90deg,#2f81f7,#3fb950)} .fwarn{background:linear-gradient(90deg,#8a5a12,#e8890c)}
+
+  /* param chips */
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;max-height:250px;overflow:auto}
+  .chip{font-size:12.5px;background:#0b0f14;border:1px solid #2f4a35;color:#c9e7d1;border-radius:999px;padding:5px 11px;white-space:nowrap}
+  .chip i{color:var(--ok);font-style:normal;font-family:ui-monospace,monospace;margin-right:5px}
+  .bigcount{font-size:46px;font-weight:900;line-height:1}
+  .bigcount small{font-size:15px;color:var(--muted);font-weight:700;margin-left:8px}
+  .block{margin-top:12px;background:#0b0f14;border:2px dashed #6b4a12;border-radius:12px;padding:20px;text-align:center}
+  .block .t{font-size:16px;font-weight:800;color:var(--warn)}
+  .block .d{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
+
+  .takeaway{margin-top:26px;background:#0d1219;border:2px solid var(--warn);border-radius:var(--r);padding:16px 20px;font-size:17px;font-weight:700;line-height:1.5}
+  .takeaway b{color:#ffb063}
+  .foot{display:flex;justify-content:space-between;gap:14px;margin-top:20px;padding-top:14px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:12px;flex-wrap:wrap}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+  .brand b{font-size:14px}.brand .h{color:var(--red)}
+  @media(max-width:980px){.grid2{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div>
+    <h1>Same sensor job. <span class="g">Different IO-Link version.</span></h1>
+    <div class="sub">Two photoelectric sensors · what the IODD files reveal · IO-Link Practical Course</div>
+  </div>
+  <div class="spacer"></div>
+  <a class="hbrand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+    <svg width="20" height="14" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span class="h">@hamedadefuwa</span></a>
+</header>
+
+<main>
+  <!-- THE TWO SENSORS -->
+  <div class="sect">The two sensors — both detect an object</div>
+  <div class="grid2">
+    <div class="card ok">
+      <div class="dev">
+        <div style="flex:1"><div class="devname">Carlo Gavazzi PD30CTDR10BPM5IO</div>
+          <div class="devmeta">Diffuse photoelectric · compact · Vendor 896 / Device 4099</div></div>
+        <div class="vbig vok">1.1</div>
+      </div>
+      <div class="same">Job: detect an object &nbsp;·&nbsp; COM2 38.4 kBaud &nbsp;·&nbsp; M8 connector</div>
+    </div>
+    <div class="card warn">
+      <div class="dev">
+        <div style="flex:1"><div class="devname">Contrinex LLR-C23PA-NMS-400</div>
+          <div class="devmeta">Through-beam laser · Vendor 342 / Device 67329</div></div>
+        <div class="vbig vwarn">1.0</div>
+      </div>
+      <div class="same">Job: detect an object &nbsp;·&nbsp; COM2 38.4 kBaud &nbsp;·&nbsp; M8 connector</div>
+    </div>
+  </div>
+
+  <!-- THE XML -->
+  <div class="sect">1 · The XML says it out loud</div>
+  <div class="grid2">
+    <div class="card">
+      <pre>&lt;CommNetworkProfile iolinkRevision=<b class="ok">"V1.1"</b>&gt;</pre>
+      <div class="stat"><div class="lbl"><span>IODD file size</span><b>180 KB</b></div>
+        <div class="track"><span class="fok" style="width:100%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Text labels</span><b>408</b></div>
+        <div class="track"><span class="fok" style="width:100%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Menus</span><b>61</b></div>
+        <div class="track"><span class="fok" style="width:100%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Schema</span><b>IODD 1.1 · ns 2010/10</b></div></div>
+    </div>
+    <div class="card">
+      <pre>&lt;CommNetworkProfile iolinkRevision=<b class="warn">"V1.0"</b>&gt;</pre>
+      <div class="stat"><div class="lbl"><span>IODD file size</span><b>19 KB</b></div>
+        <div class="track"><span class="fwarn" style="width:11%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Text labels</span><b>44</b></div>
+        <div class="track"><span class="fwarn" style="width:11%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Menus</span><b>8</b></div>
+        <div class="track"><span class="fwarn" style="width:13%"></span></div></div>
+      <div class="stat"><div class="lbl"><span>Schema</span><b>IODD 1.0.1 · ns 2009/11</b></div></div>
+    </div>
+  </div>
+
+  <!-- CONFIGURABILITY -->
+  <div class="sect">2 · Configurability — what you can actually change</div>
+  <div class="grid2">
+    <div class="card ok">
+      <div class="bigcount vok">51 <small>parameters &nbsp;·&nbsp; 26 writable</small></div>
+      <div class="devmeta" style="margin-top:6px">Each one individually addressable by ISDU index</div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="card warn">
+      <div class="bigcount vwarn">0 <small>indexed parameters</small></div>
+      <div class="devmeta" style="margin-top:6px">No <code>&lt;Variable&gt;</code> entries in the whole file</div>
+      <div class="block">
+        <div class="t">Direct Parameter Page only</div>
+        <div class="d">One <b>128-bit</b> block (<code>StdDirectParameterRef</code>)<br>
+          Everything packed into a single record — no named, indexed settings</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    Identical job, identical baud rate, identical connector — but the <b>1.1</b> sensor exposes
+    <b>26 named settings you can write</b>, while the <b>1.0</b> sensor gives you
+    <b>one packed 128-bit block</b>. That's what the version number actually buys you.
+  </div>
+
+  <div class="foot">
+    <a class="brand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+      <svg width="30" height="21" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+      <span><b>Hamed Adefuwa</b> &nbsp;<span class="h">@hamedadefuwa</span></span></a>
+    <span>Data read directly from the two IODD files · IO-Link Practical Course</span>
+  </div>
+</main>
+
+<script>
+const params=[[25,"Function Tag"],[26,"Location Tag"],[58,"Teach-in Select"],[60,"SSC1 Parameter"],
+[61,"SSC1 Configuration"],[62,"SSC2 Parameter"],[63,"SSC2 Configuration"],[64,"Channel 1 Setup"],
+[65,"Channel 2 Setup"],[68,"Local/remote adjustment"],[70,"Process data configuration"],
+[71,"Sensor filter pre-set"],[72,"Temperature alarm threshold"],[73,"Safe ON/OFF limit"],
+[74,"Event configuration"],[77,"Filter scaler"],[78,"LED indication"],[80,"Hysteresis mode"],
+[84,"Mutual interference protection"],[85,"AutoAdjust Setup"],[88,"Application Function Selector"],
+[89,"Speed & Length measurement"],[91,"Pattern Recognition Setup"],[93,"Divider & counter Setup"],
+[95,"Object & Gap Monitoring"],[97,"V_Pattern"]];
+document.getElementById('chips').innerHTML =
+  params.map(p=>`<span class="chip"><i>${p[0]}</i>${p[1]}</span>`).join('');
+</script>

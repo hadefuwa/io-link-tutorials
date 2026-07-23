@@ -1,0 +1,668 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IO-Link Compare — 1.1 vs 1.0 · Hamed Adefuwa</title>
+<style>
+  :root{--panel:#161b22;--line:#2a3441;--text:#e6edf3;--muted:#8b949e;
+    --accent:#2f81f7;--ok:#3fb950;--warn:#e8890c;--bad:#f85149;--red:#ff4d4d;--r:14px}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--text);min-height:100vh;
+    background:radial-gradient(120% 120% at 12% 6%,#161c26 0%,#0b0f16 55%,#05070a 100%)}
+  header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#11161f,#0d1117)}
+  h1{margin:0;font-size:18px;font-weight:900}
+  .sub{color:var(--muted);font-size:12px;margin-top:2px}
+  .spacer{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;
+    background:var(--panel);font-size:12.5px;font-weight:800}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+  .dot.ok{background:var(--ok);box-shadow:0 0 10px var(--ok)}.dot.bad{background:var(--bad)}
+  select,input,button{font-family:inherit}
+  .toggle{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#0b0f14}
+  .toggle button{border:0;background:transparent;color:var(--muted);padding:8px 14px;font-size:12.5px;font-weight:900;cursor:pointer}
+  .toggle button.on{background:linear-gradient(180deg,#ffcf5a,#e8a90c);color:#0d1117}
+  .toggle button.on.live{background:linear-gradient(180deg,#5ff08a,#1f9d43);color:#06210f}
+  .ip{background:#0b0f14;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 8px;width:110px;
+    font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
+  .hbrand{text-decoration:none;color:var(--text)}.hbrand .h{color:var(--red)}
+
+  .picker{display:flex;align-items:center;gap:13px;padding:12px 24px;border-bottom:1px solid var(--line);background:#11161f;flex-wrap:wrap}
+  .pk{display:flex;align-items:center;gap:10px;flex:1;min-width:300px}
+  .tagab{font-size:12px;font-weight:900;padding:5px 10px;border-radius:8px;flex:none}
+  .tA{background:rgba(47,129,247,.16);color:#79b0ff;border:1px solid rgba(47,129,247,.45)}
+  .tB{background:rgba(160,107,214,.16);color:#c69bf0;border:1px solid rgba(160,107,214,.45)}
+  .pk select{flex:1;background:#0b0f14;border:1px solid var(--line);color:var(--text);border-radius:9px;
+    padding:9px 11px;font-size:14px;font-weight:700}
+  .vsword{color:var(--muted);font-weight:900;font-size:15px}
+
+  .tabbar{display:flex;gap:7px;padding:11px 24px 0;border-bottom:1px solid var(--line);background:#0d1117;flex-wrap:wrap}
+  .tabbar button{border:1px solid transparent;border-bottom:0;background:transparent;color:var(--muted);
+    padding:10px 19px;font-size:14.5px;font-weight:900;cursor:pointer;border-radius:11px 11px 0 0}
+  .tabbar button:hover{color:var(--text)}
+  .tabbar button.on{background:var(--panel);border-color:var(--line);color:var(--text)}
+
+  main{max-width:1560px;margin:0 auto;padding:20px 24px 60px}
+  .panel{display:none}.panel.on{display:block}
+  .sect{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:900;margin:4px 0 11px}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .card+.card{margin-top:15px}
+  .hdr{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900;margin-bottom:10px;
+    display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .cnt{font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px}
+  .why{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:5px;line-height:1.45}
+
+  /* what's the difference strip */
+  .wtd{background:linear-gradient(180deg,#141a24,#111620);border:1px solid var(--line);border-radius:var(--r);
+    padding:15px 17px;margin-bottom:20px}
+  .wtdt{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:900;margin-bottom:12px}
+  .wtdt b{color:var(--text)}
+  .wtdcols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .wc{border-radius:11px;padding:12px 14px;border:1px solid var(--line);background:#0b0f14}
+  .wc.std{border-left:4px solid #5b6879}
+  .wc.w10{border-left:4px solid var(--warn)}
+  .wc.w11{border-left:4px solid var(--ok)}
+  .wch{font-size:13px;font-weight:900;margin-bottom:5px}
+  .wc.std .wch{color:#9fb0c2}.wc.w10 .wch{color:var(--warn)}.wc.w11 .wch{color:var(--ok)}
+  .wcb{font-size:13px;color:var(--muted);line-height:1.55}
+  .wcb b{color:var(--text)}
+  @media(max-width:900px){.wtdcols{grid-template-columns:1fr}}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;position:relative;overflow:hidden}
+  .tile .k{font-size:11px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+  .tile .v{font-size:29px;font-weight:900;font-variant-numeric:tabular-nums;margin-top:3px}
+  .tile .u{font-size:13px;color:var(--muted);margin-left:4px}
+  .tile .why{font-size:11px;margin-top:1px}
+  .tile canvas{position:absolute;left:0;right:0;bottom:0;width:100%;height:34px;opacity:.55}
+
+  .dev{display:flex;gap:14px;align-items:center}
+  .dev img{width:76px;height:76px;object-fit:contain;background:#fff;border-radius:10px;padding:6px;flex:none}
+  .noimg{width:76px;height:76px;border-radius:10px;background:#0b0f14;border:1px solid var(--line);flex:none}
+  .dname{font-size:16px;font-weight:900;line-height:1.25}
+  .dmeta{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .vbadge{display:inline-block;font-size:11.5px;font-weight:900;padding:4px 10px;border-radius:999px;margin-top:7px}
+  .v11{color:var(--ok);border:1px solid rgba(63,185,80,.45);background:rgba(63,185,80,.1)}
+  .v10{color:var(--warn);border:1px solid rgba(232,137,12,.45);background:rgba(232,137,12,.1)}
+  .kv{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0}.kv .k{color:var(--muted)}.kv .v{font-family:ui-monospace,Consolas,monospace;text-align:right}
+
+  .hero{display:flex;align-items:center;gap:16px}
+  .led{width:62px;height:62px;border-radius:50%;flex:none;border:2px solid var(--line);
+    background:radial-gradient(circle at 35% 30%,#20262e,#0b0f14);transition:.12s}
+  .led.on{background:radial-gradient(circle at 35% 30%,#5ff08a,#1f9d43);border-color:var(--ok);box-shadow:0 0 26px 5px rgba(63,185,80,.5)}
+  .big{font-size:42px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+  .big small{font-size:14px;color:var(--muted);font-weight:700;margin-left:5px}
+  .stt{font-size:13.5px;font-weight:900;color:var(--muted);margin-top:4px}.stt.on{color:var(--ok)}
+  canvas.chart{width:100%;height:180px;display:block;background:#0b0f14;border:1px solid var(--line);border-radius:10px;margin-top:12px}
+
+  .plist{max-height:540px;overflow:auto}
+  .prow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .prow:last-child{border-bottom:0}
+  .prow .meta{flex:1;min-width:0}
+  .prow .nm{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prow .ix{font-size:11px;color:var(--muted);font-family:ui-monospace,monospace}
+  .prow input,.prow select{background:#0b0f14;border:1px solid var(--line);color:var(--text);border-radius:7px;
+    padding:6px 8px;font-size:12.5px;width:118px}
+  .prow button{background:var(--accent);border:1px solid var(--accent);color:#fff;border-radius:7px;padding:6px 10px;
+    font-size:12px;font-weight:900;cursor:pointer}
+  .note{background:#0b0f14;border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:10px;
+    padding:11px 13px;font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:11px}
+  .note b{color:var(--text)}
+
+  pre.code{background:#0b0f14;border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin:0 0 11px;
+    font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#9fb0c2;overflow-x:auto}
+  pre.code b.ok{color:var(--ok)}pre.code b.wn{color:var(--warn)}
+  .track{height:11px;background:#0b0f14;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:5px}
+  .track>span{display:block;height:100%}
+  table.parts{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.5px}
+  table.parts td{padding:7px 0;border-bottom:1px dashed var(--line)}
+  table.parts tr:last-child td{border-bottom:0}
+  table.parts td:first-child{color:var(--muted);width:92px;font-weight:700}
+  table.parts td:nth-child(2){font-family:ui-monospace,monospace;color:#7d8da0;font-size:11px}
+  table.parts td:last-child{text-align:right;font-family:ui-monospace,monospace;font-weight:700}
+
+  .four{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 17px;position:relative}
+  .fcard .fnum{position:absolute;right:13px;top:10px;font-size:32px;font-weight:900;color:#20293a}
+  .fcard h4{margin:0 0 4px;font-size:15px;font-weight:900;padding-right:28px}
+  .fcard .why{margin:0 0 9px}
+  .vrow{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.5;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .vrow:last-of-type{border-bottom:0}
+  .tag10,.tag11{flex:none;font-size:10.5px;font-weight:900;padding:3px 8px;border-radius:999px;margin-top:1px}
+  .tag10{color:var(--warn);border:1px solid rgba(232,137,12,.45);background:rgba(232,137,12,.1)}
+  .tag11{color:var(--ok);border:1px solid rgba(63,185,80,.45);background:rgba(63,185,80,.1)}
+  .fnote{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.55;border-left:2px solid #2f3b4d;padding-left:10px}
+  .src{margin-top:11px;font-size:11.5px;color:#66748a;text-align:right}
+
+  .tiers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .tier.plain{border-top:4px solid #5b6879}.tier.t10{border-top:4px solid var(--warn)}.tier.t11{border-top:4px solid var(--ok)}
+  .tier h3{margin:0;font-size:16px;font-weight:900}
+  .tier .cap{font-size:12px;color:var(--muted);margin-top:3px}
+  .tier ul{margin:12px 0 0;padding-left:18px}
+  .tier li{font-size:12.5px;line-height:1.65;margin-bottom:4px}
+  .tier.plain li{color:#8b949e}
+  .plus{display:inline-block;font-size:10.5px;font-weight:900;padding:3px 9px;border-radius:999px;margin-bottom:3px}
+  .plus.w{background:rgba(232,137,12,.13);color:var(--warn);border:1px solid rgba(232,137,12,.4)}
+  .plus.g{background:rgba(63,185,80,.13);color:var(--ok);border:1px solid rgba(63,185,80,.4)}
+
+  .diff table{width:100%;border-collapse:collapse}
+  .diff th,.diff td{padding:11px 16px;font-size:13.5px;text-align:left}
+  .diff thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:#0b0f14}
+  .diff tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
+  .diff .lab{color:var(--muted);width:215px;font-weight:700}
+  .same{color:var(--muted)}.win{color:var(--ok);font-weight:900}.lose{color:var(--warn);font-weight:900}
+
+  .log{margin-top:15px;background:#0b0f14;border:1px solid var(--line);border-radius:var(--r);padding:11px 14px;
+    font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--muted);height:78px;overflow:hidden;white-space:pre-wrap}
+  main{padding-bottom:88px}
+  .pnav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:22px;
+    padding:14px;background:linear-gradient(180deg,rgba(13,17,25,0),#0b0f16 40%);z-index:30}
+  .pnav button{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:11px;
+    padding:11px 24px;font-size:15px;font-weight:900;cursor:pointer}
+  .pnav button:hover{border-color:var(--accent)}
+  .pnav button:disabled{opacity:.35;cursor:default}
+  .pcount{font-size:15px;color:var(--muted);font-weight:800}.pcount b{color:var(--text)}
+  @media(max-width:1150px){.vs{grid-template-columns:1fr}.tiles,.four{grid-template-columns:repeat(2,1fr)}.tiers{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div><h1>IO-Link Compare</h1><div class="sub">pick two ports · see what the version actually changes</div></div>
+  <div class="spacer"></div>
+  <div class="toggle"><button id="mSim" class="on">SIMULATION</button><button id="mLive">LIVE</button></div>
+  <span class="pill">master <input class="ip" id="ip" value="192.168.7.4"></span>
+  <span class="pill"><span class="dot" id="dot"></span><span id="conn">simulated</span></span>
+  <a class="pill hbrand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+    <svg width="18" height="13" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span class="h">@hamedadefuwa</span></a>
+</header>
+
+<div class="picker">
+  <div class="pk"><span class="tagab tA">PORT A</span><select id="selA"></select></div>
+  <span class="vsword">vs</span>
+  <div class="pk"><span class="tagab tB">PORT B</span><select id="selB"></select></div>
+</div>
+
+<div class="tabbar" id="steps">
+  <button data-t="intro">1 · Intro</button>
+  <button data-t="live" class="on">2 · Live data</button>
+  <button data-t="config">3 · Settings</button>
+  <button data-t="xml">4 · The file</button>
+  <button data-t="ver">5 · Versions</button>
+  <button data-t="summary">6 · Summary</button>
+</div>
+
+<main>
+  <section class="panel" id="p-intro">
+    <div style="text-align:center;padding:5vh 0 3vh">
+      <div class="sect" style="justify-content:center">IO-Link Practical Course · #5</div>
+      <div style="font-size:66px;font-weight:900;line-height:1;margin:6px 0 14px">IO-Link <span style="color:var(--ok)">1.1</span>
+        <span style="color:var(--muted)">vs</span> <span style="color:var(--warn)">1.0</span></div>
+      <div style="font-size:20px;color:var(--muted);font-weight:600">Two sensors that look identical — one version number that changes everything.</div>
+    </div>
+    <div class="vs" style="max-width:1100px;margin:0 auto">
+      <div class="card" style="text-align:center;border-top:4px solid var(--ok)">
+        <img src="img/pd30.png" style="width:100%;height:180px;object-fit:contain;background:#fff;border-radius:12px;padding:10px">
+        <div style="font-size:19px;font-weight:900;margin-top:12px">Carlo Gavazzi PD30</div>
+        <div class="why">detects objects · photoelectric</div>
+        <span class="vbadge v11" style="font-size:15px;margin-top:10px">IO-Link 1.1</span></div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--warn)">
+        <img src="img/llr.png" style="width:100%;height:180px;object-fit:contain;background:#fff;border-radius:12px;padding:10px">
+        <div style="font-size:19px;font-weight:900;margin-top:12px">Contrinex LLR</div>
+        <div class="why">detects objects · through-beam</div>
+        <span class="vbadge v10" style="font-size:15px;margin-top:10px">IO-Link 1.0</span></div>
+    </div>
+    <div class="why" style="text-align:center;margin-top:16px">Same COM2 speed · same M8 connector · same basic job. → let's see what's different.</div>
+  </section>
+
+  <section class="panel on" id="p-live">
+    <div class="wtd" id="wtd-live"></div>
+    <div class="sect">Master health</div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Temperature</div><div class="v"><span id="mT">--</span><span class="u">°C</span></div><div class="why">inside the master</div><canvas id="cT"></canvas></div>
+      <div class="tile"><div class="k">Voltage</div><div class="v"><span id="mV">--</span><span class="u">V</span></div><div class="why">your 24V supply</div><canvas id="cV"></canvas></div>
+      <div class="tile"><div class="k">Current</div><div class="v"><span id="mA">--</span><span class="u">mA</span></div><div class="why">all sensors combined</div><canvas id="cA"></canvas></div>
+      <div class="tile"><div class="k">Status</div><div class="v" style="color:var(--ok)">0</div><div class="why">no faults reported</div></div>
+    </div>
+    <div class="vs"><div id="liveA"></div><div id="liveB"></div></div>
+    <div class="log" id="log"></div>
+  </section>
+
+  <section class="panel" id="p-config">
+    <div class="wtd" id="wtd-config"></div>
+    <div class="sect">What you can actually change — these write to the sensor</div>
+    <div class="vs"><div id="cfgA"></div><div id="cfgB"></div></div>
+  </section>
+
+  <section class="panel" id="p-xml">
+    <div class="wtd" id="wtd-xml"></div>
+    <div class="sect">Inside the IODD — the XML file that describes each device</div>
+    <div class="vs"><div id="xmlA"></div><div id="xmlB"></div></div>
+  </section>
+
+  <section class="panel" id="p-ver">
+    <div class="wtd" id="wtd-ver"></div>
+    <div class="sect">The 4 differences — IO-Link V1.0 vs V1.1</div>
+    <div class="four">
+      <div class="fcard"><div class="fnum">1</div><h4>Transmission rate</h4>
+        <div class="why">masters must now do 230 kBaud</div>
+        <div class="vrow"><span class="tag10">V1.0</span><span>COM1 4.8 · COM2 38.4 kBaud.<br>COM3 (230.4) <b>optional</b></span></div>
+        <div class="vrow"><span class="tag11">V1.1</span><span>230.4 kBaud <b>mandatory for the master</b></span></div>
+        <div class="fnote">A <b>device</b> only ever supports <b>one</b> rate — which is why the v1.1 PD30 runs COM2, not COM3.</div></div>
+      <div class="fcard"><div class="fnum">2</div><h4>Data Storage</h4>
+        <div class="why">swap a sensor, settings come back</div>
+        <div class="vrow"><span class="tag10">V1.0</span><span><b>✘ none</b> — reconfigure every replacement by hand</span></div>
+        <div class="vrow"><span class="tag11">V1.1</span><span><b>✔</b> master stores settings and <b>auto-restores</b> them</span></div>
+        <div class="fnote">Needs V1.1 in <b>both</b> master <i>and</i> device. This is the one that saves downtime.</div></div>
+      <div class="fcard"><div class="fnum">3</div><h4>Process data width</h4>
+        <div class="why">room for richer sensor data</div>
+        <div class="vrow"><span class="tag10">V1.0</span><span>smaller payload per port</span></div>
+        <div class="vrow"><span class="tag11">V1.1</span><span>up to <b>32 bytes per port</b> (each direction)</span></div>
+        <div class="fnote">The spec lists 32 bytes as a V1.1 addition but <b>doesn't state the V1.0 ceiling</b> — don't quote a number for 1.0.</div></div>
+      <div class="fcard"><div class="fnum">4</div><h4>Backward compatibility</h4>
+        <div class="why">so always buy a 1.1 master</div>
+        <div class="vrow"><span class="tag11">V1.1 master</span><span>runs <b>both</b> V1.0 and V1.1 devices</span></div>
+        <div class="vrow"><span class="tag10">V1.0 master</span><span>runs <b>V1.0 devices only</b></span></div>
+        <div class="fnote">V1.1 features only work if the <b>device</b> supports them too.</div></div>
+    </div>
+    <div class="src">Source: IO-Link Community — “IO-Link System Description: Technology and Application”, §2.6</div>
+
+    <div class="sect" style="margin-top:24px">But even V1.0 beats a standard sensor</div>
+    <div class="tiers">
+      <div class="tier plain"><h3>Standard sensor</h3><div class="cap">no IO-Link · plain switching output</div>
+        <ul><li><b>One bit</b> — on or off, nothing else</li>
+        <li>Controller has <b>no idea</b> what's plugged in</li>
+        <li>Adjust it with a <b>screwdriver at the machine</b></li>
+        <li>No diagnostics — it works, or it silently doesn't</li>
+        <li>Level signal, degrades over long cable</li></ul></div>
+      <div class="tier t10"><span class="plus w">+ V1.0 ADDS</span><h3>IO-Link 1.0</h3><div class="cap">already a big step up</div>
+        <ul><li><b>Identity</b> — vendor, device ID &amp; serial read automatically</li>
+        <li><b>Remote configuration</b> — the v1.0 Contrinex lets you write <b>sensitivity</b> and fire a <b>teach command</b> over the wire</li>
+        <li><b>More than on/off</b> — stability alarm, detection counter, temperature</li>
+        <li><b>Events &amp; diagnostics</b> reported to the controller</li>
+        <li><b>Digital signal</b> — immune to noise; falls back to <b>SIO</b></li></ul></div>
+      <div class="tier t11"><span class="plus g">+ V1.1 ADDS</span><h3>IO-Link 1.1</h3><div class="cap">on top of everything above</div>
+        <ul><li><b>Data Storage</b> — swap a device, settings restored automatically</li>
+        <li><b>Process data up to 32 bytes</b></li>
+        <li>COM3 (230.4 kBaud) mandatory for masters</li>
+        <li>In practice: far richer parameter sets (26 vs 10 here)</li></ul></div>
+    </div>
+
+    <div class="sect" style="margin-top:24px">Head to head — your two selected ports</div>
+    <div class="card diff" style="padding:0;overflow:hidden">
+      <table><thead><tr><th class="lab">Difference</th><th id="hA">A</th><th id="hB">B</th></tr></thead>
+      <tbody id="diffBody"></tbody></table>
+    </div>
+  </section>
+
+  <section class="panel" id="p-summary">
+    <div class="wtd" id="wtd-summary" style="display:none"></div>
+    <div style="text-align:center;padding:3vh 0">
+      <div class="sect" style="justify-content:center">The one that matters</div>
+      <div style="font-size:56px;font-weight:900;line-height:1;color:var(--ok)">Data Storage</div>
+      <div style="font-size:20px;color:var(--muted);font-weight:600;max-width:70ch;margin:14px auto 0;line-height:1.5">
+        A sensor fails at 2am. An operator plugs in a new one. The master writes every setting back —
+        automatically. The line runs. <span style="color:var(--warn)">On 1.0, someone's walking out there with a laptop.</span></div>
+    </div>
+    <div class="vs" style="max-width:1100px;margin:14px auto 0">
+      <div class="card" style="border-top:4px solid var(--accent)">
+        <div class="hdr">If you're buying today</div>
+        <ul style="margin:0;padding-left:20px;font-size:15px;line-height:2">
+          <li>Always buy a <b>1.1 master</b> — it runs old and new devices</li>
+          <li>Prefer <b>1.1 devices</b> — mainly for Data Storage</li>
+          <li>A <b>1.0 device isn't junk</b> — just no auto-restore, less data</li></ul></div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--red)">
+        <div class="hdr" style="justify-content:center">Thanks for watching</div>
+        <div style="display:inline-flex;align-items:center;gap:10px;font-size:26px;font-weight:900;margin-top:8px">
+          <svg width="40" height="28" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+          <span>@<span style="color:var(--red)">hamedadefuwa</span></span></div>
+        <div class="why" style="margin-top:10px">Next up — we pull this data out with a PLC.</div></div>
+    </div>
+  </section>
+</main>
+
+<div class="pnav">
+  <button id="pPrev">‹ Back</button>
+  <span class="pcount"><b id="pCur">1</b> / <span id="pTot">6</span></span>
+  <button id="pNext">Next ›</button>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const dev=p=>`/iolinkmaster/port[${p}]/iolinkdevice`;
+const SEL=(o,v)=>o.map(x=>`<option value="${x[0]}" ${x[0]==v?'selected':''}>${x[1]}</option>`).join('');
+
+const PORTS={
+ 1:{port:1,name:'OBD1000-R100-2EP-IO-V31',vendor:'Pepperl+Fuchs',id:'1114369 (0x110101)',ver:'1.1',
+    img:'img/obd1000.png',conn:'M12 · 4-pin',iodd:'IODD1.1',pdlen:'1 bit in / 2 bit out',
+    pd:{label:'Signal Level',unit:'',max:1200,why:'rises as the target gets closer'},
+    decode:h=>({det:!!(parseInt(h,16)&1),val:null}),
+    params:[{idx:70,name:'Switching Signal Setpoint',type:'number',min:1,max:1000,val:300},
+      {idx:71,name:'Switchpoint Logic',type:'select',val:0,opts:[[0,'Light-on (NO)'],[1,'Dark-on (NC)']]},
+      {idx:64,name:'Switching Signal Delay Time',type:'number',min:0,max:65535,val:0},
+      {idx:97,name:'Signal Filter',type:'number',min:0,max:255,val:0},
+      {idx:104,name:'Process Data Configuration',type:'number',min:0,max:255,val:0},
+      {idx:113,name:'I/O Type I/Q',type:'number',min:0,max:255,val:0},
+      {idx:117,name:'Output Function',type:'number',min:0,max:255,val:0},
+      {idx:118,name:'Input Function',type:'number',min:0,max:255,val:0},
+      {idx:120,name:'Event Configuration',type:'number',min:0,max:255,val:0},
+      {idx:125,name:'Device Operation',type:'number',min:0,max:255,val:0},
+      {idx:126,name:'User Interface Control',type:'number',min:0,max:255,val:0},
+      {idx:127,name:'Indication Control',type:'number',min:0,max:255,val:0},
+      {idx:192,name:'User Tag',type:'text',val:'R100 series'}]},
+ 2:{port:2,name:'TP9237',vendor:'ifm',id:'0x000123',ver:'1.1',
+    img:'',conn:'M12 · 4-pin',iodd:'IODD1.1',pdlen:'16 bit in',
+    pd:{label:'Process temperature',unit:'°C',max:60,why:'live process temperature'},
+    decode:h=>({det:false,val:(parseInt(h,16)||0)/100}),
+    params:[{idx:24,name:'Application tag',type:'text',val:'Line 1 temp'}]},
+ 3:{port:3,name:'LLR-C23PA-NMS-400',vendor:'Contrinex',id:'67329 (0x10701)',ver:'1.0',
+    img:'img/llr.png',conn:'M8 · 3-pin',iodd:'IODD1.0.1',pdlen:'through-beam · detect + alarm',
+    noPd:true, simRx:true,   // physical unit is the emitter (no PD); receiver signal is simulated for the demo
+    pd:{label:'Beam signal',unit:'',max:1000,why:'through-beam: drops when an object blocks the beam'},pmode:'direct',
+    decode:h=>({det:!!(parseInt(h,16)&1),val:null}),
+    params:[{idx:7,name:'Sensitivity (teach value)',type:'number',min:0,max:255,val:128},
+      {idx:10,name:'Teach command',type:'select',val:0,opts:[[0,'Idle'],[1,'Teach 1-point, on target'],[2,'Teach 2-point (step 1)'],[3,'Teach 2-point (step 2)']]},
+      {idx:3,name:'Output 1 configuration',type:'select',val:0,opts:[[0,'Detection light-on'],[1,'Detection dark-on'],[2,'Stability alarm'],[3,'Stability alarm inv.']]},
+      {idx:4,name:'Output 2 configuration',type:'select',val:2,opts:[[0,'Detection light-on'],[1,'Detection dark-on'],[2,'Stability alarm'],[3,'Stability alarm inv.']]},
+      {idx:9,name:'Sensor mode',type:'select',val:2,opts:[[1,'Fine'],[2,'Normal'],[3,'Fast']]},
+      {idx:1,name:'Switching delay time base',type:'select',val:0,opts:[[0,'0.1 ms'],[1,'0.4 ms'],[2,'1.6 ms'],[3,'6.4 ms']]},
+      {idx:5,name:'Switching delay multiplier',type:'number',min:0,max:63,val:0},
+      {idx:2,name:'Output stretch time base',type:'select',val:0,opts:[[0,'0.1 ms'],[1,'0.4 ms'],[2,'1.6 ms'],[3,'6.4 ms']]},
+      {idx:6,name:'Output stretch multiplier',type:'number',min:0,max:63,val:0},
+      {idx:8,name:'Sequence choice',type:'number',min:0,max:3,val:0}]},
+ 4:{port:4,name:'PD30CTDR10BPM5IO',vendor:'Carlo Gavazzi',id:'4099 (0x1003)',ver:'1.1',
+    img:'img/pd30.png',conn:'M8 · class A',iodd:'IODD1.1',pdlen:'32 bit in',
+    pd:{label:'Measured value',unit:'',max:300,why:'reflected light coming back'},
+    decode:h=>{const r=parseInt(h,16)>>>0;return{det:!!(r&0x1),val:(r>>>16)&0xFFFF};},  // top16=value, bit0=SSC1
+    params:[{idx:58,name:'Teach-in Select',type:'select',val:0,opts:[[0,'Single point'],[1,'Two point'],[2,'Window']]},
+      {idx:61,name:'SSC1 Configuration',type:'select',val:1,opts:[[0,'Deactivated'],[1,'Single point'],[2,'Window'],[3,'Two point']]},
+      {idx:63,name:'SSC2 Configuration',type:'select',val:0,opts:[[0,'Deactivated'],[1,'Single point'],[2,'Window'],[3,'Two point']]},
+      {idx:60,name:'SSC1 Parameter',type:'number',min:0,max:65535,val:1000},
+      {idx:62,name:'SSC2 Parameter',type:'number',min:0,max:65535,val:0},
+      {idx:64,name:'Channel 1 Setup',type:'number',min:0,max:255,val:0},
+      {idx:65,name:'Channel 2 Setup',type:'number',min:0,max:255,val:0},
+      {idx:68,name:'Local / remote adjustment',type:'select',val:0,opts:[[0,'Local'],[1,'Remote']]},
+      {idx:70,name:'Process data configuration',type:'number',min:0,max:255,val:0},
+      {idx:71,name:'Sensor filter pre-set',type:'number',min:0,max:10,val:2},
+      {idx:72,name:'Temperature alarm threshold',type:'number',min:-40,max:100,val:70},
+      {idx:73,name:'Safe ON/OFF limit',type:'number',min:0,max:255,val:0},
+      {idx:74,name:'Event configuration',type:'number',min:0,max:255,val:0},
+      {idx:77,name:'Filter scaler',type:'number',min:0,max:255,val:1},
+      {idx:78,name:'LED indication',type:'select',val:0,opts:[[0,'Standard'],[1,'Off'],[2,'Find-me']]},
+      {idx:80,name:'Hysteresis mode',type:'select',val:0,opts:[[0,'Automatic'],[1,'Manual']]},
+      {idx:84,name:'Mutual interference protection',type:'select',val:1,opts:[[0,'Off'],[1,'On']]},
+      {idx:85,name:'AutoAdjust Setup',type:'number',min:0,max:255,val:0},
+      {idx:88,name:'Application Function Selector',type:'number',min:0,max:255,val:0},
+      {idx:89,name:'Speed & Length measurement',type:'number',min:0,max:255,val:0},
+      {idx:91,name:'Pattern Recognition Setup',type:'number',min:0,max:255,val:0},
+      {idx:93,name:'Divider & counter Setup',type:'number',min:0,max:255,val:0},
+      {idx:95,name:'Object & Gap Monitoring',type:'number',min:0,max:255,val:0},
+      {idx:97,name:'V_Pattern',type:'number',min:0,max:255,val:0},
+      {idx:25,name:'Function Tag',type:'text',val:'Diffuse PD30'},
+      {idx:26,name:'Location Tag',type:'text',val:'Conveyor 2'}]}
+};
+const XML={
+ 1:{bytes:67850,size:'66 KB',rev:'V1.1',ns:'2010/10',vars:21,rw:13,texts:220,menus:24,pdin:'1 bit',imgs:10},
+ 2:null,
+ 3:{bytes:19482,size:'19 KB',rev:'V1.0',ns:'2009/11',vars:0,rw:10,texts:88,menus:8,pdin:'n/a',imgs:3},
+ 4:{bytes:179628,size:'175 KB',rev:'V1.1',ns:'2010/10',vars:51,rw:26,texts:408,menus:61,pdin:'32 bit',imgs:4}
+};
+const STATS={1:{isdu:21,rw:13,how:'indexed ISDU'},2:{isdu:'—',rw:'—',how:'indexed ISDU'},
+             3:{isdu:0,rw:10,how:'Direct Parameter Page'},4:{isdu:51,rw:26,how:'indexed ISDU'}};
+
+let side={A:4,B:3},mode='live',phase=0,prevDet={},counts={};
+const series={};Object.keys(PORTS).forEach(p=>{series[p]=[];counts[p]=0;});
+const mh={t:[],v:[],a:[]};
+
+async function al(b){try{const r=await fetch('/api/al',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});return await r.json();}catch(e){return null;}}
+const DS={
+  async pdin(p){if(mode==='sim')return sim(p);
+    const j=await al({code:'request',cid:1,adr:`${dev(p)}/pdin/getdata`});return (j&&j.code===200&&j.data)?j.data.value:null;},
+  async master(){if(mode==='sim')return{t:41+Math.sin(phase*.3)*.8,v:24.4+Math.sin(phase*.21)*.05,a:117+Math.sin(phase*.17)*4};
+    const g=async a=>{const j=await al({code:'request',cid:1,adr:a});return (j&&j.code===200&&j.data)?j.data.value:null;};
+    const [t,v,a]=await Promise.all([g('/processdatamaster/temperature/getdata'),g('/processdatamaster/voltage/getdata'),g('/processdatamaster/current/getdata')]);
+    return{t,v:v!=null?v/1000:null,a};},
+  async writeIsdu(p,idx,hex){if(mode==='sim')return true;
+    const j=await al({code:'request',cid:1,adr:`${dev(p)}/iolwriteacyclic`,data:{index:idx,subindex:0,value:hex}});return j&&j.code===200;}
+};
+function sim(p){
+  if(p==1){const t=(PORTS[1].params.find(x=>x.idx===70)||{}).val||300;
+    const s=Math.max(0,Math.round(550+Math.sin(phase*.9)*560));PORTS[1]._sig=s;return s>=t?'01':'00';}
+  if(p==2)return Math.round((22.6+Math.sin(phase*.5)*1.6)*100).toString(16).padStart(4,'0');
+  if(p==3)return Math.sin(phase*.7)>0?'01':'00';
+  if(p==4)return Math.max(0,Math.round(2000+Math.sin(phase*.6+2)*1900)).toString(16).padStart(8,'0');
+  return '00';
+}
+function draw(cv,arr,color,min,max,fill){
+  if(!cv)return;const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;
+  if(cv.width!==w*dpr||cv.height!==h*dpr){cv.width=w*dpr;cv.height=h*dpr;}
+  const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+  if(fill){c.strokeStyle='#1b2430';c.lineWidth=1;for(let i=1;i<4;i++){const y=h/4*i;c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}}
+  if(arr.length<2)return;
+  const rng=(max-min)||1,X=i=>i/(arr.length-1)*w,Y=v=>h-((v-min)/rng)*(h-12)-6;
+  if(fill){const g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,color+'55');g.addColorStop(1,color+'00');
+    c.beginPath();c.moveTo(0,h);arr.forEach((v,i)=>c.lineTo(X(i),Y(v)));c.lineTo(w,h);c.closePath();c.fillStyle=g;c.fill();}
+  c.beginPath();arr.forEach((v,i)=>i?c.lineTo(X(i),Y(v)):c.moveTo(X(i),Y(v)));
+  c.strokeStyle=color;c.lineWidth=2.4;c.lineJoin='round';c.stroke();
+}
+const push=(a,v,n=90)=>{a.push(v);if(a.length>n)a.shift();};
+function log(m){const e=$('log');if(!e)return;e.textContent=`[${new Date().toLocaleTimeString()}] ${m}\n`+e.textContent.split('\n').slice(0,5).join('\n');}
+
+function renderLive(s){
+  const d=PORTS[side[s]];
+  $('live'+s).innerHTML=`
+    <div class="card">
+      <div class="dev">${d.img?`<img src="${d.img}">`:`<div class="noimg"></div>`}
+        <div style="flex:1"><div class="dname">${d.name}</div><div class="dmeta">${d.vendor} · ${d.id}</div>
+          <span class="vbadge ${d.ver==='1.1'?'v11':'v10'}">IO-Link ${d.ver}</span>
+          <span class="why" style="display:inline;margin-left:8px">${d.ver==='1.1'?'the newer spec':'the older spec'}</span></div></div>
+      <div style="margin-top:11px">
+        <div class="kv"><span class="k">Connector</span><span class="v">${d.conn}</span></div>
+        <div class="kv"><span class="k">IODD</span><span class="v">${d.iodd}</span></div>
+        <div class="kv"><span class="k">Process data</span><span class="v">${d.pdlen}</span></div></div>
+    </div>
+    ${(d.noPd&&!d.simRx)?`<div class="card">
+      <div class="hdr">Process data</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="led" style="border-color:#3a4450"></div>
+        <div><div style="font-size:22px;font-weight:900;color:var(--warn)">No signal</div>
+          <div class="why">this unit is the emitter — it fires the beam but sends no process data</div></div></div>
+      <div class="note" style="margin:14px 0 0">Its <b>parameters still read/write over IO-Link</b> (see the Configuration tab) — that's what makes it a great v1.0 example even without a live value.</div>
+    </div>`:`<div class="card">
+      <div class="hdr"><span>${d.pd.label}</span>${d.simRx?`<span class="cnt" style="background:rgba(232,137,12,.16);color:#ffb063;border:1px solid rgba(232,137,12,.5)">SIMULATED RECEIVER · DEMO</span>`:''}</div>
+      <div class="hero"><div class="led" id="led${s}"></div>
+        <div style="flex:1"><div class="big"><span id="pv${s}">--</span><small>${d.pd.unit}</small></div>
+          <div class="stt" id="st${s}">—</div></div>
+        <div style="text-align:right"><div class="kv" style="border:0"><span class="k">PDin&nbsp;</span><span class="v" id="raw${s}">—</span></div>
+          <div class="kv" style="border:0"><span class="k">detections&nbsp;</span><span class="v" id="cnt${s}">0</span></div></div></div>
+      <div class="why">${d.pd.why||''}</div>
+      <canvas class="chart" id="ch${s}"></canvas>
+    </div>`}`;
+}
+function renderCfg(s){
+  const p=side[s],d=PORTS[p],st=STATS[p],box=$('cfg'+s),good=d.ver==='1.1';
+  const note=d.pmode==='direct'?`<div class="note">These are <b>Direct Parameter Page</b> sub-indexes, not indexed ISDU
+      parameters — this v1.0 device has no <code>&lt;Variable&gt;</code> entries, but the page is <b>read/write</b>,
+      so sensitivity and teach are still settable over the wire.</div>`:'';
+  box.innerHTML=`<div class="card">
+    <div class="hdr"><span>${d.name}</span><span class="cnt ${good?'v11':'v10'}">${st.rw} writable</span></div>
+    <div class="why" style="margin:-4px 0 11px">via ${st.how}${st.isdu!=='—'?` · ${st.isdu} indexed parameters in the IODD`:''}</div>
+    ${note}
+    <div class="plist">${d.params.map((q,i)=>{
+      const ctl=q.type==='select'?`<select data-i="${i}">${SEL(q.opts,q.val)}</select>`
+        :`<input data-i="${i}" type="${q.type}" value="${q.val}" ${q.min!=null?`min="${q.min}"`:''} ${q.max!=null?`max="${q.max}"`:''}>`;
+      return `<div class="prow"><div class="meta"><div class="nm">${q.name}</div>
+        <div class="ix">${d.pmode==='direct'?'sub-index':'index'} ${q.idx}</div></div>${ctl}<button data-w="${i}">Set</button></div>`;}).join('')}</div>
+  </div>`;
+  box.querySelectorAll('button[data-w]').forEach(b=>b.onclick=async()=>{
+    const i=+b.dataset.w,q=d.params[i],el=box.querySelector(`[data-i="${i}"]`),v=el.value;
+    q.val=(q.type==='text')?v:Number(v);
+    const hex=(q.type==='text')?Array.from(new TextEncoder().encode(v)).map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase()
+      :(q.type==='select'?Number(v).toString(16).padStart(2,'0').toUpperCase():(Number(v)&0xFFFF).toString(16).padStart(4,'0').toUpperCase());
+    const ok=await DS.writeIsdu(d.port,q.idx,hex);
+    log(`${ok?'✔':'✘'} X0${d.port} ${d.pmode==='direct'?'sub':'idx'} ${q.idx} ← ${v}${mode==='sim'?' (simulated)':''}`);});
+}
+function renderXml(s){
+  const p=side[s],x=XML[p],d=PORTS[p],box=$('xml'+s),MAX=179628;
+  if(!x){box.innerHTML=`<div class="card"><div class="hdr">${d.name}</div>
+    <div class="note">No IODD for this device in <code>docs/</code> yet.</div></div>`;return;}
+  const good=x.rev==='V1.1';
+  box.innerHTML=`<div class="card">
+    <div class="hdr"><span>${d.name}</span><span class="cnt ${good?'v11':'v10'}">${x.rev}</span></div>
+    <pre class="code">&lt;CommNetworkProfile iolinkRevision=<b class="${good?'ok':'wn'}">"${x.rev}"</b>&gt;</pre>
+    <div class="why" style="margin:-4px 0 10px">the version, written in the file itself</div>
+    <div class="kv"><span class="k">IODD file size</span><span class="v">${x.size}</span></div>
+    <div class="track"><span style="width:${(x.bytes/MAX*100).toFixed(0)}%;background:${good?'linear-gradient(90deg,#2f81f7,#3fb950)':'linear-gradient(90deg,#8a5a12,#e8890c)'}"></span></div>
+    <div class="why">bigger file, richer device</div>
+    <div class="kv" style="margin-top:9px"><span class="k">Schema</span><span class="v">ns ${x.ns}</span></div>
+    <table class="parts">
+      <tr><td>ID card</td><td>&lt;DeviceIdentity&gt;</td><td>✓</td></tr>
+      <tr><td>Pictures</td><td>&lt;DeviceVariant&gt;</td><td>${x.imgs} images</td></tr>
+      <tr><td>The bytes</td><td>&lt;ProcessDataCollection&gt;</td><td>${x.pdin}</td></tr>
+      <tr><td>Settings</td><td>&lt;VariableCollection&gt;</td><td class="${x.vars?'':'lose'}">${x.vars} · ${x.rw} rw</td></tr>
+      <tr><td>Dictionary</td><td>&lt;ExternalTextCollection&gt;</td><td>${x.texts} labels</td></tr>
+      <tr><td>Menus</td><td>&lt;MenuCollection&gt;</td><td>${x.menus}</td></tr>
+    </table></div>`;
+}
+function renderDiff(){
+  const A=PORTS[side.A],B=PORTS[side.B],sA=STATS[side.A],sB=STATS[side.B],xA=XML[side.A],xB=XML[side.B];
+  $('hA').textContent=`A — X0${A.port} ${A.name}`;$('hB').textContent=`B — X0${B.port} ${B.name}`;
+  const c=(v,g)=>`<span class="${g===null?'same':g?'win':'lose'}">${v}</span>`;
+  const rows=[['IO-Link revision',c('v'+A.ver,A.ver==='1.1'),c('v'+B.ver,B.ver==='1.1')],
+    ['Writable settings',c(sA.rw,sA.rw>sB.rw),c(sB.rw,sB.rw>sA.rw)],
+    ['Indexed (ISDU) parameters',c(sA.isdu,sA.isdu>sB.isdu),c(sB.isdu,sB.isdu>sA.isdu)],
+    ['Configured via',c(sA.how,null),c(sB.how,null)],
+    ['Data Storage',c(A.ver==='1.1'?'✔ possible':'✘ none',A.ver==='1.1'),c(B.ver==='1.1'?'✔ possible':'✘ none',B.ver==='1.1')],
+    ['Process data',c(A.pdlen,null),c(B.pdlen,null)],
+    ['Connector',c(A.conn,null),c(B.conn,null)],
+    ['IODD schema',c(A.iodd,null),c(B.iodd,null)]];
+  if(xA&&xB){rows.push(['IODD file size',c(xA.size,xA.bytes>xB.bytes),c(xB.size,xB.bytes>xA.bytes)]);
+    rows.push(['Text labels in XML',c(xA.texts,xA.texts>xB.texts),c(xB.texts,xB.texts>xA.texts)]);
+    rows.push(['Menus in XML',c(xA.menus,xA.menus>xB.menus),c(xB.menus,xB.menus>xA.menus)]);}
+  $('diffBody').innerHTML=rows.map(r=>`<tr><td class="lab">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+}
+/* ---- "what's the difference" strip, tailored per tab ---- */
+const WTD={
+ live:{t:'What\'s the difference? — <b>the data you get back</b>',
+   std:'<b>One bit.</b> On or off. That is genuinely everything a standard sensor can tell you.',
+   v10:'The switch state <b>plus extras</b> — stability alarm, detection counter, sensor temperature.',
+   v11:'<b>Rich process data</b>, up to 32 bytes — signal levels, measurements, quality, all at once.'},
+ config:{t:'What\'s the difference? — <b>changing settings</b>',
+   std:'A <b>screwdriver</b> and a walk to the machine. Every adjustment is done by hand, on site.',
+   v10:'<b>Remote settings over the wire</b> — about 10 here, packed into one block. Still no screwdriver.',
+   v11:'<b>Remote settings</b> — 26 here, each with its own index, so tools can name and group them.'},
+ xml:{t:'What\'s the difference? — <b>the description file</b>',
+   std:'<b>No file at all.</b> Nothing tells the controller what the device is or what it can do.',
+   v10:'A <b>small IODD</b> — 19 KB, no indexed parameters, 88 labels.',
+   v11:'A <b>big IODD</b> — 175 KB, 51 parameters, 408 labels, 61 menus.'},
+ ver:{t:'What\'s the difference? — <b>the specification itself</b>',
+   std:'Not IO-Link at all. No identity, no configuration, no diagnostics — just a switching output.',
+   v10:'<b>Identity, remote configuration, events and diagnostics.</b> A huge step up from a plain sensor.',
+   v11:'All of that, <b>plus Data Storage</b>, 32-byte process data, and COM3 required for masters.'}
+};
+function renderWTD(){
+  Object.entries(WTD).forEach(([k,w])=>{
+    const el=$('wtd-'+k); if(!el)return;
+    el.innerHTML=`<div class="wtdt">${w.t}</div><div class="wtdcols">
+      <div class="wc std"><div class="wch">Standard sensor</div><div class="wcb">${w.std}</div></div>
+      <div class="wc w10"><div class="wch">IO-Link 1.0</div><div class="wcb">${w.v10}</div></div>
+      <div class="wc w11"><div class="wch">IO-Link 1.1</div><div class="wcb">${w.v11}</div></div></div>`;
+  });
+}
+function renderAll(){['A','B'].forEach(s=>{renderLive(s);renderCfg(s);renderXml(s);});renderDiff();renderWTD();}
+
+/* ---- presentation stepper ---- */
+const STEP=['intro','live','config','xml','ver','summary'];
+const stepBtns=[...document.querySelectorAll('#steps button')];
+let step=1;   // start on Live
+$('pTot').textContent=STEP.length;
+function goStep(n){
+  step=Math.max(0,Math.min(STEP.length-1,n));
+  const t=STEP[step];
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p-'+t));
+  stepBtns.forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  $('pCur').textContent=step+1;
+  $('pPrev').disabled=step===0; $('pNext').disabled=step===STEP.length-1;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+stepBtns.forEach(b=>b.onclick=()=>goStep(STEP.indexOf(b.dataset.t)));
+$('pPrev').onclick=()=>goStep(step-1); $('pNext').onclick=()=>goStep(step+1);
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='select'||tag==='textarea')return;   // don't hijack typing in config fields
+  if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();goStep(step+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();goStep(step-1);}
+  else if(e.key==='Home')goStep(0); else if(e.key==='End')goStep(STEP.length-1);
+  else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+});
+['A','B'].forEach(s=>{const el=$('sel'+s);
+  el.innerHTML=Object.values(PORTS).map(d=>`<option value="${d.port}" ${d.port==side[s]?'selected':''}>X0${d.port} — ${d.name} (v${d.ver})</option>`).join('');
+  el.onchange=e=>{side[s]=+e.target.value;renderAll();log(`Port ${s} → X0${side[s]}`);};});
+function setMode(m){mode=m;
+  $('mSim').classList.toggle('on',m==='sim');$('mLive').classList.toggle('on',m==='live');$('mLive').classList.toggle('live',m==='live');
+  $('conn').textContent=m==='sim'?'simulated':'connecting…';$('dot').className='dot'+(m==='sim'?'':' ok');
+  log(m==='sim'?'SIMULATION — no master needed':'LIVE — polling the AL1350 via the local proxy');}
+$('mSim').onclick=()=>setMode('sim');$('mLive').onclick=()=>setMode('live');
+$('ip').onchange=async e=>{await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({masterIp:e.target.value,port:side.A})});log('master IP → '+e.target.value);};
+
+let tickN=0,failStreak=0;
+function setReach(ok){
+  if(mode!=='live')return;
+  if(ok){failStreak=0;$('conn').textContent='connected';$('dot').className='dot ok';}
+  else{failStreak++; if(failStreak>=4){$('conn').textContent='master unreachable';$('dot').className='dot bad';}}
+}
+async function tick(){
+  phase+=0.08; tickN++;
+  let attempted=false, ok=false;
+  if(mode==='sim' || tickN%5===1){          // master health only ~every 2s (eases the single-threaded server)
+    const m=await DS.master();
+    if(mode==='live')attempted=true;
+    if(m&&m.t!=null){ok=true;$('mT').textContent=(+m.t).toFixed(0);push(mh.t,+m.t);}
+    if(m&&m.v!=null){$('mV').textContent=(+m.v).toFixed(2);push(mh.v,+m.v);}
+    if(m&&m.a!=null){$('mA').textContent=(+m.a).toFixed(0);push(mh.a,+m.a);}
+    draw($('cT'),mh.t,'#2f81f7',38,44);draw($('cV'),mh.v,'#3fb950',24,24.8);draw($('cA'),mh.a,'#e8890c',100,135);
+  }
+  for(const s of ['A','B']){
+    const p=side[s],d=PORTS[p];
+    if(d.simRx){                            // simulated through-beam receiver (physical unit is the emitter)
+      const t=phase*0.9, blocked=Math.sin(t)>0.55;
+      const val=blocked?(40+Math.random()*35):(880+Math.sin(t*3)*30+Math.random()*18);
+      push(series[p],val);
+      if(blocked&&!prevDet[p]){counts[p]++;log(`X0${p} ${d.name} — object in beam`);}
+      prevDet[p]=blocked;
+      const pv=$('pv'+s);if(!pv)continue;
+      pv.textContent=Math.round(val);
+      $('led'+s).className='led'+(blocked?' on':'');
+      $('st'+s).textContent=blocked?'BLOCKED — object in beam':'clear';
+      $('st'+s).className='stt'+(blocked?' on':'');
+      $('raw'+s).textContent=blocked?'0x01':'0x00';
+      $('cnt'+s).textContent=counts[p];
+      draw($('ch'+s),series[p],s==='A'?'#2f81f7':'#a06bd6',0,d.pd.max,true);
+      continue;
+    }
+    if(d.noPd)continue;                    // emitter with no sim: nothing to poll
+    if(mode==='live')attempted=true;
+    const hex=await DS.pdin(p);
+    if(hex==null)continue;
+    ok=true;
+    const r=d.decode(hex);
+    const val=r.val!=null?r.val:(p==1&&mode==='sim'?d._sig:(r.det?1:0));
+    push(series[p],Number(val)||0);
+    if(r.det&&!prevDet[p]){counts[p]++;log(`X0${p} ${d.name} — object detected`);}
+    prevDet[p]=r.det;
+    const pv=$('pv'+s);if(!pv)continue;
+    pv.textContent=r.val!=null?(+r.val).toFixed(d.pd.unit==='°C'?1:0):(p==1&&mode==='sim'?d._sig:(r.det?'ON':'OFF'));
+    $('led'+s).className='led'+(r.det?' on':'');
+    $('st'+s).textContent=r.det?'ACTIVE — object detected':'inactive — clear';
+    $('st'+s).className='stt'+(r.det?' on':'');
+    $('raw'+s).textContent='0x'+String(hex).toUpperCase();
+    $('cnt'+s).textContent=counts[p];
+    draw($('ch'+s),series[p],s==='A'?'#2f81f7':'#a06bd6',0,d.pd.max,true);
+  }
+  if(mode==='sim'){$('conn').textContent='simulated';$('dot').className='dot';}
+  else if(attempted) setReach(ok);
+}
+renderAll();setMode('live');goStep(1);tick();setInterval(tick,400);
+</script>

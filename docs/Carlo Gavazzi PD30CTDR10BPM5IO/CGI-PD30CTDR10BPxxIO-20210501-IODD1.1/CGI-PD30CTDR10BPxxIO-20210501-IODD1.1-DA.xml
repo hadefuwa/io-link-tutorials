@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+	<DocumentInfo copyright="Carlo Gavazzi" releaseDate="2021-05-01" version="V1.0" />
+<Language xml:lang="da">
+	<Text id="T_VendorText" value="www.gavazziautomation.com" />
+	<Text id="T_VendorUrl" value="www.gavazziautomation.com" />
+	<Text id="T_DeviceName" value="PD30" />
+	<Text id="T_DeviceFamily" value="Fotocelle" />
+	<Text id="TD_ISDUDeviceVariant" value="Fotoceller, objektaftastere, rød lyskilde, 1000 mm, rustfrit stålhus, IO-Link" />
+	<Text id="TN_Out1" value="Strømforsyning (+)" />
+	<Text id="TN_Out2" value="Udgang 2 / Teach-in" />
+	<Text id="TN_Out3" value="Strømforsyning (-)" />
+	<Text id="TN_Out4" value="Udgang 1 / IO-Link" />
+	<Text id="TD_Connection01" value="M8-stik eller kabel, 2 m" />
+	<Text id="TN_V_FunctionTag" value="Funktionstag" />
+	<Text id="TN_V_LocationTag" value="Lokaliseringstag" />
+	<!-- Smart Sensor Profile parameters -->
+	<Text id="TN_DT_TI_Result_Flag_Nok" value="Ikke OK" />
+	<Text id="TN_DT_TI_Result_Flag_OK" value="OK" />
+	<Text id="TN_DT_SSC_Param_SP1" value="Setpunkt 1" />
+	<Text id="TN_DT_SSC_Param_SP2" value="Setpunkt 2" />
+	<Text id="TN_DT_SSC_Config_Logic_High" value="Høj aktiv" />
+	<Text id="TN_DT_SSC_Config_Logic_Low" value="Lav aktiv" />
+	<Text id="TN_DT_SSC_Config_Logic" value="Aftastningslogik" />
+	<Text id="TN_DT_SSC_Config_Mode_DIS" value="Deaktiveret" />
+	<Text id="TN_DT_SSC_Config_Mode_SPM" value="Et-punkt" />
+	<Text id="TN_DT_SSC_Config_Mode_WM" value="Vindue" />
+	<Text id="TN_DT_SSC_Config_Mode_TPM" value="To-punkt" />
+	<Text id="TN_DT_SSC_Config_Mode" value="Mode" />
+	<Text id="TN_DT_SSC_Config_Hyst" value="Hysterese" />
+	<Text id="TN_V_TI_Select_NO" value="Ingen kanal valgt" />
+	<Text id="TN_V_TI_Select_SSC1" value="Aftastningskanal (SSC 1)" />
+	<Text id="TN_V_TI_Select_SSC2" value="Aftastningskanal  (SSC 2)" />
+	<Text id="TN_V_TI_Select" value="Teach-in valg" />
+	<Text id="TN_V_TI_Result_State_IDLE" value="LEDIG" />
+	<Text id="TN_V_TI_Result_State_Success" value="SUCCESS" />
+	<Text id="TN_V_TI_Result_State_WAIT" value="VENT PÅ KOMMANDO" />
+	<Text id="TN_V_TI_Result_State_BUSY" value="OPTAGET" />
+	<Text id="TN_V_TI_Result_State_ERROR" value="FEJL" />
+	<Text id="TN_V_TI_Result_State" value="Teach-in-status" />
+	<Text id="TN_V_TI_Result_SP1TP1" value="Indlæringspunkt 1 til setpunkt 1 " />
+	<Text id="TN_V_TI_Result_SP1TP2" value="Indlæringspunkt 2 til setpunkt 1 " />
+	<Text id="TN_V_TI_Result_SP2TP1" value="Indlæringspunkt 1 til setpunkt 2" />
+	<Text id="TN_V_TI_Result_SP2TP2" value="Indlæringspunkt 2 til setpunkt 2" />
+	<Text id="TN_V_TI_Result" value="Teach-in-resultat" />
+	<Text id="TN_V_SSC1_Param" value="SSC1-parameter" />
+	<Text id="TN_V_SSC1_Config" value="SSC1-konfiguration" />
+	<Text id="TN_V_SSC2_Param" value="SSC2-parameter" />
+	<Text id="TN_V_SSC2_Config" value="SSC2-konfiguration" />
+	<!-- Output parameters -->
+	<Text id="TN_DT_SIOChN_Setup_StageMode_DIS" value="Deaktiveret udgang" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_PNP" value="PNP" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_NPN" value="NPN" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Push-Pull" value="Push-pull" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_high" value="Digital logik-indgang (Aktiv høj/pull-down)" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_low" value="Digital logik-indgang (Aktiv lav/pull-up)" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Teach-in" value="Teach-in" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode" value="Udgangstrin - tilstand" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_Deactivated" value="Deaktiveret" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 1" value="SSC 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 2" value="SSC 2" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA1" value="Støvalarm (DA1)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA2" value="Støvalarm (DA2)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_TA" value="Temperaturalarm (TA)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_ELI" value="Ekstern logik-indgang" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SF" value="Applikationsfunktioner" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_1" value="Indgangsvælger 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_2" value="Indgangsvælger 2" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_DIS" value="Deaktiveret timer" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOn" value="T-on delay" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_Toff" value="T-off delay" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOnOff" value="T-on delay/T-off delay" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_LEdge" value="One-shot forkant" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TEdge" value="One-shot bagkant" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode" value="Timertilstand" />
+	<Text id="TN_DT_SIOChN_Setup_Delay" value="Timerværdi" />
+	<Text id="TN_DT_SIOChN_Setup_Empty" value="Ikke i brug" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_ms" value="Millisekunder" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_s" value="Sekunder" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_min" value="Minutter" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale" value="Timerskala" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Direct" value="Direkte" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_AND" value="AND" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_OR" value="OR" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_XOR" value="XOR" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" value="Set-reset-flip-flop" />
+	<Text id="TN_DT_SIOChN_Setup_Logic" value="Logisk funktion" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_NI" value="Ikke inverteret (Normalt åben)" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_INV" value="Inverteret (Normalt lukket)" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter" value="Udgangsinverter" />
+	<Text id="TN_V_SIOCh1_Setup" value="Kanal 1 opsætning" />
+	<Text id="TN_V_SIOCh2_Setup" value="Kanal 2 opsætning" />
+	<!-- Sensor specific adjustable parameters -->
+	<Text id="TN_V_SelectAdjustment_Adjustment_Trim-in" value="Trimmerindgang" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_EWT" value="Indlæring via kabel" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_DIS" value="Justering via IO-Link" />
+	<Text id="TN_V_SelectAdjustment" value="Valg af lokal/fjern-indstilling" />
+	<Text id="TN_V_TrimmerSetting" value="SP1-trimmerværdi" />
+	<Text id="TN_V_PDConfiguration_Analogue_Inactive" value="Analog værdi inaktiv" />
+	<Text id="TN_V_PDConfiguration_Analogue_Normal" value="Analog værdi normal" />
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Length" value="Analog værdi som emnelængde" />
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Speed" value="Analog værdi som emnehastighed" />
+	<Text id="TN_V_PDConfiguration_Analogue_Divider" value="Analog værdi som tællerværdi" />
+	<Text id="TN_V_PDConfiguration_Analogue" value="Analog værdi" />
+	<Text id="TN_V_PDConfiguration_SO1_Inactive" value="Udgang 1 inaktiv" />
+	<Text id="TN_V_PDConfiguration_SO1_Active" value="Udgang 1 aktiv" />
+	<Text id="TN_V_PDConfiguration_SO1" value="Udgang 1" />
+	<Text id="TN_V_PDConfiguration_SO2_Inactive" value="Udgang 2 inaktiv" />
+	<Text id="TN_V_PDConfiguration_SO2_Active" value="Udgang 2 aktiv" />
+	<Text id="TN_V_PDConfiguration_SO2" value="Udgang 2" />
+	<Text id="TN_V_PDConfiguration_SSC1_Inactive" value="SSC1 Inaktiv" />
+	<Text id="TN_V_PDConfiguration_SSC1_Active" value="SSC1 Aktiv" />
+	<Text id="TN_V_PDConfiguration_SSC1" value="Aftastningskanal 1" />
+	<Text id="TN_V_PDConfiguration_SSC2_Inactive" value="SSC2 Inaktiv" />
+	<Text id="TN_V_PDConfiguration_SSC2_Active" value="SSC2 Aktiv" />
+	<Text id="TN_V_PDConfiguration_SSC2" value="Aftastningskanal 2" />
+	<Text id="TN_V_PDConfiguration_DA1_Inactive" value="DA1 Inaktiv" />
+	<Text id="TN_V_PDConfiguration_DA1_Active" value="DA1 Aktiv" />
+	<Text id="TN_V_PDConfiguration_DA1" value="Støvalarm (DA) 1" />
+	<Text id="TN_V_PDConfiguration_DA2_Inactive" value="DA2 Inaktiv" />
+	<Text id="TN_V_PDConfiguration_DA2_Active" value="DA2 Aktiv" />
+	<Text id="TN_V_PDConfiguration_DA2" value="Støvalarm (DA) 2" />
+	<Text id="TN_V_PDConfiguration_TA_Inactive" value="TA Inaktiv" />
+	<Text id="TN_V_PDConfiguration_TA_Active" value="TA Aktiv" />
+	<Text id="TN_V_PDConfiguration_TA" value="Temperaturalarm (TA)" />
+	<Text id="TN_V_PDConfiguration_SC_Inactive" value="SC Inaktiv" />
+	<Text id="TN_V_PDConfiguration_SC_Active" value="SC Aktiv" />
+	<Text id="TN_V_PDConfiguration_SC" value="Kortslutning (SC)" />
+	<Text id="TN_V_PDConfiguration_WDA1_Inactive" value="WDA1 Inaktiv"  />
+	<Text id="TN_V_PDConfiguration_WDA1_Active" value="WDA1 Aktiv"  />
+	<Text id="TN_V_PDConfiguration_WDA1" value="Vanddråbealarm 1"  />
+	<Text id="TN_V_PDConfiguration_WDA2_Inactive" value="WDA2 Inaktiv"  />
+	<Text id="TN_V_PDConfiguration_WDA2_Active" value="WDA2 Aktiv"  />
+	<Text id="TN_V_PDConfiguration_WDA2" value="Vanddråbealarm 2"  />
+	<Text id="TN_V_PDConfiguration_SFO1_Inactive" value="AFO1 Inaktiv" />
+	<Text id="TN_V_PDConfiguration_SFO1_Active" value="AFO1 Aktiv" />
+	<Text id="TN_V_PDConfiguration_SFO1" value="Applikationsfunktioner, udgang 1" />
+	<Text id="TN_V_PDConfiguration" value="Procesdatakonfiguration" />
+	<Text id="TN_V_SensorPresets_FS" value="Tilpasset (filterskalering)" />
+	<Text id="TN_V_SensorPresets_Slow" value="Høj præcision" />
+	<Text id="TN_V_SensorPresets_Fast" value="Standardpræcision" />
+	<Text id="TN_V_SensorPresets" value="Forudindstil sensorfilter" />
+	<Text id="TN_V_TempAlarmThres_High" value="Høj tærskel" />
+	<Text id="TN_V_TempAlarmThres_Low" value="Lav tærskel" />
+	<Text id="TN_V_TempAlarmThres" value="Temperaturalarmtærskel" />
+	<Text id="TN_V_SafeOnOffLimit_SSC1" value="SSC 1 - Safe-grænse" />
+	<Text id="TN_V_SafeOnOffLimit_SSC2" value="SSC 2 - Safe-grænse" />
+	<Text id="TN_V_SafeOnOffLimit" value="Safe ON/OFF-grænse" />
+	<Text id="TN_V_EventConfiguration_Maintenance_DIS" value="Vedligeholdelses-event inaktiv" />
+	<Text id="TN_V_EventConfiguration_Maintenance_ENA" value="Vedligeholdelses-event aktiv" />
+	<Text id="TN_V_EventConfiguration_Maintenance" value="Vedligeholdelse (0x8C30)" />
+	<Text id="TN_V_EventConfiguration_Temperature_DIS" value="Temperaturfejl-event inaktiv" />
+	<Text id="TN_V_EventConfiguration_Temperature_ENA" value="Temperaturfejl-event aktiv" />
+	<Text id="TN_V_EventConfiguration_Temperature" value="Temperaturfejl-event (0x4000)" />
+	<Text id="TN_V_EventConfiguration_Overrun_DIS" value="Temperaturoverskridelses-event inaktiv" />
+	<Text id="TN_V_EventConfiguration_Overrun_ENA" value="Temperaturoverskridelses-event aktiv" />
+	<Text id="TN_V_EventConfiguration_Overrun" value="Temperaturoverskridelse (0x4210)" />
+	<Text id="TN_V_EventConfiguration_Underrun_DIS" value="Temperaturunderskridelses-event inaktiv" />
+	<Text id="TN_V_EventConfiguration_Underrun_ENA" value="Temperaturunderskridelses-event aktiv" />
+	<Text id="TN_V_EventConfiguration_Underrun" value="Temperaturunderskridelse (0x4220)" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_DIS" value="Kortslutnings-event inaktiv" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_ENA" value="Kortslutnings-event aktiv" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit" value="Kortslutning (0x7710)" />
+	<Text id="TN_V_EventConfiguration" value="Event-konfiguration" />
+	<Text id="TN_V_QualityOfTeach" value="Teach-kvalitet" />
+	<Text id="TN_V_QualityOfRun" value="Run-kvalitet" />
+	<Text id="TN_V_Excess_gain" value="Funktionsreserve" />
+	<Text id="TN_V_FilterScaler" value="Detektionsfilter" />
+	<Text id="TN_V_LedIndication_DIS" value="LED-indikering inaktiv" />
+	<Text id="TN_V_LedIndication_ENA" value="LED-indikering aktiv" />
+	<Text id="TN_V_LedIndication_FMS" value="Find min sensor" />
+	<Text id="TN_V_LedIndication" value="LED-indikering" />
+	<Text id="TN_V_SSC1_Hyst_Mode"  value="Hysteresemodus" />
+	<Text id="TN_V_SSC1_Hyst_Mode_Man" value="Hysterese indstillet manuelt" />
+	<Text id="TN_V_SSC1_Hyst_Mode_Auto" value="Hysterese indstillet automatisk" />
+	<Text id="TN_V_Auto_Hyst_Values" value="Automatisk beregnede hystereseværdier" />
+	<Text id="TN_V_Auto_Hyst_Values_SP1" value="SP1" />
+	<Text id="TN_V_Auto_Hyst_Values_SP2" value="SP2" />
+
+	<Text id="TN_V_IP_off" value="Inaktiv" />
+	<Text id="TN_V_IP_1sensor_filter" value="1sensormodus" />
+	<Text id="TN_V_IP_2sensor-sensor1" value="2sensor – sensor1" />
+	<Text id="TN_V_IP_2sensor-sensor2" value="2sensor – sensor2" />
+	<Text id="TN_V_IP_3sensor-sensor1" value="3sensor – sensor1" />
+	<Text id="TN_V_IP_3sensor-sensor2" value="3sensor – sensor2" />
+	<Text id="TN_V_IP_3sensor-sensor3" value="3sensor – sensor3" />
+	<Text id="TN_V_interference_protection" value="Gensidig interferensbeskyttelse" />
+	
+	<Text id="TN_V_AA_OFF" value="Automatisk justering inaktiv" />
+	<Text id="TN_V_AA_ON" value="Automatisk justering aktiv" />
+	<Text id="TN_V_AA_Enable" value="Automatisk justering" />
+	<Text id="TN_V_AA_AdjustWindowPct" value="Juster vinduesstørrelse" />
+	<Text id="TN_V_AA_AdjustResolutionPct" value="Juster opløsning" />
+	<Text id="TN_V_AutoAdjust_setup" value="Opsætning af automatisk justering" />
+		
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC1" value="SSC1" />
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC2" value="SSC2" />
+	<Text id="TN_V_AA_Corrected_setpoint" value="Korrigerede sætpunkter" />
+	
+	<Text id="TN_V_SFS_Normale" value="Ingen applikationsfunktion valgt" />
+	<Text id="TN_V_SFS_Speed_And_Lenght" value="Hastighed og længde" />
+	<Text id="TN_V_SFS_Pattern_Recognition" value="Mønstergenkendelse" />
+	<Text id="TN_V_SFS_Divider"  value="Deler" />
+	<Text id="TN_V_SFS_Object_And_Gap_monitoring" value="Emne- og afstandsovervågning" />
+	<Text id="TN_V_Special_Func_Selector" value="Applikationsfunktionsvælger" />
+	<Text id="TN_V_SF_NoSensor" value="Ingen rolle valgt" />
+	<Text id="TN_V_SF_SensorA" value="Udløs sensor" />
+	<Text id="TN_V_SF_SensorB" value="Hovedsensor" />
+	<Text id="TN_V_Distance_Between_Sensors" value="Afstand mellem sensorer" />
+	<Text id="TN_V_SAL_measurement_Setup" value="Opsætning af hastigheds- og længdemåling" />
+	<Text id="TN_V_Object_length" value="Emnelængde" />
+	<Text id="TN_V_Object_speed" value="Emnehastighed" />
+	<Text id="TN_V_SAL_Mode" value="Sensorrolle" />
+	<Text id="TN_V_SAL_STATUS_DISABLED" value="KLAR" />
+	<Text id="TN_V_SAL_STATUS_MEASUREMENT_RUNNING" value="Måling kører" />
+	<Text id="TN_V_SAL_STATUS_ERR_SPEED_TOO_HIGH" value="For høj hastighed" />
+	<Text id="TN_V_SAL_STATUS_ERR_TIMEOUT" value="Timeout" />
+	<Text id="TN_V_SAL_STATUS_ERR_OBJ_TOO_LONG" value="For højt emne" />
+	<Text id="TN_V_SAL_STATUS_ERR_LOGIC_FAIL" value="Logikfejl" />
+	<Text id="TN_V_SAL_Status" value="Status" />
+	<Text id="TN_V_SAL_measurement_Result" value="Resultat af hastigheds- og længdemåling" />
+	<Text id="TN_V_PR_Mode" value="Sensorrolle" />
+	<Text id="TN_V_PR_Timeout" value="Timeout" />
+	<Text id="TN_V_PR_PatternTolerancePromille" value="Tolerance" />
+	<Text id="TN_V_PR_Setup" value="Opsætning af mønstergenkendelse" />
+	<Text id="TN_Pattern_Not_Saved" value="Ikke gemt" />
+	<Text id="TN_Pattern_Saved" value="Gemt" />
+	<Text id="TN_V_PR_Ref_Pattern_SavedOrNot" value="Referencemønster" />
+	<Text id="TN_V_Reference_pattern_NoOfEdges" value="Antal flanker i referencemønster" />
+	<Text id="TN_V_NoOfEdges_last_scan" value="Antal flanker i seneste mønster" />
+	<Text id="TN_V_PR_STATUS_CLEAR" value="KLAR" />
+	<Text id="TN_V_PR_STATUS_MEASUREMENT_RUNNING" value="Måling kører" />
+	<Text id="TN_V_PR_STATUS_PATTERN_MATCH" value="Mønstermatch" />
+	<Text id="TN_V_PR_STATUS_ERR_TIMEOUT" value="Timeout" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_EXCEED_MAX" value="For mange flanker" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_CNT_ERR" value="FEJL i FLANKETÆLLER" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_TIMING_ERR"  value="FEJL i FLANKEVARIGHED" />
+	<Text id="TN_V_PR_Status" value="Mønstergenkendelsesstatus" />
+	<Text id="TN_V_PR_Result" value="Resultat af mønstergenkendelse" />
+	<Text id="TN_V_DaC_CounterLimit"  value="Tællergrænseværdi" />	
+	<Text id="TN_V_DaC_PCV" value="Forudindstillet tællerværdi" />
+	<Text id="TN_V_DaC_Setup" value="Opsætning af deler og tæller" />
+	<Text id="TN_V_DaC_Result" value="Tællerværdi" />
+	<Text id="TN_V_OaGM_GapMinT" value="Minimumvarighed for afstand" />
+	<Text id="TN_V_OaGM_GapMaxT" value="Maksimumvarighed for afstand" />
+	<Text id="TN_V_OaGM_objMinT" value="Minimumvarighed for emne" />
+	<Text id="TN_V_OaGM_objMaxT" value="Maksimumvarighed for emne" />
+	<Text id="TN_V_OaGM_Setup" value="Opsætning af emne- og afstandsovervågning" />
+	<Text id="TN_V_OaGM_ObjT" value="Emnevarighed" />
+	<Text id="TN_V_OaGM_GapT" value="Afstandsvarighed" />
+	<Text id="TN_V_OaGM_STATUS_Obj_IDLE" value="KLAR" />
+	<Text id="TN_V_OaGM_STATUS_Obj_Measurement_Run" value="Måling kører" />
+	<Text id="TN_V_OaGM_STATUS_Obj_Passed" value="Emne inden for grænseværdi" />
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Long" value="For langt emne" />
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Short" value="For kort emne" />
+	<Text id="TN_V_OaGM_Obj_Status" value="Emnestatus" />
+	<Text id="TN_V_OaGM_STATUS_Gap_IDLE" value="KLAR" />
+	<Text id="TN_V_OaGM_STATUS_Gap_Measurement_Run" value="Måling kører" />
+	<Text id="TN_V_OaGM_STATUS_Gap_Passed" value="Afstand inden for grænseværdi" />
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Long" value="For lang afstand" />
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Short" value="For kort afstand" />
+	<Text id="TN_V_OaGM_Gap_Status" value="Afstandsstatus" />
+	<Text id="TN_V_OaGM_Result" value="Resultat af emne- og afstandsovervågning" />
+	<Text id="TN_V_Ref_Pattern_timestamp_1" value="Tidsstempel 1" />
+	<Text id="TN_V_Ref_Pattern_timestamp_2" value="Tidsstempel 2" />
+	<Text id="TN_V_Ref_Pattern_timestamp_3" value="Tidsstempel 3" />
+	<Text id="TN_V_Ref_Pattern_timestamp_4" value="Tidsstempel 4" />
+	<Text id="TN_V_Ref_Pattern_timestamp_5" value="Tidsstempel 5" />
+	<Text id="TN_V_Ref_Pattern_timestamp_6" value="Tidsstempel 6" />
+	<Text id="TN_V_Ref_Pattern_timestamp_7" value="Tidsstempel 7" />
+	<Text id="TN_V_Ref_Pattern_timestamp_8" value="Tidsstempel 8" />
+	<Text id="TN_V_Ref_Pattern_timestamp_9" value="Tidsstempel 9" />
+	<Text id="TN_V_Ref_Pattern_timestamp_10" value="Tidsstempel 10" />
+	<Text id="TN_V_Ref_Pattern_timestamp_11" value="Tidsstempel 11" />
+	<Text id="TN_V_Ref_Pattern_timestamp_12" value="Tidsstempel 12" />
+	<Text id="TN_V_Ref_Pattern_timestamp_13" value="Tidsstempel 13" />
+	<Text id="TN_V_Ref_Pattern_timestamp_14" value="Tidsstempel 14" />
+	<Text id="TN_V_Ref_Pattern_timestamp_15" value="Tidsstempel 15" />
+	<Text id="TN_V_Ref_Pattern_timestamp_16" value="Tidsstempel 16" />
+	<Text id="TN_V_Ref_Pattern_timestamp_17" value="Tidsstempel 17" />
+	<Text id="TN_V_Ref_Pattern_timestamp_18" value="Tidsstempel 18" />
+	<Text id="TN_V_Ref_Pattern_timestamp_19" value="Tidsstempel 19" />
+	<Text id="TN_V_Ref_Pattern_timestamp_20" value="Tidsstempel 20" />
+	<Text id="TN_V_P_EVENT_NONE" value="Ingen flanke" />
+	<Text id="TN_V_P_EVENT_POS_EDGE" value="Positiv flanke" />
+	<Text id="TN_V_P_EVENT_NEG_EDGE" value="Negativ flanke" />
+	<Text id="TN_V_Ref_Pattern_edge_type_1" value="Mønstertidsstempel 1" />
+	<Text id="TN_V_Ref_Pattern_edge_type_2" value="Mønstertidsstempel 2" />
+	<Text id="TN_V_Ref_Pattern_edge_type_3" value="Mønstertidsstempel 3" />
+	<Text id="TN_V_Ref_Pattern_edge_type_4" value="Mønstertidsstempel 4" />
+	<Text id="TN_V_Ref_Pattern_edge_type_5" value="Mønstertidsstempel 5" />
+	<Text id="TN_V_Ref_Pattern_edge_type_6" value="Mønstertidsstempel 6" />
+	<Text id="TN_V_Ref_Pattern_edge_type_7" value="Mønstertidsstempel 7" />
+	<Text id="TN_V_Ref_Pattern_edge_type_8" value="Mønstertidsstempel 8" />
+	<Text id="TN_V_Ref_Pattern_edge_type_9" value="Mønstertidsstempel 9" />
+	<Text id="TN_V_Ref_Pattern_edge_type_10" value="Mønstertidsstempel 10" />
+	<Text id="TN_V_Ref_Pattern_edge_type_11" value="Mønstertidsstempel 11" />
+	<Text id="TN_V_Ref_Pattern_edge_type_12" value="Mønstertidsstempel 12" />
+	<Text id="TN_V_Ref_Pattern_edge_type_13" value="Mønstertidsstempel 13" />
+	<Text id="TN_V_Ref_Pattern_edge_type_14" value="Mønstertidsstempel 14" />
+	<Text id="TN_V_Ref_Pattern_edge_type_15" value="Mønstertidsstempel 15" />
+	<Text id="TN_V_Ref_Pattern_edge_type_16" value="Mønstertidsstempel 16" />
+	<Text id="TN_V_Ref_Pattern_edge_type_17" value="Mønstertidsstempel 17" />
+	<Text id="TN_V_Ref_Pattern_edge_type_18" value="Mønstertidsstempel 18" />
+	<Text id="TN_V_Ref_Pattern_edge_type_19" value="Mønstertidsstempel 19" />
+	<Text id="TN_V_Ref_Pattern_edge_type_20" value="Mønstertidsstempel 20" />
+	<Text id="TN_V_Ref_ObjectTimeLength" value="Emnevarighed" />
+	<Text id="TN_V_Pattern" value="" />
+	<!-- Diagnostics parameters -->
+	<Text id="TN_V_DiagOperatingHours" value="Driftstimer" />
+	<Text id="TN_V_DiagPowerCycles" value="Antal effektcyklusser" />
+	<Text id="TN_V_DiagMaxTemp" value="Maksimumtemperatur - siden idriftsættelse" />
+	<Text id="TN_V_DiagMinTemp" value="Minimumtemperatur - siden idriftsættelse" />
+	<Text id="TN_V_DiagMaxTempStartup" value="Maksimumtemperatur siden opstart" />
+	<Text id="TN_V_DiagMinTempStartup" value="Minimumtemperatur siden opstart" />
+	<Text id="TN_V_DiagCurrentTemp" value="Aktuel temperatur" />
+	<Text id="TN_V_NonDS_NV_DataMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_ProdSetMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_DiagEE_MemoryFailure" value="" />
+	<Text id="TN_V_MemoryFailFlag" value="Hukommelsesfejl" />
+	<Text id="TN_V_DiagFrontendFailure" value="Front-end-fejl" />
+	<Text id="TN_V_DiagDetectionCnt" value="Detektionstæller SSC1" />
+	<Text id="TN_V_DiagOpTempOverun" value="Minutter over maksimumtemperatur" />
+	<Text id="TN_V_DiagOpTempUnderrun" value="Minutter under minimumtemperatur" />
+	<Text id="TN_V_DiagMaintenanceCnt" value="Vedligeholdelsesevent-tæller" />
+	<Text id="TN_V_DiagDownloadCnt" value="Download tæller" />
+	<!-- System commands -->
+	<Text id="TN_FactoryReset" value="Gendan fabriksindstillinger" />
+	<Text id="TN_RestoreSSC" value="Gendan SSC" />
+	<Text id="TN_PresetCounterValue" value="Forudindstillet tællerværdi" />
+	<Text id="TN_TeachApply" value="Teach Anvend " />
+	<Text id="TN_TeachSP1" value="Teach SP1" />
+	<Text id="TN_TeachSP2" value="Teach SP2" />
+	<Text id="TN_TeachSP1TP1" value="Teach SP1 TP1" />
+	<Text id="TN_TeachSP1TP2" value="Teach SP1 TP2" />
+	<Text id="TN_TeachSP2TP1" value="Teach SP2 TP1" />
+	<Text id="TN_TeachSP2TP2" value="Teach SP2 TP2" />
+	<Text id="TN_TeachSP1Start" value="Teach SP1 Start" />
+	<Text id="TN_TeachSP1Stop" value="Teach SP1 Stop" />
+	<Text id="TN_TeachSP2Start" value="Teach SP2 Start" />
+	<Text id="TN_TeachSP2Stop" value="Teach SP2 Stop" />
+	<Text id="TN_TeachPattern" value="Indlæringsmønster" />	
+	<Text id="TN_TeachCancel" value="Teach Cancel" />
+	<!-- Process data -->
+	<Text id="TN_PDI_Analogue" value="Analog værdi" />
+	<Text id="TN_PDI_Analogue_obj_Length" value="Emnelængde" />
+	<Text id="TN_PDI_Analogue_obj_Speed" value="Emnehastighed" />
+	<Text id="TN_PDI_Analogue_Diveder" value="Tællerværdi" />
+
+	<Text id="TN_PDI_SC" value="Kortslutning" />
+	<Text id="TN_PDI_TA1" value="Temperaturalarm" />
+	<Text id="TN_PDI_DA2" value="Støvalarm 2" />
+	<Text id="TN_PDI_DA1" value="Støvalarm 1" />
+	<Text id="TN_PDI_SSC2" value="Koblingssignalkanal 2" />
+	<Text id="TN_PDI_SSC1" value="Koblingssignalkanal 1" />
+	<Text id="TN_PDI_SFO1" value="Applikationsfunktion, udgang 1" />
+	<Text id="TN_PDI_WDA2" value="Vanddråbealarm 2" />
+	<Text id="TN_PDI_WDA1" value="Vanddråbealarm 1" />
+	<Text id="TN_PDI_SO2" value="Udgang 2" />
+	<Text id="TN_PDI_SO1" value="Udgang 1" />
+	<Text id="TN_Active" value="Aktiv" />
+	<Text id="TN_Inactive" value="Inaktiv" />
+	<Text id="TI_PDI" value="Procesdataindgang" />
+	<!-- Events -->
+	<!-- Menus -->
+	<Text id="TN_ME_Observation_Diag_Operating" value="Driftsdiagnosticering" />
+	<Text id="TN_ME_Observation_Diag_Sensor" value="Sensordiagnosticering" />
+	<Text id="TN_ME_Observation_Diag_Temp" value="Temperaturdiagnosticering" />
+	<Text id="TN_ME_Observation_PD" value="Procesdata" />
+	
+	<Text id="TN_ME_Parameter_Output_SIO_1" value="Kanal 1 (SO1)" />
+	<Text id="TN_ME_Parameter_Output_SIO_1_Setup" value="Indstilling udgang 1 (SO1)" />
+	<Text id="TN_ME_Parameter_Output_SIO_2" value="Kanal 2 (SO2)" />
+	<Text id="TN_ME_Parameter_Output_SIO_2_Setup" value="Indstilling udgang 2 (SO2)" />
+	<Text id="TN_ME_Parameter_Sensor Specific" value="Sensorspecifik" />
+	
+	<Text id="TN_ME_Parameter_Special_Func" value="Specialfunktioner" />
+	<Text id="TN_ME_Parameter_Application_Functions" value="Applikationsfunktioner" />
+	<Text id="TN_ME_Param_Temp" value="Opsætning af temperaturalarm" />
+	<Text id="TN_ME_Param_Measurment" value="Valg af sensormåling" />
+	<Text id="TN_ME_Param_Hyst_Auto" value="Automatisk hysterese" />
+	<Text id="TN_ME_Param_Hyst_Man" value="Manuel hysterese" />
+	<Text id="TN_ME_SSC1_TW_Single_P" value="Sætpunkter" />
+	<Text id="TN_ME_AA_Corrected_setpoint" value="Corrected Setpoints" />
+	<Text id="TN_ME_Param_PR" value="Mønstergenkendelse" />
+	<Text id="TN_ME_Param_PR_Smart" value="Hovedsensor for mønstergenkendelse" />
+	<Text id="TN_ME_Param_SAL" value="Hastigheds- og længdemåling" />
+	<Text id="TN_ME_Param_SAL_Smart" value="Hovedsensor for hastigheds- og længdemåling" />
+	<Text id="TN_ME_Param_DaC" value="Deler og tæller" />
+	<Text id="TN_ME_Param_OaGM" value="Emne- og afstandsovervågning" />
+	
+	<Text id="TN_ME_PDConfiguration" value="Procesdatakonfiguration" />
+	<Text id="TN_ME_Pattern" value="Referencemønster" />
+	<Text id="TN_ME_EventConfiguration" value="Event-konfiguration" />
+	<Text id="TN_ME_Parameter_Command" value="Kommando" />
+	<Text id="TN_ME_TI" value="Teach-in" />
+	
+	<Text id="TN_ME_TI_SSC1" value="Teach-in aftastningskanal 1 (SSC1)" />
+	<Text id="TN_ME_TI_SSC2" value="Teach-in aftastningskanal 2 (SSC2)" />
+	<Text id="TN_ME_DeviceAccessLocks" value="Adgangslåse" /> 
+	<Text id="TN_ME_TI_SingleValue_SSC1" value="Teach-in enkelt værdi (SSC1)" />
+	<Text id="TN_ME_TI_SingleValue_SSC2" value="Teach-in enkelt værdi (SSC2)" />
+	<Text id="TN_ME_TI_TwoValue_SSC1" value="Teach-in to værdier (SSC1)" />
+	<Text id="TN_ME_TI_TwoValue_SSC2" value="Teach-in to værdier (SSC2)" />
+	<Text id="TN_ME_TI_Dynamic_SSC1" value="Teach-in dynamisk (SSC1)" />
+	<Text id="TN_ME_TI_Dynamic_SSC2" value="Teach-in dynamisk (SSC2)" />
+	
+	<Text id="TN_ME_SSC1" value="Aftastningskanal 1" />
+	<Text id="TN_ME_SSC1_Adjust_IOL1" value="Setpunkt" />
+	<Text id="TN_ME_SSC1_SP" value="SSC1 enkelt punkt" />
+	<Text id="TN_ME_SSC1_Window" value="Justering af SSC1-vindue via IO-Link" />
+	<Text id="TN_ME_SSC1_TP" value="Justering af topunkts-SSC1 via IO-Link" />
+	<Text id="TN_ME_SSC2" value="Aftastningskanal 2" />
+	<Text id="TN_ME_SSC2_Single_P" value="Skift af aftastningskanal 2 enkelt punkt" />
+	<Text id="TN_ME_SSC2_Window" value="Skift af aftastningskanal 2 window" />
+	<Text id="TN_ME_SSC2_two_P" value="Skift af aftastningskanal 2 to punkter" />	
+	<Text id="TD_ME_TI_TeachApply" value="Teach Anvend" />
+	<Text id="TD_ME_TI_TeachSP1" value="Teach SP1" />
+	<Text id="TD_ME_TI_TeachSP2" value="Teach SP2" />
+	<Text id="TD_ME_TI_TeachSP1TP1" value="Teach SP1 TP1" />
+	<Text id="TD_ME_TI_TeachSP1TP2" value="Teach SP1 TP2" />
+	<Text id="TD_ME_TI_TeachSP2TP1" value="Teach SP2 TP1" />
+	<Text id="TD_ME_TI_TeachSP2TP2" value="Teach SP2 TP2" />
+	<Text id="TD_ME_TI_TeachSP1Start" value="Teach SP1 Start" />
+	<Text id="TD_ME_TI_TeachSP1Stop" value="Teach SP1 Stop" />
+	<Text id="TD_ME_TI_TeachSP2Start" value="Teach SP2 Start" />
+	<Text id="TD_ME_TI_TeachSP2Stop" value="Teach SP2 Stop" />
+	<Text id="TD_ME_TI_TeachCancel" value="Teach Cancel" />
+	</Language>
+	<Stamp crc="3985844875"><Checker name="IODD-Checker V1.1.4" version="V1.1.4.0"/></Stamp>
+</ExternalTextDocument>

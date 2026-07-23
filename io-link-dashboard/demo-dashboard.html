@@ -1,0 +1,219 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IO-Link Master Dashboard — DEMO · Hamed Adefuwa</title>
+<style>
+  :root{
+    --bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--text:#e6edf3;--muted:#8b949e;
+    --accent:#2f81f7;--on:#3fb950;--warn:#d29922;--bad:#f85149;--red:#ff4d4d;--r:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:
+    radial-gradient(120% 120% at 12% 6%,#161c26 0%,#0b0f16 55%,#05070a 100%);color:var(--text);min-height:100vh}
+  header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 26px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#11161f,#0d1117);position:sticky;top:0;z-index:9}
+  h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:12px;margin-top:2px}
+  .spacer{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;
+    background:var(--panel);font-size:12.5px;font-weight:700}
+  .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--on);box-shadow:0 0 10px var(--on)}
+  .sim{color:#0d1117;background:linear-gradient(180deg,#ffcf5a,#e8a90c);border-color:#e8a90c}
+  .hbrand{text-decoration:none;color:var(--text)} .hbrand .h{color:var(--red)}
+
+  main{max-width:1460px;margin:0 auto;padding:22px 26px 50px}
+  .sectitle{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800;margin:6px 0 12px}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden}
+  .tile .k{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  .tile .v{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:6px;line-height:1}
+  .tile .u{font-size:15px;color:var(--muted);font-weight:600;margin-left:5px}
+  .spark{position:absolute;left:0;right:0;bottom:0;height:42px;opacity:.55}
+
+  .ports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .card.empty{opacity:.5}
+  .chead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .pnum{flex:none;width:42px;height:42px;border-radius:10px;background:#0b0f14;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:var(--muted)}
+  .pnum.live{border-color:var(--on);color:var(--on)}
+  .cname{font-size:16px;font-weight:800;line-height:1.2}
+  .cmeta{font-size:12px;color:var(--muted);margin-top:2px}
+  .ver{flex:none;font-size:11px;font-weight:900;padding:4px 9px;border-radius:999px}
+  .v11{color:var(--on);border:1px solid rgba(63,185,80,.45);background:rgba(63,185,80,.09)}
+  .v10{color:var(--warn);border:1px solid rgba(210,153,34,.45);background:rgba(210,153,34,.09)}
+
+  .row{display:flex;align-items:center;gap:14px;margin-top:12px}
+  .led{width:52px;height:52px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 30%,#20262e,#0b0f14);
+    border:2px solid var(--line);transition:.12s}
+  .led.on{background:radial-gradient(circle at 35% 30%,#5ff08a,#1f9d43);border-color:var(--on);box-shadow:0 0 20px 3px rgba(63,185,80,.5)}
+  .state{font-size:14px;font-weight:700;color:var(--muted)} .state.on{color:var(--on)}
+  .kv{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0} .kv .k{color:var(--muted)} .kv .v{font-family:ui-monospace,Consolas,monospace}
+
+  .bar{height:9px;border-radius:6px;background:#0b0f14;border:1px solid var(--line);overflow:hidden;position:relative;margin-top:7px}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,#2f81f7,#3fb950);width:0;transition:width .25s}
+  .thr{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--warn)}
+  .barlbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+
+  .log{margin-top:22px;background:#0b0f14;border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;
+    font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--muted);height:132px;overflow:hidden;white-space:pre-wrap}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:20px;padding-top:14px;
+    border-top:1px solid var(--line);color:var(--muted);font-size:12px;flex-wrap:wrap}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+  .brand b{font-size:14px}.brand .h{color:var(--red)}
+  @media(max-width:1050px){.tiles{grid-template-columns:repeat(2,1fr)}.ports{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div>
+    <h1>IO-Link Master Dashboard</h1>
+    <div class="sub">ifm AL1350 · 192.168.7.4 · 4-port IoT</div>
+  </div>
+  <div class="spacer"></div>
+  <span class="pill sim">⚠ SIMULATED DATA — DEMO</span>
+  <span class="pill"><span class="dot"></span>connected</span>
+  <a class="pill hbrand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+    <svg width="20" height="14" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span class="h">@hamedadefuwa</span></a>
+</header>
+
+<main>
+  <div class="sectitle">Master health</div>
+  <div class="tiles">
+    <div class="tile"><div class="k">Temperature</div><div class="v"><span id="t-temp">41</span><span class="u">°C</span></div><svg class="spark" id="s-temp" preserveAspectRatio="none" viewBox="0 0 100 42"><polyline fill="none" stroke="#2f81f7" stroke-width="1.6"/></svg></div>
+    <div class="tile"><div class="k">Voltage</div><div class="v"><span id="t-volt">24.4</span><span class="u">V</span></div><svg class="spark" id="s-volt" preserveAspectRatio="none" viewBox="0 0 100 42"><polyline fill="none" stroke="#3fb950" stroke-width="1.6"/></svg></div>
+    <div class="tile"><div class="k">Current</div><div class="v"><span id="t-curr">117</span><span class="u">mA</span></div><svg class="spark" id="s-curr" preserveAspectRatio="none" viewBox="0 0 100 42"><polyline fill="none" stroke="#d29922" stroke-width="1.6"/></svg></div>
+    <div class="tile"><div class="k">Status</div><div class="v" style="color:var(--on)">0<span class="u" style="color:var(--on)">healthy</span></div></div>
+  </div>
+
+  <div class="sectitle">Ports</div>
+  <div class="ports">
+    <!-- PORT 1 -->
+    <section class="card">
+      <div class="chead"><div class="pnum live">X01</div>
+        <div style="flex:1"><div class="cname">OBD1000-R100-2EP-IO-V31</div><div class="cmeta">Pepperl+Fuchs · 0x110101 · COM2 3.9 ms</div></div>
+        <span class="ver v11">IO-Link 1.1</span></div>
+      <div class="row"><div class="led" id="led1"></div>
+        <div style="flex:1"><div class="state" id="st1">inactive — clear</div>
+          <div class="bar"><span id="bar1"></span><span class="thr" style="left:30%"></span></div>
+          <div class="barlbl"><span>signal level <b id="sig1">0</b></span><span>threshold 300</span></div>
+        </div></div>
+      <div class="kv"><span class="k">PDin</span><span class="v" id="pd1">0x00</span></div>
+      <div class="kv"><span class="k">Temperature</span><span class="v" id="tmp1">32 °C</span></div>
+    </section>
+
+    <!-- PORT 2 -->
+    <section class="card">
+      <div class="chead"><div class="pnum live">X02</div>
+        <div style="flex:1"><div class="cname">TP9237</div><div class="cmeta">ifm · 0x000123 · COM2 3.9 ms</div></div>
+        <span class="ver v11">IO-Link 1.1</span></div>
+      <div class="row"><div style="flex:1">
+        <div style="font-size:32px;font-weight:800;font-variant-numeric:tabular-nums"><span id="tval">22.6</span><span class="u" style="font-size:15px;color:var(--muted)"> °C</span></div>
+        <div class="bar"><span id="bar2"></span></div>
+        <div class="barlbl"><span>process temperature</span><span>0 – 60 °C</span></div>
+      </div></div>
+      <div class="kv"><span class="k">PDin</span><span class="v" id="pd2">0x08D2</span></div>
+      <div class="kv"><span class="k">Status</span><span class="v" style="color:var(--on)">OPERATE</span></div>
+    </section>
+
+    <!-- PORT 3 -->
+    <section class="card empty">
+      <div class="chead"><div class="pnum">X03</div>
+        <div style="flex:1"><div class="cname">— no device —</div><div class="cmeta">port in IO-Link mode, nothing connected</div></div></div>
+      <div class="kv"><span class="k">PDin</span><span class="v">—</span></div>
+      <div class="kv"><span class="k">Status</span><span class="v">no device</span></div>
+    </section>
+
+    <!-- PORT 4 -->
+    <section class="card">
+      <div class="chead"><div class="pnum live">X04</div>
+        <div style="flex:1"><div class="cname">PD30CTDR10BPM5IO</div><div class="cmeta">Carlo Gavazzi · 0x1003 · COM2 5.0 ms</div></div>
+        <span class="ver v11">IO-Link 1.1</span></div>
+      <div class="row"><div class="led" id="led4"></div>
+        <div style="flex:1"><div class="state" id="st4">inactive — clear</div>
+          <div class="bar"><span id="bar4"></span></div>
+          <div class="barlbl"><span>received light intensity <b id="sig4">0</b></span><span>32-bit PD</span></div>
+        </div></div>
+      <div class="kv"><span class="k">PDin</span><span class="v" id="pd4">0x00000000</span></div>
+      <div class="kv"><span class="k">Detections</span><span class="v" id="cnt4">0</span></div>
+    </section>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <div class="foot">
+    <a class="brand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+      <svg width="30" height="21" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+      <span><b>Hamed Adefuwa</b> &nbsp;<span class="h">@hamedadefuwa</span></span></a>
+    <span>DEMO MODE — values are simulated, no master connected. IO-Link Practical Course.</span>
+  </div>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const hist={temp:[],volt:[],curr:[]};
+let phase=0, det1=false, det4=false, count4=0;
+
+function spark(id,arr,min,max){
+  const el=$(id).querySelector('polyline');
+  if(arr.length<2){el.setAttribute('points','');return;}
+  const pts=arr.map((v,i)=>{
+    const x=i/(arr.length-1)*100;
+    const y=42-((v-min)/(max-min||1))*36-3;
+    return x.toFixed(1)+','+y.toFixed(1);
+  }).join(' ');
+  el.setAttribute('points',pts);
+}
+function push(a,v,n=40){a.push(v); if(a.length>n)a.shift();}
+function log(m){const el=$('log');const t=new Date().toLocaleTimeString();
+  el.textContent=`[${t}] ${m}\n`+el.textContent.split('\n').slice(0,9).join('\n');}
+
+function tick(){
+  phase+=0.08;
+  // master health drift
+  const temp=41+Math.sin(phase*0.3)*0.8+(Math.random()-.5)*0.3;
+  const volt=24.40+Math.sin(phase*0.21)*0.05+(Math.random()-.5)*0.02;
+  const curr=117+Math.sin(phase*0.17)*4+(Math.random()-.5)*2;
+  $('t-temp').textContent=temp.toFixed(0);
+  $('t-volt').textContent=volt.toFixed(2);
+  $('t-curr').textContent=curr.toFixed(0);
+  push(hist.temp,temp);push(hist.volt,volt);push(hist.curr,curr);
+  spark('s-temp',hist.temp,39,43); spark('s-volt',hist.volt,24.2,24.6); spark('s-curr',hist.curr,105,130);
+
+  // PORT 1 — signal level sweeping across the 300 threshold
+  const sig=Math.max(0,Math.round(500+Math.sin(phase*0.9)*520+(Math.random()-.5)*40));
+  const on1=sig>=300;
+  $('sig1').textContent=sig;
+  $('bar1').style.width=Math.min(100,sig/1000*100)+'%';
+  $('led1').className='led'+(on1?' on':'');
+  $('st1').textContent=on1?'ACTIVE — object detected':'inactive — clear';
+  $('st1').className='state'+(on1?' on':'');
+  $('pd1').textContent='0x0'+(on1?1:0);
+  $('tmp1').textContent=(32+Math.sin(phase*0.2)).toFixed(0)+' °C';
+  if(on1&&!det1) log('X01 OBD1000 — object detected (signal '+sig+')');
+  det1=on1;
+
+  // PORT 2 — process temperature
+  const pt=22.6+Math.sin(phase*0.5)*1.6+(Math.random()-.5)*0.15;
+  $('tval').textContent=pt.toFixed(1);
+  $('bar2').style.width=(pt/60*100)+'%';
+  $('pd2').textContent='0x'+Math.round(pt*100).toString(16).toUpperCase().padStart(4,'0');
+
+  // PORT 4 — received light intensity, offset phase
+  const li=Math.max(0,Math.round(2000+Math.sin(phase*0.6+2)*1900+(Math.random()-.5)*120));
+  const on4=li>=1800;
+  $('sig4').textContent=li;
+  $('bar4').style.width=Math.min(100,li/4000*100)+'%';
+  $('led4').className='led'+(on4?' on':'');
+  $('st4').textContent=on4?'ACTIVE — object detected':'inactive — clear';
+  $('st4').className='state'+(on4?' on':'');
+  $('pd4').textContent='0x'+li.toString(16).toUpperCase().padStart(8,'0');
+  if(on4&&!det4){count4++;$('cnt4').textContent=count4;log('X04 PD30 — object detected (intensity '+li+')');}
+  det4=on4;
+}
+log('demo dashboard started — simulated data, no master connected');
+log('AL1350 @ 192.168.7.4 · 3 devices on X01, X02, X04');
+tick(); setInterval(tick,400);
+</script>

@@ -1,0 +1,135 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#05070a}
+  .board{position:relative;width:1920px;height:1080px;overflow:hidden;
+    background:radial-gradient(120% 120% at 12% 8%,#161c26 0%,#0b0f16 55%,#05070a 100%);
+    font-family:"Segoe UI","Arial",sans-serif;color:#fff;padding:44px 56px}
+  .hex{position:absolute;inset:0;opacity:.04;
+    background-image:linear-gradient(60deg,transparent 47%,#ff7a1a 48%,#ff7a1a 52%,transparent 53%);background-size:52px 52px}
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4}
+  .g1{width:700px;height:700px;left:-180px;top:120px;background:#3fb950}
+  .g2{width:700px;height:700px;right:-180px;top:120px;background:#e8590c}
+  header{position:relative;display:flex;align-items:flex-end;gap:22px;margin-bottom:30px}
+  h1{font-size:62px;font-weight:900;letter-spacing:-.01em;line-height:1}
+  h1 .a{background:linear-gradient(180deg,#7ff0a2,#3fb950);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1 .b{background:linear-gradient(180deg,#ffb063,#e8590c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1 .vs{color:#5b6879;font-size:44px;margin:0 10px}
+  .sub{color:#8ea0b4;font-size:20px;font-weight:600;padding-bottom:8px}
+  .spacer{flex:1}
+  .hbrand{display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border:2px solid #2b3444;border-radius:999px;
+    background:#0d1219;font-size:17px;font-weight:800;color:#fff}
+  .hbrand .h{color:#ff4d4d}
+
+  table{position:relative;width:100%;border-collapse:separate;border-spacing:0}
+  th,td{padding:14px 20px;font-size:22px;vertical-align:middle}
+  thead th{font-size:19px;text-transform:uppercase;letter-spacing:.07em;color:#8ea0b4;font-weight:700;padding-bottom:10px}
+  .lbl{width:300px;color:#9fb0c2;font-weight:600;font-size:20px}
+  tbody tr:nth-child(odd) td{background:rgba(255,255,255,.028)}
+  td.a,th.a{border-left:4px solid rgba(63,185,80,.55)}
+  td.b,th.b{border-left:4px solid rgba(232,89,12,.55)}
+  .devname{font-size:24px;font-weight:800;color:#fff;line-height:1.25}
+  .devmeta{font-size:16px;color:#8ea0b4;font-weight:600;margin-top:3px}
+
+  /* hero version row */
+  .hero td{padding:20px}
+  .vbig{font-size:74px;font-weight:900;line-height:1}
+  .vA{background:linear-gradient(180deg,#7ff0a2,#3fb950);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .vB{background:linear-gradient(180deg,#ffb063,#e8590c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .vtag{display:inline-block;margin-left:14px;font-size:17px;font-weight:800;padding:6px 12px;border-radius:999px;vertical-align:super}
+  .tagA{color:#3fb950;border:2px solid rgba(63,185,80,.45);background:rgba(63,185,80,.08)}
+  .tagB{color:#e8590c;border:2px solid rgba(232,89,12,.45);background:rgba(232,89,12,.08)}
+  .yes{color:#3fb950;font-weight:800}
+  .no{color:#f85149;font-weight:800}
+  .mono{font-family:Consolas,monospace}
+
+  .foot{position:absolute;left:56px;right:56px;bottom:30px;display:flex;align-items:center;gap:20px}
+  .takeaway{flex:1;background:#0d1219;border:2px solid #ff7a1a;border-radius:14px;padding:14px 20px;font-size:21px;font-weight:700}
+  .takeaway b{color:#ff9d3f}
+  .note{font-size:14px;color:#66748a;text-align:right;line-height:1.5}
+</style>
+
+<div class="board">
+  <div class="hex"></div><div class="glow g1"></div><div class="glow g2"></div>
+
+  <header>
+    <h1><span class="a">IO-LINK 1.1</span><span class="vs">vs</span><span class="b">1.0</span></h1>
+    <div class="sub">two real sensors, side by side</div>
+    <div class="spacer"></div>
+    <div class="hbrand"><svg width="24" height="17" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg><span class="h">@hamedadefuwa</span></div>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="lbl"></th>
+        <th class="a"><div class="devname">Carlo Gavazzi &nbsp;PD30CTDR10BPM5IO</div><div class="devmeta">diffuse photoelectric · compact</div></th>
+        <th class="b"><div class="devname">Contrinex &nbsp;LLR-C23PA-NMS-400</div><div class="devmeta">through-beam laser · emitter</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hero">
+        <td class="lbl">IO-Link revision</td>
+        <td class="a"><span class="vbig vA">1.1</span><span class="vtag tagA">current</span></td>
+        <td class="b"><span class="vbig vB">1.0</span><span class="vtag tagB">legacy</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">IODD file</td>
+        <td class="a"><span class="mono">…-IODD<b style="color:#3fb950">1.1</b></span> <span style="font-size:16px;color:#8ea0b4">· schema 2010/10</span></td>
+        <td class="b"><span class="mono">…-IODD<b style="color:#e8590c">1.0.1</b></span> <span style="font-size:16px;color:#8ea0b4">· schema 2009/11</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Vendor / Device ID</td>
+        <td class="a"><span class="mono">896 / 4099</span> <span style="font-size:16px;color:#8ea0b4">= 0x380 / 0x1003</span></td>
+        <td class="b"><span class="mono">342 / 67329</span> <span style="font-size:16px;color:#8ea0b4">= 0x156 / 0x10701</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Data Storage<br><span style="font-size:15px;color:#66748a">auto param backup / restore</span></td>
+        <td class="a"><span class="yes">✔ possible</span> &nbsp;<span style="font-size:16px;color:#8ea0b4">(1.1 feature)</span></td>
+        <td class="b"><span class="no">✘ not available</span> &nbsp;<span style="font-size:16px;color:#8ea0b4">(1.0 has no DS)</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Process data length</td>
+        <td class="a"><b class="mono">32 bit</b></td>
+        <td class="b">detection state + stability alarm <span style="font-size:16px;color:#8ea0b4">(small)</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Transmission rate</td>
+        <td class="a" class="mono">COM2 · 38.4 kBaud</td>
+        <td class="b">COM2 · 38.4 kBaud</td>
+      </tr>
+      <tr>
+        <td class="lbl">Min. cycle time</td>
+        <td class="a"><span class="mono">5 ms</span></td>
+        <td class="b">—</td>
+      </tr>
+      <tr>
+        <td class="lbl">SIO mode</td>
+        <td class="a"><span class="yes">Yes</span></td>
+        <td class="b"><span class="yes">Supported</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Profile / norm</td>
+        <td class="a">Smart sensor profile 2nd ed. · IEC 61131-9</td>
+        <td class="b">—</td>
+      </tr>
+      <tr>
+        <td class="lbl">Connector</td>
+        <td class="a">M8 · port class <b>A (4-pin)</b></td>
+        <td class="b">M8 <b>3-pin</b> <span style="font-size:16px;color:#8ea0b4">(L+, 0V, C/Q)</span></td>
+      </tr>
+      <tr>
+        <td class="lbl">Writable parameters</td>
+        <td class="a"><span class="yes">Yes</span></td>
+        <td class="b"><span class="yes">Yes</span> <span style="font-size:16px;color:#8ea0b4">— sensitivity, timing, counter, temp…</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="foot">
+    <div class="takeaway">The real difference isn't read vs write — <b>both let you configure the sensor</b>.
+      It's <b>Data Storage</b>: swap a 1.1 device and the master restores its settings automatically. With 1.0, you reconfigure by hand.</div>
+    <div class="note">Sources: Carlo Gavazzi PD30CTDx10BPxxIO datasheet<br>Contrinex LLR-C23PA-NM datasheet (Rev 6)</div>
+  </div>
+</div>

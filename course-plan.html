@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IO-Link Course Planner — Hamed Adefuwa</title>
+<style>
+  :root{
+    --bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--text:#e6edf3;--muted:#8b949e;
+    --accent:#2f81f7;--on:#3fb950;--warn:#d29922;--idea:#8b949e;--red:#ff4d4d;--radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:14px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#11161f,#0d1117)}
+  header .titlewrap{display:flex;flex-direction:column;gap:2px}
+  #courseTitle{font-size:19px;font-weight:700;background:transparent;border:0;color:var(--text);padding:2px 4px;border-radius:6px;min-width:260px}
+  #courseSub{font-size:12px;color:var(--muted);background:transparent;border:0;padding:1px 4px;border-radius:6px;min-width:260px}
+  #courseTitle:hover,#courseSub:hover,#courseTitle:focus,#courseSub:focus{background:#0b0f14;outline:0}
+  .spacer{flex:1}
+  .hbrand{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);text-decoration:none;color:var(--text);font-size:12px;font-weight:600}
+  .hbrand:hover{border-color:var(--red)} .hbrand .handle{color:var(--red)}
+  .tools{display:flex;gap:8px;flex-wrap:wrap}
+  button{cursor:pointer;font-size:13px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:7px 12px}
+  button:hover{border-color:var(--accent)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .stats{max-width:1080px;margin:16px auto 0;padding:0 22px;display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  .stats b{color:var(--text)}
+  main{max-width:1080px;margin:12px auto 60px;padding:0 22px;display:flex;flex-direction:column;gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .card.pub{border-left:4px solid var(--on)} .card.rec{border-left:4px solid var(--warn)}
+  .card.plan{border-left:4px solid var(--accent)} .card.idea{border-left:4px solid var(--idea)}
+  .chead{display:flex;align-items:center;gap:10px;padding:12px 14px}
+  .num{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;width:22px;text-align:center;flex:none;cursor:grab}
+  .ltitle{flex:1;font-size:16px;font-weight:600;background:transparent;border:0;color:var(--text);padding:5px 6px;border-radius:6px;min-width:80px}
+  .ltitle:hover,.ltitle:focus{background:#0b0f14;outline:0}
+  .status{flex:none;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--line);cursor:pointer;user-select:none}
+  .status.pub{color:var(--on);border-color:rgba(63,185,80,.4)} .status.rec{color:var(--warn);border-color:rgba(210,153,34,.4)}
+  .status.plan{color:var(--accent);border-color:rgba(47,129,247,.4)} .status.idea{color:var(--idea)}
+  .len{flex:none;width:78px;font-size:12px;color:var(--muted);background:transparent;border:1px solid transparent;border-radius:6px;padding:4px 6px;text-align:right}
+  .len:hover,.len:focus{background:#0b0f14;border-color:var(--line);outline:0}
+  .iconbtn{flex:none;border:0;background:transparent;color:var(--muted);padding:4px 6px;font-size:14px;border-radius:6px}
+  .iconbtn:hover{background:#0b0f14;color:var(--text)}
+  .cbody{padding:0 14px 14px 46px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card.collapsed .cbody{display:none}
+  .field{display:flex;flex-direction:column;gap:4px}
+  .field.full{grid-column:1 / -1}
+  .field label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+  textarea{width:100%;resize:none;overflow:hidden;background:#0b0f14;border:1px solid var(--line);border-radius:8px;
+    color:var(--text);font-family:inherit;font-size:13.5px;line-height:1.5;padding:9px 10px;min-height:38px}
+  textarea:focus{outline:0;border-color:var(--accent)}
+  textarea.hook{font-style:italic;color:#cdd9e5}
+  .foot{max-width:1080px;margin:0 auto 40px;padding:14px 22px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+  .brand b{font-size:14px} .brand .handle{color:var(--red)}
+  .saved{font-size:11px;color:var(--muted);transition:opacity .3s}
+  @media(max-width:760px){.cbody{grid-template-columns:1fr}}
+  @media print{
+    header,.tools,.iconbtn,.foot .actions{display:none!important}
+    body{background:#fff;color:#000} .card{border:1px solid #ccc;break-inside:avoid;border-left:4px solid #999}
+    .card.collapsed .cbody{display:grid} textarea{border:0;color:#000;background:#fff}
+  }
+</style>
+<body>
+
+<header>
+  <div class="titlewrap">
+    <input id="courseTitle" value="IO-Link Practical Course">
+    <input id="courseSub" value="YouTube video plan — click any text to edit; changes save automatically">
+  </div>
+  <div class="spacer"></div>
+  <a class="hbrand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+    <svg width="22" height="16" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span class="handle">@hamedadefuwa</span>
+  </a>
+  <div class="tools">
+    <button class="primary" id="add">+ Add lesson</button>
+    <button id="expand">Expand all</button>
+    <button id="collapse">Collapse all</button>
+    <button id="export">Export</button>
+    <button id="import">Import</button>
+    <button id="print">Print / PDF</button>
+    <button id="reset">Reset</button>
+  </div>
+</header>
+
+<div class="stats" id="stats"></div>
+<main id="list"></main>
+
+<div class="foot">
+  <a class="brand" href="https://www.youtube.com/@hamedadefuwa" target="_blank" rel="noopener">
+    <svg width="30" height="21" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg>
+    <span><b>Hamed Adefuwa</b> &nbsp;<span class="handle">@hamedadefuwa</span></span>
+  </a>
+  <span class="saved" id="saved"></span>
+  <span class="actions" style="color:var(--muted)">Saved in this browser · use Export to back up</span>
+</div>
+
+<input type="file" id="fileInput" accept="application/json" style="display:none">
+
+<script>
+const KEY='ioLinkCoursePlan_v1';
+const STATUSES=[['pub','Published'],['rec','Recording'],['plan','Planned'],['idea','Idea']];
+const nextStatus=s=>STATUSES[(STATUSES.findIndex(x=>x[0]===s)+1)%STATUSES.length][0];
+const statusLabel=s=>(STATUSES.find(x=>x[0]===s)||STATUSES[2])[1];
+
+const DEFAULT={
+  title:"IO-Link Practical Course",
+  sub:"YouTube video plan — click any text to edit; changes save automatically",
+  lessons:[
+   {status:"pub",title:"What Is IO-Link",len:"8–10 min",
+    hook:"What IO-Link actually is — demonstrated, not lectured.",
+    desc:"Series opener. Show a real IO-Link sensor working and explain why it beats a plain on/off sensor. Live demo with the AL1350 master, a photoelectric sensor, and the custom PC dashboard.",
+    seg:"- What IO-Link is: point-to-point, IEC 61131-9, vs a standard digital sensor\n- Master vs Device — the C/Q line carries data, not just on/off\n- Process data (cyclic) vs service data (parameters + diagnostics)\n- Live demo: the object-detected bit changing in real time\n- The reveal: the SAME sensor also gives signal strength, temperature, hours",
+    demo:"Wave a hand in front of the sensor → detection LED flips. Then show the extra data (signal level, temperature) on the custom dashboard.",
+    gear:"ifm AL1350, Pepperl+Fuchs OBD1000 sensor, PC + custom dashboard app"},
+
+   {status:"pub",title:"Manufacturer's Software — ifm moneo",len:"10 min",
+    hook:"Configure a smart sensor in minutes — no code.",
+    desc:"Show the power and simplicity of ifm's own configuration software. Add the master, browse the device with the IODD auto-loaded, and read/write parameters.",
+    seg:"- What moneo is and where it fits\n- Add the AL1350 as an ifm Device (IoT Core): 192.168.7.4, port 80, HTTP\n- Browse port X01 — auto-loaded IODD gives human-readable parameters\n- Read live values; change the switching set-point and see the effect\n- moneo vs raw JSON vs a custom app — when to use which",
+    demo:"Add the master in moneo, read signal level / temperature, change the switch point, watch the detection behaviour change.",
+    gear:"AL1350, sensor, PC with ifm moneo installed"},
+
+   {status:"plan",title:"The AL1350 IoT Interface (web UI + IoT Core)",len:"10–12 min",
+    hook:"Every ifm master is a tiny web server — here's what's inside.",
+    desc:"No PLC, no extra software. Access the master's built-in web interface and its IoT Core JSON API straight from a browser. This episode sets up the HTTP and MQTT videos.",
+    seg:"- Open the master's web interface in a browser: device info, ports, diagnostics\n- What the IoT Core is: HTTP/JSON (and MQTT) built into the master\n- Anatomy of a request: code / cid / adr / data → value returned in hex\n- getdata (process data) vs iolreadacyclic / iolwriteacyclic (parameters / ISDU)\n- Make a raw request by hand and read the sensor with zero code",
+    demo:"Browser → 192.168.7.4 web UI. Then a raw POST (Postman or curl) reading PDin; show the JSON and decode the hex.",
+    gear:"AL1350, PC, browser, Postman or curl"},
+
+   {status:"plan",title:"HTTP POST/GET: S7-1200 PLC ↔ IO-Link Master (No Profinet)",len:"15 min",
+    hook:"Talk to IO-Link from a Siemens PLC — no Profinet, just HTTP.",
+    desc:"Read and write IO-Link data from an S7-1200 using HTTP requests to the AL1350 IoT Core, bypassing Profinet / GSDML entirely.",
+    seg:"- Why HTTP instead of Profinet (no GSDML, simple, flexible)\n- S7-1200 HTTP client approach (TCON / TSEND_C to build + send the request)\n- Construct the JSON request string inside the PLC\n- Send to the master, receive the JSON, parse the hex value\n- Read the detection bit; then WRITE a parameter (e.g. the set-point)\n- Show it live on the HMI / TIA online view",
+    demo:"S7-1200 polls the sensor's detect bit over HTTP → value on the HMI. Then the PLC writes a new switch point.",
+    gear:"S7-1200 PLC, AL1350, sensor, TIA Portal, HMI (or a watch table)"},
+
+   {status:"plan",title:"MQTT: S7-1200 PLC ↔ IO-Link Master (No Profinet)",len:"15–18 min",
+    hook:"Stream IO-Link data with MQTT — event-driven, no Profinet.",
+    desc:"Move IO-Link data via MQTT between the AL1350 and an S7-1200 through a broker. Contrast event-driven MQTT with HTTP polling.",
+    seg:"- MQTT in three minutes: broker, publish/subscribe, topics, QoS\n- Stand up a broker (Mosquitto on a PC or Raspberry Pi)\n- Configure the AL1350 IoT Core to publish sensor data\n- S7-1200 MQTT (LMQTT library): subscribe to the sensor topic\n- Publish a command back to the master\n- HTTP vs MQTT — when to reach for each",
+    demo:"Sensor data published to MQTT; MQTT Explorer shows it; the S7-1200 subscribes and displays; toggle the sensor and watch it stream.",
+    gear:"S7-1200, AL1350, Mosquitto broker, TIA Portal + LMQTT, MQTT Explorer"},
+
+   {status:"idea",title:"Build Your Own IO-Link Dashboard (DIY web app)",len:"12–15 min",
+    hook:"Roll your own dashboard — one HTML file + the IoT Core.",
+    desc:"Recreate the custom dashboard from Episode 1: a tiny local web app that reads and writes the sensor via the IoT Core. Free and hackable for viewers who want their own.",
+    seg:"- Architecture: browser → tiny local server → master IoT Core (avoids CORS)\n- Reading process data and decoding the hex using the IODD\n- Live signal level, temperature, a detection counter\n- Writing parameters (switch point, device tag)\n- Gotcha: this firmware ignores getdatamulti — use individual reads",
+    demo:"Open the dashboard, wave a hand, change a parameter; quick peek at the code.",
+    gear:"PC (PowerShell + browser), AL1350, sensor"},
+
+   {status:"idea",title:"Parameters & Diagnostics Deep Dive (ISDU)",len:"10–12 min",
+    hook:"The data a normal sensor simply can't give you.",
+    desc:"Go beyond on/off: read the sensor's internal diagnostics and reconfigure it remotely — signal quality, temperature, operating hours, teach-in.",
+    seg:"- Service data / ISDU vs process data\n- Signal level & quality, temperature, operating hours\n- Remote teach-in and set-point adjustment\n- Device tag / identity\n- The predictive-maintenance angle",
+    demo:"Read temperature and hours; change the switch point live; set a custom device tag.",
+    gear:"AL1350, sensor, moneo or the custom dashboard"},
+
+   {status:"idea",title:"Networking an IO-Link Master (the bit nobody explains)",len:"10 min",
+    hook:"Get your PC or PLC actually talking to the master.",
+    desc:"Practical networking: the master's IP and subnet, giving a PC a second IP on the master's range while keeping internet, and proving reachability.",
+    seg:"- The master's IoT port IP and subnet\n- Same-NIC second IP vs a separate adapter — what actually works\n- A static config that keeps internet AND adds sensor access\n- Testing: ping, ARP, and a raw read\n- Common pitfalls: wrong subnet, DHCP resets",
+    demo:"Add a 192.168.7.x IP to a PC, ping the master, read the sensor — all live.",
+    gear:"PC, AL1350, network cable / switch"}
+  ]
+};
+
+let data = load();
+
+function load(){ try{ const s=localStorage.getItem(KEY); if(s){ const d=JSON.parse(s); if(!Array.isArray(d.archive)) d.archive=[]; return d; } }catch(e){} const d=JSON.parse(JSON.stringify(DEFAULT)); d.archive=[]; return d; }
+let saveTimer;
+function save(){ localStorage.setItem(KEY, JSON.stringify(data)); const el=document.getElementById('saved'); el.textContent='saved ✓'; el.style.opacity=1; clearTimeout(saveTimer); saveTimer=setTimeout(()=>el.style.opacity=0,1200); }
+
+function autosize(t){ t.style.height='auto'; t.style.height=(t.scrollHeight+2)+'px'; }
+
+function renderStats(){
+  const c={pub:0,rec:0,plan:0,idea:0}; data.lessons.forEach(l=>c[l.status]=(c[l.status]||0)+1);
+  document.getElementById('stats').innerHTML =
+    `<span><b>${data.lessons.length}</b> lessons</span>`+
+    `<span style="color:var(--on)"><b>${c.pub}</b> published</span>`+
+    `<span style="color:var(--warn)"><b>${c.rec}</b> recording</span>`+
+    `<span style="color:var(--accent)"><b>${c.plan}</b> planned</span>`+
+    `<span><b>${c.idea}</b> ideas</span>`+
+    (data.archive&&data.archive.length?`<span style="color:var(--muted)"><b>${data.archive.length}</b> archived</span>`:'');
+}
+
+function field(l,key,label,cls,full){
+  const wrap=document.createElement('div'); wrap.className='field'+(full?' full':'');
+  const lab=document.createElement('label'); lab.textContent=label; wrap.appendChild(lab);
+  const ta=document.createElement('textarea'); ta.value=l[key]||''; if(cls) ta.className=cls;
+  ta.addEventListener('input',()=>{ l[key]=ta.value; autosize(ta); save(); });
+  wrap.appendChild(ta); setTimeout(()=>autosize(ta),0);
+  return wrap;
+}
+
+function render(){
+  renderStats();
+  const list=document.getElementById('list'); list.innerHTML='';
+  data.lessons.forEach((l,i)=>{
+    const card=document.createElement('section');
+    card.className='card '+l.status+(l._collapsed?' collapsed':'');
+    // header
+    const h=document.createElement('div'); h.className='chead';
+    const num=document.createElement('div'); num.className='num'; num.textContent=(i+1); h.appendChild(num);
+    const title=document.createElement('input'); title.className='ltitle'; title.value=l.title||'';
+    title.addEventListener('input',()=>{ l.title=title.value; save(); }); h.appendChild(title);
+    const st=document.createElement('div'); st.className='status '+l.status; st.textContent=statusLabel(l.status);
+    st.title='click to change status'; st.addEventListener('click',()=>{ l.status=nextStatus(l.status); save(); render(); }); h.appendChild(st);
+    const len=document.createElement('input'); len.className='len'; len.value=l.len||''; len.placeholder='length';
+    len.addEventListener('input',()=>{ l.len=len.value; save(); }); h.appendChild(len);
+    const mk=(txt,tt,fn)=>{ const b=document.createElement('button'); b.className='iconbtn'; b.textContent=txt; b.title=tt; b.addEventListener('click',fn); return b; };
+    h.appendChild(mk(l._collapsed?'▸':'▾','expand/collapse',()=>{ l._collapsed=!l._collapsed; save(); render(); }));
+    h.appendChild(mk('▲','move up',()=>{ if(i>0){ [data.lessons[i-1],data.lessons[i]]=[data.lessons[i],data.lessons[i-1]]; save(); render(); }}));
+    h.appendChild(mk('▼','move down',()=>{ if(i<data.lessons.length-1){ [data.lessons[i+1],data.lessons[i]]=[data.lessons[i],data.lessons[i+1]]; save(); render(); }}));
+    h.appendChild(mk('⧉','duplicate',()=>{ const c=JSON.parse(JSON.stringify(l)); c.title=(l.title||'')+' (copy)'; data.lessons.splice(i+1,0,c); save(); render(); }));
+    h.appendChild(mk('🗄','archive',()=>{ data.archive.unshift(data.lessons.splice(i,1)[0]); data._archOpen=true; save(); render(); }));
+    card.appendChild(h);
+    // body
+    const b=document.createElement('div'); b.className='cbody';
+    b.appendChild(field(l,'hook','Hook / one-liner','hook',true));
+    b.appendChild(field(l,'desc','Description (YouTube-ready)',null,true));
+    b.appendChild(field(l,'seg','Segments / key points',null,false));
+    b.appendChild(field(l,'demo','On-screen demo',null,false));
+    b.appendChild(field(l,'gear','Gear / props',null,true));
+    b.appendChild(field(l,'notes','Notes',null,true));
+    card.appendChild(b);
+    list.appendChild(card);
+  });
+
+  // ---- Archive section ----
+  if(data.archive && data.archive.length){
+    const sec=document.createElement('section'); sec.className='card idea'+(data._archOpen?'':' collapsed');
+    const h=document.createElement('div'); h.className='chead';
+    const t=document.createElement('div'); t.style.flex='1'; t.style.fontWeight='700'; t.style.color='var(--muted)';
+    t.textContent='🗄  Archived ('+data.archive.length+')'; h.appendChild(t);
+    const tog=document.createElement('button'); tog.className='iconbtn'; tog.textContent=data._archOpen?'▾':'▸'; tog.title='show / hide archive';
+    tog.addEventListener('click',()=>{ data._archOpen=!data._archOpen; save(); render(); }); h.appendChild(tog);
+    sec.appendChild(h);
+    const body=document.createElement('div'); body.className='cbody'; body.style.gridTemplateColumns='1fr'; body.style.gap='8px';
+    data.archive.forEach((l,j)=>{
+      const row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 10px;background:#0b0f14;border:1px solid var(--line);border-radius:8px';
+      const name=document.createElement('div'); name.style.flex='1'; name.textContent=(l.title||'(untitled)');
+      const meta=document.createElement('span'); meta.style.cssText='color:var(--muted);font-size:12px';
+      meta.textContent=statusLabel(l.status)+(l.len?(' · '+l.len):'');
+      const rb=document.createElement('button'); rb.className='iconbtn'; rb.textContent='↩'; rb.title='restore to plan';
+      rb.addEventListener('click',()=>{ data.lessons.push(data.archive.splice(j,1)[0]); save(); render(); });
+      const db=document.createElement('button'); db.className='iconbtn'; db.textContent='🗑'; db.title='delete permanently';
+      db.addEventListener('click',()=>{ if(confirm('Permanently delete "'+(l.title||'this lesson')+'"? This cannot be undone.')){ data.archive.splice(j,1); save(); render(); }});
+      row.append(name,meta,rb,db); body.appendChild(row);
+    });
+    sec.appendChild(body); list.appendChild(sec);
+  }
+}
+
+// toolbar
+document.getElementById('courseTitle').value=data.title||DEFAULT.title;
+document.getElementById('courseSub').value=data.sub||DEFAULT.sub;
+document.getElementById('courseTitle').addEventListener('input',e=>{ data.title=e.target.value; save(); });
+document.getElementById('courseSub').addEventListener('input',e=>{ data.sub=e.target.value; save(); });
+document.getElementById('add').addEventListener('click',()=>{ data.lessons.push({status:'idea',title:'New lesson',len:'',hook:'',desc:'',seg:'',demo:'',gear:'',notes:''}); save(); render(); window.scrollTo(0,document.body.scrollHeight); });
+document.getElementById('expand').addEventListener('click',()=>{ data.lessons.forEach(l=>l._collapsed=false); save(); render(); });
+document.getElementById('collapse').addEventListener('click',()=>{ data.lessons.forEach(l=>l._collapsed=true); save(); render(); });
+document.getElementById('print').addEventListener('click',()=>window.print());
+document.getElementById('reset').addEventListener('click',()=>{ if(confirm('Reset to the original suggested plan? Your edits will be lost (Export first if unsure).')){ data=JSON.parse(JSON.stringify(DEFAULT)); data.archive=[]; save(); document.getElementById('courseTitle').value=data.title; document.getElementById('courseSub').value=data.sub; render(); }});
+document.getElementById('export').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='io-link-course-plan.json'; a.click();
+});
+document.getElementById('import').addEventListener('click',()=>document.getElementById('fileInput').click());
+document.getElementById('fileInput').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+  r.onload=()=>{ try{ data=JSON.parse(r.result); if(!Array.isArray(data.archive)) data.archive=[]; save(); document.getElementById('courseTitle').value=data.title||''; document.getElementById('courseSub').value=data.sub||''; render(); }catch(err){ alert('Not a valid plan file.'); } };
+  r.readAsText(f);
+});
+
+render();
+</script>
+</body>
+</html>

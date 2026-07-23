@@ -1,13 +1,16 @@
 @echo off
 REM ============================================================
-REM  IO-Link Dashboard launcher
-REM  Double-click to start. Opens the dashboard in your browser.
+REM  IO-Link Dashboard launcher  -  double-click to run
+REM  Starts the local server and opens the presentation deck.
 REM ============================================================
 cd /d "%~dp0"
 title IO-Link Dashboard (AL1350)
-echo Starting IO-Link Dashboard...
-echo If a browser window does not open, go to: http://localhost:8088/
-echo (Close this window to stop the dashboard.)
+echo ============================================================
+echo   IO-Link Dashboard
+echo   A browser will open at:  http://localhost:8088/deck.html
+echo   (deck.html = slides, explorer.html = full dashboard)
+echo   Close this window to stop the dashboard.
+echo ============================================================
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0server.ps1"
 echo.

@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+	<DocumentInfo copyright="Carlo Gavazzi" releaseDate="2021-05-01" version="V1.0" />
+<Language xml:lang="zh">
+	<Text id="T_VendorText" value="www.gavazziautomation.com" />
+	<Text id="T_VendorUrl" value="www.gavazziautomation.com" />
+	<Text id="T_DeviceName" value="PD30" />
+	<Text id="T_DeviceFamily" value="光电传感器" />
+	<Text id="TD_ISDUDeviceVariant" value="光电传感器，漫反射，红光发射器，1000 mm，不锈钢外壳，IO-Link" />
+	<Text id="TN_Out1" value="电源 (+)" />
+	<Text id="TN_Out2" value="输出 2 / 示教" />
+	<Text id="TN_Out3" value="电源 (-)" />
+	<Text id="TN_Out4" value="输出 1/ IO-Link" />
+	<Text id="TD_Connection01" value="M8插头或2米电缆" />
+	<Text id="TN_V_FunctionTag" value="功能标记" />
+	<Text id="TN_V_LocationTag" value="位置标记" />
+	<!-- Smart Sensor Profile parameters -->
+	<Text id="TN_DT_TI_Result_Flag_Nok" value="不正常" />
+	<Text id="TN_DT_TI_Result_Flag_OK" value="正常" />
+	<Text id="TN_DT_SSC_Param_SP1" value="设定点 1" />
+	<Text id="TN_DT_SSC_Param_SP2" value="设定点 2" />
+	<Text id="TN_DT_SSC_Config_Logic_High" value="高电平有效" />
+	<Text id="TN_DT_SSC_Config_Logic_Low" value="低电平有效" />
+	<Text id="TN_DT_SSC_Config_Logic" value="开关逻辑" />
+	<Text id="TN_DT_SSC_Config_Mode_DIS" value="已停用" />
+	<Text id="TN_DT_SSC_Config_Mode_SPM" value="单点" />
+	<Text id="TN_DT_SSC_Config_Mode_WM" value="窗口" />
+	<Text id="TN_DT_SSC_Config_Mode_TPM" value="两点" />
+	<Text id="TN_DT_SSC_Config_Mode" value="模式" />
+	<Text id="TN_DT_SSC_Config_Hyst" value="迟滞" />
+	<Text id="TN_V_TI_Select_NO" value="未选择通道" />
+	<Text id="TN_V_TI_Select_SSC1" value="开关信号通道 1 (SSC 1)" />
+	<Text id="TN_V_TI_Select_SSC2" value="开关信号通道 2 (SSC 2)" />
+	<Text id="TN_V_TI_Select" value="示教选择" />
+	<Text id="TN_V_TI_Result_State_IDLE" value="空闲" />
+	<Text id="TN_V_TI_Result_State_Success" value="成功" />
+	<Text id="TN_V_TI_Result_State_WAIT" value="等待命令" />
+	<Text id="TN_V_TI_Result_State_BUSY" value="忙碌" />
+	<Text id="TN_V_TI_Result_State_ERROR" value="错误" />
+	<Text id="TN_V_TI_Result_State" value="示教状态" />
+	<Text id="TN_V_TI_Result_SP1TP1" value="设定值 1 的示教点 1" />
+	<Text id="TN_V_TI_Result_SP1TP2" value="设定值 2 的示教点 1" />
+	<Text id="TN_V_TI_Result_SP2TP1" value="设定值 1 的示教点 2" />
+	<Text id="TN_V_TI_Result_SP2TP2" value="设定值 2 的示教点 2" />
+	<Text id="TN_V_TI_Result" value="示教结果" />
+	<Text id="TN_V_SSC1_Param" value="SSC1 参数" />
+	<Text id="TN_V_SSC1_Config" value="SSC1 配置" />
+	<Text id="TN_V_SSC2_Param" value="SSC2 参数" />
+	<Text id="TN_V_SSC2_Config" value="SSC2 配置" />
+	<!-- Output parameters -->
+	<Text id="TN_DT_SIOChN_Setup_StageMode_DIS" value="输出停用" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_PNP" value="PNP" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_NPN" value="NPN" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Push-Pull" value="推挽" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_high" value="数字逻辑输入（高电平有效/下拉）" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_low" value="数字逻辑输入（低电平有效/上拉）" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Teach-in" value="示教" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode" value="阶段模式" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_Deactivated" value="已停用" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 1" value="SSC 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 2" value="SSC 2" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA1" value="粉尘警报 (DA1)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA2" value="粉尘警报 (DA2)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_TA" value="温度警报 (TA)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_ELI" value="外部逻辑输入" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SF" value="应用功能" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_1" value="输入选择器 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_2" value="输入选择器 2" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_DIS" value="已禁用定时器" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOn" value="T-on 延迟" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_Toff" value="T-off 延迟" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOnOff" value="T-on/T-off 延迟" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_LEdge" value="单次上升沿" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TEdge" value="单次下降沿" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode" value="定时器模式" />
+	<Text id="TN_DT_SIOChN_Setup_Delay" value="定时器值" />
+	<Text id="TN_DT_SIOChN_Setup_Empty" value="未使用" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_ms" value="毫秒" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_s" value="秒" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_min" value="分钟" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale" value="定时器范围" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Direct" value="直连" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_AND" value="AND" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_OR" value="OR" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_XOR" value="XOR" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" value="门控 SR-FF" />
+	<Text id="TN_DT_SIOChN_Setup_Logic" value="逻辑功能" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_NI" value="未取反（常开）" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_INV" value="已取反（常闭）" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter" value="输出取反" />
+	<Text id="TN_V_SIOCh1_Setup" value="通道1设置" />
+	<Text id="TN_V_SIOCh2_Setup" value="通道2设置" />
+	<!-- Sensor specific adjustable parameters -->
+	<Text id="TN_V_SelectAdjustment_Adjustment_Trim-in" value="电位计输入" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_EWT" value="通过导线示教" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_DIS" value="IO-Link 调整" />
+	<Text id="TN_V_TrimmerSetting" value="SP1 微调电容器值" />
+	<Text id="TN_V_SelectAdjustment" value="本地/远程调整的选择" />
+	<Text id="TN_V_PDConfiguration_Analogue_Inactive" value="模拟量值不启用" />
+	<Text id="TN_V_PDConfiguration_Analogue_Normal" value="正常模拟值" />
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Length" value="物体长度模拟值" />
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Speed" value="物体速度模拟值" />
+	<Text id="TN_V_PDConfiguration_Analogue_Divider" value="计时器值模拟值" />
+	<Text id="TN_V_PDConfiguration_Analogue" value="模拟值" />
+	<Text id="TN_V_PDConfiguration_SO1_Inactive" value="开关输出 1 不启用" />
+	<Text id="TN_V_PDConfiguration_SO1_Active" value="开关输出 1 启用" />
+	<Text id="TN_V_PDConfiguration_SO1" value="开关输出 1" />
+	<Text id="TN_V_PDConfiguration_SO2_Inactive" value="开关输出 2 不启用" />
+	<Text id="TN_V_PDConfiguration_SO2_Active" value="开关输出 2 启用" />
+	<Text id="TN_V_PDConfiguration_SO2" value="开关输出 2" />
+	<Text id="TN_V_PDConfiguration_SSC1_Inactive" value="SSC1 未启用" />
+	<Text id="TN_V_PDConfiguration_SSC1_Active" value="SSC1 启用" />
+	<Text id="TN_V_PDConfiguration_SSC1" value="开关信号通道 1" />
+	<Text id="TN_V_PDConfiguration_SSC2_Inactive" value="SSC2 未启用" />
+	<Text id="TN_V_PDConfiguration_SSC2_Active" value="SSC2 启用" />
+	<Text id="TN_V_PDConfiguration_SSC2" value="开关信号通道 2" />
+	<Text id="TN_V_PDConfiguration_DA1_Inactive" value="DA1 未启用" />
+	<Text id="TN_V_PDConfiguration_DA1_Active" value="DA1 启用" />
+	<Text id="TN_V_PDConfiguration_DA1" value="粉尘警报  1" />
+	<Text id="TN_V_PDConfiguration_DA2_Inactive" value="DA2 未启用" />
+	<Text id="TN_V_PDConfiguration_DA2_Active" value="DA2 启用" />
+	<Text id="TN_V_PDConfiguration_DA2" value="粉尘警报 2" />
+	<Text id="TN_V_PDConfiguration_TA_Inactive" value="TA 未启用" />
+	<Text id="TN_V_PDConfiguration_TA_Active" value="TA 启用" />
+	<Text id="TN_V_PDConfiguration_TA" value="温度警报" />
+	<Text id="TN_V_PDConfiguration_SC_Inactive" value="SC 未启用" />
+	<Text id="TN_V_PDConfiguration_SC_Active" value="SC 启用" />
+	<Text id="TN_V_PDConfiguration_SC" value="短路" />
+	<Text id="TN_V_PDConfiguration_WDA1_Inactive" value="WDA1 未启用"  />
+	<Text id="TN_V_PDConfiguration_WDA1_Active" value="WDA1 启用"  />
+	<Text id="TN_V_PDConfiguration_WDA1" value="水滴警报 1"  />
+	<Text id="TN_V_PDConfiguration_WDA2_Inactive" value="WDA2 未启用"  />
+	<Text id="TN_V_PDConfiguration_WDA2_Active" value="WDA2 启用"  />
+	<Text id="TN_V_PDConfiguration_WDA2" value="水滴警报 2"  />
+	<Text id="TN_V_PDConfiguration_SFO1_Inactive" value="AFO1 未启用" />
+	<Text id="TN_V_PDConfiguration_SFO1_Active" value="AFO1 启用" />
+	<Text id="TN_V_PDConfiguration_SFO1" value="应用功能输出 1" />
+	<Text id="TN_V_PDConfiguration" value="过程数据配置" />
+	<Text id="TN_V_SensorPresets_FS" value="定制（过滤器定标器）" />
+	<Text id="TN_V_SensorPresets_Slow" value="高精度" />
+	<Text id="TN_V_SensorPresets_Fast" value="默认精度" />
+	<Text id="TN_V_SensorPresets" value="传感器过滤器预设" />
+	<Text id="TN_V_TempAlarmThres_High" value="高阈值" />
+	<Text id="TN_V_TempAlarmThres_Low" value="低阈值" />
+	<Text id="TN_V_TempAlarmThres" value="温度警报阈值" />
+	<Text id="TN_V_SafeOnOffLimit_SSC1" value="SCC 1 - 安全限制" />
+	<Text id="TN_V_SafeOnOffLimit_SSC2" value="SCC 2 - 安全限制" />
+	<Text id="TN_V_SafeOnOffLimit" value="安全开/关限制" />
+	<Text id="TN_V_EventConfiguration_Maintenance_DIS" value="维护事件未启用" />
+	<Text id="TN_V_EventConfiguration_Maintenance_ENA" value="维护事件启用" />
+	<Text id="TN_V_EventConfiguration_Maintenance" value="维护 (0x8C30)" />
+	<Text id="TN_V_EventConfiguration_Temperature_DIS" value="温度异常事件不启用" />
+	<Text id="TN_V_EventConfiguration_Temperature_ENA" value="温度异常事件启用" />
+	<Text id="TN_V_EventConfiguration_Temperature" value="温度异常事件 (0x4000)" />
+	<Text id="TN_V_EventConfiguration_Overrun_DIS" value="温度过载运行不启用" />
+	<Text id="TN_V_EventConfiguration_Overrun_ENA" value="温度过载运行启用" />
+	<Text id="TN_V_EventConfiguration_Overrun" value="温度过载运行 (0x4210)" />
+	<Text id="TN_V_EventConfiguration_Underrun_DIS" value="温度欠载运行不启用" />
+	<Text id="TN_V_EventConfiguration_Underrun_ENA" value="温度欠载运行启用" />
+	<Text id="TN_V_EventConfiguration_Underrun" value="温度欠载运行 (0x4220)" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_DIS" value="短路不启用" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_ENA" value="短路启用" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit" value="短路 (0x7710)" />
+	<Text id="TN_V_EventConfiguration" value="事件配置" />
+	<Text id="TN_V_QualityOfTeach" value="示教质量" />
+	<Text id="TN_V_QualityOfRun" value="运行质量" />
+	<Text id="TN_V_Excess_gain" value="过量增益" />
+	<Text id="TN_V_FilterScaler" value="筛选定标器" />
+	<Text id="TN_V_LedIndication_DIS" value="LED 指示不启用" />
+	<Text id="TN_V_LedIndication_ENA" value="LED 指示启用" />
+	<Text id="TN_V_LedIndication_FMS" value="查找我的传感器" />
+	<Text id="TN_V_LedIndication" value="LED 指示" />
+	<Text id="TN_V_SSC1_Hyst_Mode"  value="磁滞模式" />
+	<Text id="TN_V_SSC1_Hyst_Mode_Man" value="手动设置磁滞" />
+	<Text id="TN_V_SSC1_Hyst_Mode_Auto" value="自动设置磁滞" />
+	<Text id="TN_V_Auto_Hyst_Values" value="自动计算磁滞值" />
+	<Text id="TN_V_Auto_Hyst_Values_SP1" value="用于 SP1" />
+	<Text id="TN_V_Auto_Hyst_Values_SP2" value="用于 SP2" />
+	<Text id="TN_V_IP_off" value="未启用" />
+	<Text id="TN_V_IP_1sensor_filter" value="单传感器模式" />
+	<Text id="TN_V_IP_2sensor-sensor1" value="双传感器 - 传感器 1" />
+	<Text id="TN_V_IP_2sensor-sensor2" value="双传感器 - 传感器 2" />
+	<Text id="TN_V_IP_3sensor-sensor1" value="三传感器 - 传感器 1" />
+	<Text id="TN_V_IP_3sensor-sensor2" value="三传感器 - 传感器 2" />
+	<Text id="TN_V_IP_3sensor-sensor3" value="三传感器 - 传感器 3" />
+	<Text id="TN_V_interference_protection" value="互扰保护" />
+	
+	<Text id="TN_V_AA_OFF" value="自动调节未激活" />
+	<Text id="TN_V_AA_ON" value="自动调节已激活" />
+	<Text id="TN_V_AA_Enable" value="自动调节" />
+	<Text id="TN_V_AA_AdjustWindowPct" value="调节窗口大小" />
+	<Text id="TN_V_AA_AdjustResolutionPct" value="分辨率大小" />
+	<Text id="TN_V_AutoAdjust_setup" value="自动调节设置" />
+		
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC1" value="SSC1" />
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC2" value="SSC2" />
+	<Text id="TN_V_AA_Corrected_setpoint" value="已修正设定值" />
+	
+	<Text id="TN_V_SFS_Normale" value="未选中应用功能" />
+	<Text id="TN_V_SFS_Speed_And_Lenght" value="速度和长度" />
+	<Text id="TN_V_SFS_Pattern_Recognition" value="模式识别" />
+	<Text id="TN_V_SFS_Divider"  value="分配器" />
+	<Text id="TN_V_SFS_Object_And_Gap_monitoring" value="物体和间隙监视" />
+	<Text id="TN_V_Special_Func_Selector" value="应用功能选择器" />
+	<Text id="TN_V_SF_NoSensor" value="未选中角色" />
+	<Text id="TN_V_SF_SensorA" value="触发传感器" />
+	<Text id="TN_V_SF_SensorB" value="主传感器" />
+	<Text id="TN_V_Distance_Between_Sensors" value="传感器之间的距离" />
+	<Text id="TN_V_SAL_measurement_Setup" value="速度和长度测量设置" />
+	<Text id="TN_V_Object_length" value="物体长度" />
+	<Text id="TN_V_Object_speed" value="物体速度" />
+	<Text id="TN_V_SAL_Mode" value="传感器角色" />
+	<Text id="TN_V_SAL_STATUS_DISABLED" value="空闲" />
+	<Text id="TN_V_SAL_STATUS_MEASUREMENT_RUNNING" value="测量正在运行" />
+	<Text id="TN_V_SAL_STATUS_ERR_SPEED_TOO_HIGH" value="速度过高" />
+	<Text id="TN_V_SAL_STATUS_ERR_TIMEOUT" value="超时" />
+	<Text id="TN_V_SAL_STATUS_ERR_OBJ_TOO_LONG" value="物体过长" />
+	<Text id="TN_V_SAL_STATUS_ERR_LOGIC_FAIL" value="逻辑失效" />
+	<Text id="TN_V_SAL_Status" value="状态" />
+	<Text id="TN_V_SAL_measurement_Result" value="速度和长度测量结果" />
+	<Text id="TN_V_PR_Mode" value="传感器角色" />
+	<Text id="TN_V_PR_Timeout" value="超时" />
+	<Text id="TN_V_PR_PatternTolerancePromille" value="容差" />
+	<Text id="TN_V_PR_Setup" value="模式识别设置" />
+	<Text id="TN_Pattern_Not_Saved" value="未保存" />
+	<Text id="TN_Pattern_Saved" value="已保存" />
+	<Text id="TN_V_PR_Ref_Pattern_SavedOrNot" value="参考模式" />
+	<Text id="TN_V_Reference_pattern_NoOfEdges" value="参考模式边缘个数" />
+	<Text id="TN_V_NoOfEdges_last_scan" value="上一模式边缘个数" />
+	<Text id="TN_V_PR_STATUS_CLEAR" value="空闲" />
+	<Text id="TN_V_PR_STATUS_MEASUREMENT_RUNNING" value="测量正在运行" />
+	<Text id="TN_V_PR_STATUS_PATTERN_MATCH" value="模式匹配" />
+	<Text id="TN_V_PR_STATUS_ERR_TIMEOUT" value="超时" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_EXCEED_MAX" value="边缘过多" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_CNT_ERR" value="边缘计数错误" />
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_TIMING_ERR"  value="边缘定时错误" />
+	<Text id="TN_V_PR_Status" value="模式识别状态" />
+	<Text id="TN_V_PR_Result" value="模式识别结果" />
+	<Text id="TN_V_DaC_CounterLimit"  value="计数器限值" />	
+	<Text id="TN_V_DaC_PCV" value="预设计数器值" />
+	<Text id="TN_V_DaC_Setup" value="分配器和计数器设置" />
+	<Text id="TN_V_DaC_Result" value="计数器值" />
+	<Text id="TN_V_OaGM_GapMinT" value="间隙最小时间" />
+	<Text id="TN_V_OaGM_GapMaxT" value="间隙最大时间" />
+	<Text id="TN_V_OaGM_objMinT" value="物体最小时间" />
+	<Text id="TN_V_OaGM_objMaxT" value="物体最大时间" />
+	<Text id="TN_V_OaGM_Setup" value="物体和间隙监视设置" />
+	<Text id="TN_V_OaGM_ObjT" value="物体时间" />
+	<Text id="TN_V_OaGM_GapT" value="间隙时间" />
+	<Text id="TN_V_OaGM_STATUS_Obj_IDLE" value="空闲" />
+	<Text id="TN_V_OaGM_STATUS_Obj_Measurement_Run" value="测量正在运行" />
+	<Text id="TN_V_OaGM_STATUS_Obj_Passed" value="物体未超过限值" />
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Long" value="物体过长" />
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Short" value="物体过短" />
+	<Text id="TN_V_OaGM_Obj_Status" value="物体状态" />
+	<Text id="TN_V_OaGM_STATUS_Gap_IDLE" value="空闲" />
+	<Text id="TN_V_OaGM_STATUS_Gap_Measurement_Run" value="测量正在运行" />
+	<Text id="TN_V_OaGM_STATUS_Gap_Passed" value="间隙未超过限值" />
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Long" value="间隙过长" />
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Short" value="间隙过短" />
+	<Text id="TN_V_OaGM_Gap_Status" value="间隙状态" />
+	<Text id="TN_V_OaGM_Result" value="物体和间隙监视结果" />
+	<Text id="TN_V_Ref_Pattern_timestamp_1" value="时间戳 1" />
+	<Text id="TN_V_Ref_Pattern_timestamp_2" value="时间戳 2" />
+	<Text id="TN_V_Ref_Pattern_timestamp_3" value="时间戳 3 " />
+	<Text id="TN_V_Ref_Pattern_timestamp_4" value="时间戳 4" />
+	<Text id="TN_V_Ref_Pattern_timestamp_5" value="时间戳 5" />
+	<Text id="TN_V_Ref_Pattern_timestamp_6" value="时间戳 6" />
+	<Text id="TN_V_Ref_Pattern_timestamp_7" value="时间戳 7" />
+	<Text id="TN_V_Ref_Pattern_timestamp_8" value="时间戳 8" />
+	<Text id="TN_V_Ref_Pattern_timestamp_9" value="时间戳 9" />
+	<Text id="TN_V_Ref_Pattern_timestamp_10" value="时间戳 10" />
+	<Text id="TN_V_Ref_Pattern_timestamp_11" value="时间戳 11" />
+	<Text id="TN_V_Ref_Pattern_timestamp_12" value="时间戳 12" />
+	<Text id="TN_V_Ref_Pattern_timestamp_13" value="时间戳 13" />
+	<Text id="TN_V_Ref_Pattern_timestamp_14" value="时间戳 14" />
+	<Text id="TN_V_Ref_Pattern_timestamp_15" value="时间戳 15" />
+	<Text id="TN_V_Ref_Pattern_timestamp_16" value="时间戳 16" />
+	<Text id="TN_V_Ref_Pattern_timestamp_17" value="时间戳 17" />
+	<Text id="TN_V_Ref_Pattern_timestamp_18" value="时间戳 18" />
+	<Text id="TN_V_Ref_Pattern_timestamp_19" value="时间戳 19" />
+	<Text id="TN_V_Ref_Pattern_timestamp_20" value="时间戳 20" />
+	<Text id="TN_V_P_EVENT_NONE" value="无边缘" />
+	<Text id="TN_V_P_EVENT_POS_EDGE" value="正边缘" />
+	<Text id="TN_V_P_EVENT_NEG_EDGE" value="负边缘" />
+	<Text id="TN_V_Ref_Pattern_edge_type_1" value="模式时间戳 1" />
+	<Text id="TN_V_Ref_Pattern_edge_type_2" value="模式时间戳 2" />
+	<Text id="TN_V_Ref_Pattern_edge_type_3" value="模式时间戳 3" />
+	<Text id="TN_V_Ref_Pattern_edge_type_4" value="模式时间戳 4" />
+	<Text id="TN_V_Ref_Pattern_edge_type_5" value="模式时间戳 5" />
+	<Text id="TN_V_Ref_Pattern_edge_type_6" value="模式时间戳 6" />
+	<Text id="TN_V_Ref_Pattern_edge_type_7" value="模式时间戳 7" />
+	<Text id="TN_V_Ref_Pattern_edge_type_8" value="模式时间戳 8" />
+	<Text id="TN_V_Ref_Pattern_edge_type_9" value="模式时间戳 9" />
+	<Text id="TN_V_Ref_Pattern_edge_type_10" value="模式时间戳 10" />
+	<Text id="TN_V_Ref_Pattern_edge_type_11" value="模式时间戳 11" />
+	<Text id="TN_V_Ref_Pattern_edge_type_12" value="模式时间戳 12" />
+	<Text id="TN_V_Ref_Pattern_edge_type_13" value="模式时间戳 13" />
+	<Text id="TN_V_Ref_Pattern_edge_type_14" value="模式时间戳 14" />
+	<Text id="TN_V_Ref_Pattern_edge_type_15" value="模式时间戳 15" />
+	<Text id="TN_V_Ref_Pattern_edge_type_16" value="模式时间戳 16" />
+	<Text id="TN_V_Ref_Pattern_edge_type_17" value="模式时间戳 17" />
+	<Text id="TN_V_Ref_Pattern_edge_type_18" value="模式时间戳 18" />
+	<Text id="TN_V_Ref_Pattern_edge_type_19" value="模式时间戳 19" />
+	<Text id="TN_V_Ref_Pattern_edge_type_20" value="模式时间戳 20" />
+	<Text id="TN_V_Ref_ObjectTimeLength" value="物体时间长度" />
+	<Text id="TN_V_Pattern" value="" />
+	
+	<!-- Diagnostics parameters -->
+	<Text id="TN_V_DiagOperatingHours" value="运行小时数" />
+	<Text id="TN_V_DiagPowerCycles" value="上电次数" />
+	<Text id="TN_V_DiagMaxTemp" value="最高温度- 始终高温" />
+	<Text id="TN_V_DiagMinTemp" value="最低温度- 始终低温" />
+	<Text id="TN_V_DiagMaxTempStartup" value="自通电以来的最高温度" />
+	<Text id="TN_V_DiagMinTempStartup" value="自通电以来的最低温度" />
+	<Text id="TN_V_DiagCurrentTemp" value="当前温度" />
+	
+	<Text id="TN_V_NonDS_NV_DataMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_ProdSetMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_DiagEE_MemoryFailure" value="" />
+	<Text id="TN_V_MemoryFailFlag" value="内存故障" />
+	<Text id="TN_V_DiagFrontendFailure" value="前端故障" />
+	
+	<Text id="TN_V_DiagDetectionCnt" value="检测计数器 SSC1" />
+	<Text id="TN_V_DiagOpTempOverun" value="高于最高温度的分钟数 " />
+	<Text id="TN_V_DiagOpTempUnderrun" value="低于最低温度的分钟数" />
+	<Text id="TN_V_DiagMaintenanceCnt" value="维护事件计数器" />
+	<Text id="TN_V_DiagDownloadCnt" value="下载计数器" />
+	<!-- System commands -->
+	<Text id="TN_FactoryReset" value="出厂重置" />
+	<Text id="TN_RestoreSSC" value="还原SSC" />
+	<Text id="TN_PresetCounterValue" value="预设计数器值" />
+	<Text id="TN_TeachApply" value="示教申请" />
+	<Text id="TN_TeachSP1" value="示教SP1" />
+	<Text id="TN_TeachSP2" value="示教SP2" />
+	<Text id="TN_TeachSP1TP1" value="示教SP1 TP1" />
+	<Text id="TN_TeachSP1TP2" value="示教SP1 TP2" />
+	<Text id="TN_TeachSP2TP1" value="示教SP2 TP1" />
+	<Text id="TN_TeachSP2TP2" value="示教SP2 TP2" />
+	<Text id="TN_TeachSP1Start" value="示教SP1开始" />
+	<Text id="TN_TeachSP1Stop" value="示教SP1停止" />
+	<Text id="TN_TeachSP2Start" value="示教SP2开始" />
+	<Text id="TN_TeachSP2Stop" value="示教SP2停止" />
+	<Text id="TN_TeachPattern" value="教导图案" />	
+	<Text id="TN_TeachCancel" value="示教取消" />
+	<!-- Process data -->
+	<Text id="TN_PDI_Analogue" value="模拟量值" />
+	<Text id="TN_PDI_Analogue_obj_Length" value="物体长度" />
+	<Text id="TN_PDI_Analogue_obj_Speed" value="物体速度" />
+	<Text id="TN_PDI_Analogue_Diveder" value="计数器值" />
+	
+	<Text id="TN_PDI_SC" value="短路" />
+	<Text id="TN_PDI_TA1" value="温度报警" />
+	<Text id="TN_PDI_DA2" value="粉尘警报 2" />
+	<Text id="TN_PDI_DA1" value="粉尘警报 1" />
+	<Text id="TN_PDI_SSC2" value="开关信号通道 2" />
+	<Text id="TN_PDI_SSC1" value="开关信号通道 1" />
+	<Text id="TN_PDI_SFO1" value="应用功能输出 1" />
+	<Text id="TN_PDI_WDA2" value="水滴警报 2" />
+	<Text id="TN_PDI_WDA1" value="水滴警报 1" />
+	<Text id="TN_PDI_SO2" value="开关输出 2" />
+	<Text id="TN_PDI_SO1" value="开关输出 1" />
+	<Text id="TN_Active" value="启用" />
+	<Text id="TN_Inactive" value="不启用" />
+	<Text id="TI_PDI" value="过程数据输入" />
+	<!-- Events -->
+	<!-- Menus -->
+	<Text id="TN_ME_Observation_Diag_Operating" value="运行诊断" />
+	<Text id="TN_ME_Observation_Diag_Sensor" value="传感器诊断" />
+	<Text id="TN_ME_Observation_Diag_Temp" value="温度诊断" />
+	<Text id="TN_ME_Observation_PD" value="过数据" />
+	<Text id="TN_ME_Parameter_Output_SIO_1" value="通道 1 (SO1)" />
+	<Text id="TN_ME_Parameter_Output_SIO_1_Setup" value="通道1(SO1)设定" />
+	<Text id="TN_ME_Parameter_Output_SIO_2" value="通道 2 (SO2)" />
+	<Text id="TN_ME_Parameter_Output_SIO_2_Setup" value="通道2(SO2)设定" />
+	<Text id="TN_ME_Parameter_Sensor Specific" value="传感器细节" />
+	
+	<Text id="TN_ME_Parameter_Special_Func" value="特殊功能" />
+	<Text id="TN_ME_Parameter_Application_Functions" value="应用功能" />
+	<Text id="TN_ME_Param_Temp" value="温度警报设置" />
+	<Text id="TN_ME_Param_Measurment" value="传感器测量选择" />
+	<Text id="TN_ME_Param_Hyst_Auto" value="自动磁滞" />
+	<Text id="TN_ME_Param_Hyst_Man" value="手动磁滞" />
+	<Text id="TN_ME_SSC1_TW_Single_P" value="设定值" />
+	<Text id="TN_ME_AA_Corrected_setpoint" value="已修正设定值" />
+	<Text id="TN_ME_Param_PR" value="模式识别" />
+	<Text id="TN_ME_Param_PR_Smart" value="模式识别主传感器" />
+	<Text id="TN_ME_Param_SAL" value="速度和长度测量" />
+	<Text id="TN_ME_Param_SAL_Smart" value="速度和长度测量主传感器" />
+	<Text id="TN_ME_Param_DaC" value="分配器和计数器" />
+	<Text id="TN_ME_Param_OaGM" value="物体和间隙监视" />	
+	<Text id="TN_ME_PDConfiguration" value="过程数据配置" />
+	<Text id="TN_ME_Pattern" value="参考模式" />
+	
+	<Text id="TN_ME_EventConfiguration" value="事件配置" />
+	<Text id="TN_ME_Parameter_Command" value="命令" />
+	<Text id="TN_ME_TI" value="示教" />
+	<Text id="TN_ME_TI_SSC1" value="示教SSC1" />
+	<Text id="TN_ME_TI_SSC2" value="示教SSC2" />
+	<Text id="TN_ME_DeviceAccessLocks" value="设备访问锁定" />
+	
+	<Text id="TN_ME_TI_SingleValue_SSC1" value="示教SSC1单个数值" />
+	<Text id="TN_ME_TI_SingleValue_SSC2" value="示教SSC2单个数值" />
+	
+	<Text id="TN_ME_TI_TwoValue_SSC1" value="示教SSC1两个数值" />
+	<Text id="TN_ME_TI_TwoValue_SSC2" value="示教SSC2两个数值" />
+	
+	<Text id="TN_ME_TI_Dynamic_SSC1" value="动态示教SSC1" />
+	<Text id="TN_ME_TI_Dynamic_SSC2" value="动态示教SSC2" />
+	
+	<Text id="TN_ME_SSC1" value="开关信号通道 1" />
+	<Text id="TN_ME_SSC1_Adjust_IOL1" value="设定点" />
+	<Text id="TN_ME_SSC1_SP" value="SSC1单点模式" />
+	<Text id="TN_ME_SSC1_Window" value="SSC1 窗口 IOL 调节" />
+	<Text id="TN_ME_SSC1_TP" value="SSC1 双点 IOL 调节" />
+	<Text id="TN_ME_SSC2" value="开关信号通道 2" />
+	<Text id="TN_ME_SSC2_Single_P" value="开关信号通道2单点模式" />
+	<Text id="TN_ME_SSC2_Window" value="开关信号通道2窗口模式" />
+	<Text id="TN_ME_SSC2_two_P" value="开关信号通道2两点模式" />	
+	<Text id="TD_ME_TI_TeachApply" value="示教申请" />
+	<Text id="TD_ME_TI_TeachSP1" value="示教SP1" />
+	<Text id="TD_ME_TI_TeachSP2" value="示教SP2" />
+	<Text id="TD_ME_TI_TeachSP1TP1" value="示教SP1 TP1" />
+	<Text id="TD_ME_TI_TeachSP1TP2" value="示教SP1 TP2" />
+	<Text id="TD_ME_TI_TeachSP2TP1" value="示教SP2 TP1" />
+	<Text id="TD_ME_TI_TeachSP2TP2" value="示教SP2 TP2" />
+	<Text id="TD_ME_TI_TeachSP1Start" value="示教SP1开始" />
+	<Text id="TD_ME_TI_TeachSP1Stop" value="示教SP1停止" />
+	<Text id="TD_ME_TI_TeachSP2Start" value="示教SP2开始" />
+	<Text id="TD_ME_TI_TeachSP2Stop" value="示教SP2停止" />
+	<Text id="TD_ME_TI_TeachCancel" value="示教取消" />
+	</Language>
+	<Stamp crc="4060849942"><Checker name="IODD-Checker V1.1.4" version="V1.1.4.0"/></Stamp>
+</ExternalTextDocument>

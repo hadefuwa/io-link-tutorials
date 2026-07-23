@@ -1,0 +1,113 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#05070a}
+  .thumb{
+    position:relative;width:1280px;height:720px;overflow:hidden;
+    background:radial-gradient(120% 120% at 15% 20%,#161c26 0%,#0b0f16 55%,#05070a 100%);
+    font-family:"Segoe UI","Arial Black",Arial,sans-serif;color:#fff;
+  }
+  /* tech accents */
+  .hex{position:absolute;inset:0;opacity:.05;
+    background-image:linear-gradient(60deg,transparent 47%,#ff7a1a 48%,#ff7a1a 52%,transparent 53%);
+    background-size:46px 46px}
+  .glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55}
+  .glow.o{width:620px;height:620px;right:-160px;bottom:-220px;background:#ff7a1a}
+  .glow.b{width:520px;height:520px;left:-200px;top:-180px;background:#1b4fff;opacity:.28}
+  .corner{position:absolute;width:150px;height:150px;border:3px solid #ff7a1a;opacity:.5}
+  .corner.tl{left:26px;top:26px;border-right:0;border-bottom:0}
+  .corner.br{right:26px;bottom:26px;border-left:0;border-top:0}
+
+  /* LEFT TEXT */
+  .left{position:absolute;left:52px;top:104px;width:740px;z-index:5}
+  .tag{display:inline-flex;align-items:center;gap:9px;background:#0d1219;border:2px solid #2b3444;
+    border-radius:999px;padding:9px 16px;font-size:19px;font-weight:800;letter-spacing:.06em;color:#cdd8e6}
+  .tag .dot{width:11px;height:11px;border-radius:50%;background:#ff7a1a;box-shadow:0 0 12px #ff7a1a}
+  h1{font-weight:900;line-height:.92;letter-spacing:-.01em;margin-top:22px}
+  .l1{font-size:70px;white-space:nowrap;background:linear-gradient(180deg,#ffffff,#aeb9c6);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 3px 0 rgba(0,0,0,.25);filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
+  .l2{font-size:104px;white-space:nowrap;background:linear-gradient(180deg,#ffb063,#ff7a1a 55%,#e85d00);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 6px 16px rgba(232,93,0,.45));margin-top:-2px}
+  .sub{display:inline-block;margin-top:20px;background:#0d1219;border:2px solid #ff7a1a;border-radius:12px;padding:11px 18px;
+    font-size:26px;font-weight:900;letter-spacing:.04em;color:#fff}
+  .sub b{color:#ff9d3f}
+  .badge{display:inline-flex;align-items:center;gap:0;margin-top:26px;border-radius:12px;overflow:hidden;
+    box-shadow:0 8px 22px rgba(0,0,0,.5)}
+  .badge .m{display:flex;align-items:center;gap:12px;background:#0d1219;border:2px solid #ff7a1a;border-right:0;
+    padding:13px 18px;font-size:30px;font-weight:900;letter-spacing:.08em;color:#fff}
+  .badge .n{background:linear-gradient(180deg,#ff8c1a,#e85d00);padding:13px 20px;font-size:34px;font-weight:900;color:#fff;
+    border:2px solid #ff7a1a;border-left:0}
+  .gear{width:34px;height:34px}
+
+  /* RIGHT BROWSER MOCK */
+  .stage{position:absolute;right:-40px;top:96px;width:720px;height:540px;z-index:4;
+    perspective:1400px}
+  .browser{position:absolute;right:60px;top:20px;width:660px;
+    transform:rotateY(-15deg) rotateX(4deg) rotate(-1deg);transform-origin:right center;
+    border-radius:12px;overflow:hidden;border:3px solid #ff7a1a;
+    box-shadow:0 0 0 3px rgba(255,122,26,.25),0 30px 70px rgba(0,0,0,.65),0 0 60px rgba(255,122,26,.35)}
+  .chrome{display:flex;align-items:center;gap:12px;background:#20262f;padding:11px 14px}
+  .dots{display:flex;gap:7px}.dots i{width:12px;height:12px;border-radius:50%;display:block}
+  .dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+  .url{flex:1;background:#11151b;border-radius:7px;padding:8px 12px;font-size:20px;color:#9fb0c2;font-family:Consolas,monospace}
+  .url b{color:#fff}
+  .page{background:#f7f7f7;color:#111;padding:16px 18px 20px}
+  .ph{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:800;color:#222;margin-bottom:12px}
+  .ph .ifm{width:34px;height:34px;background:#ff7a1a;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:19px}
+  th{background:#111;color:#fff;text-align:left;padding:7px 10px;font-weight:700}
+  td{padding:8px 10px;border-bottom:1px solid #e3e3e3;color:#222}
+  tr:nth-child(even) td{background:#eee}
+  .io{color:#1a9c3c;font-weight:800}
+  .muted{color:#9aa}
+  .fade{position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(180deg,transparent,#05070a)}
+
+  .brandline{position:absolute;left:56px;bottom:34px;font-size:20px;font-weight:800;letter-spacing:.05em;color:#8ea0b4;z-index:6}
+  .brandline b{color:#ff9d3f}
+</style>
+
+<div class="thumb">
+  <div class="hex"></div>
+  <div class="glow o"></div><div class="glow b"></div>
+  <div class="corner tl"></div><div class="corner br"></div>
+
+  <!-- RIGHT: browser mock of the AL1350 web server -->
+  <div class="stage">
+    <div class="browser">
+      <div class="chrome">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="url">🔒 http://<b>192.168.7.4</b></div>
+      </div>
+      <div class="page">
+        <div class="ph"><span class="ifm">ifm</span> AL1350 IO-Link Master · 4 Port IoT</div>
+        <table>
+          <tr><th>Port</th><th>Mode</th><th>Name</th></tr>
+          <tr><td>1</td><td class="io">IO-Link</td><td>OBD1000-R100-2EP-IO-V31</td></tr>
+          <tr><td>2</td><td class="io">IO-Link</td><td>TP9237</td></tr>
+          <tr><td>3</td><td class="io">IO-Link</td><td class="muted">—</td></tr>
+          <tr><td>4</td><td class="io">IO-Link</td><td>PD30CTDR10BPM5IO</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEFT: text -->
+  <div class="left">
+    <span class="tag"><span class="dot"></span>ifm AL1350 · IoT</span>
+    <h1>
+      <div class="l1">IO-LINK MASTER</div>
+      <div class="l2">WEB SERVER</div>
+    </h1>
+    <div class="sub">NO SOFTWARE — <b>JUST A BROWSER</b></div>
+    <div class="badge">
+      <span class="m">
+        <svg class="gear" viewBox="0 0 24 24" fill="#ff9d3f"><path d="M19.4 13a7.9 7.9 0 000-2l2-1.6-2-3.4-2.4 1a7.9 7.9 0 00-1.7-1l-.4-2.6H9.1l-.4 2.6a7.9 7.9 0 00-1.7 1l-2.4-1-2 3.4L2.6 11a7.9 7.9 0 000 2l-2 1.6 2 3.4 2.4-1c.5.4 1.1.8 1.7 1l.4 2.6h5.8l.4-2.6c.6-.2 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7z"/></svg>
+        PRACTICAL COURSE
+      </span>
+      <span class="n">#3</span>
+    </div>
+  </div>
+
+  <div class="fade"></div>
+</div>

@@ -74,6 +74,18 @@ function Read-HttpRequest($stream) {
     return @{ Method = $method; Path = $path; Body = $body }
 }
 
+function Send-HttpBytes($stream, $status, $contentType, [byte[]]$bodyBytes) {
+    $head = "HTTP/1.1 $status`r`n" +
+            "Content-Type: $contentType`r`n" +
+            "Content-Length: $($bodyBytes.Length)`r`n" +
+            "Cache-Control: no-store`r`n" +
+            "Connection: close`r`n`r`n"
+    $headBytes = [System.Text.Encoding]::ASCII.GetBytes($head)
+    $stream.Write($headBytes, 0, $headBytes.Length)
+    if ($bodyBytes.Length -gt 0) { $stream.Write($bodyBytes, 0, $bodyBytes.Length) }
+    $stream.Flush()
+}
+
 function Send-HttpResponse($stream, $status, $contentType, $bodyString) {
     $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes($bodyString)
     $head = "HTTP/1.1 $status`r`n" +
@@ -92,8 +104,9 @@ function Send-HttpResponse($stream, $status, $contentType, $bodyString) {
 function Invoke-AlProxy($rawBody) {
     $ip = $script:cfg.masterIp
     try {
+        # short timeout: this server is single-threaded, so a hung master must not stall the UI
         $resp = Invoke-WebRequest -Uri "http://$ip/" -Method Post -Body $rawBody `
-                    -ContentType 'application/json' -TimeoutSec 5 -UseBasicParsing
+                    -ContentType 'application/json' -TimeoutSec 2 -UseBasicParsing
         return @{ ok = $true; content = $resp.Content }
     } catch {
         $msg = $_.Exception.Message
@@ -125,7 +138,7 @@ Write-Host "AL1350 master: $($cfg.masterIp)  (port X0$($cfg.port))" -ForegroundC
 Write-Host "Press Ctrl+C in this window to stop." -ForegroundColor DarkGray
 
 if ($cfg.openBrowser) {
-    try { Start-Process $url | Out-Null } catch {}
+    try { Start-Process ($url + 'deck.html') | Out-Null } catch {}
 }
 
 $indexPath = Join-Path $scriptDir 'index.html'
@@ -171,7 +184,35 @@ try {
                     break
                 }
                 default {
-                    Send-HttpResponse $stream '404 Not Found' 'text/plain' 'Not found'
+                    # static files (html / css / js / images) served from the app folder
+                    $rel  = [Uri]::UnescapeDataString($pathOnly.TrimStart('/')) -replace '/','\'
+                    $full = Join-Path $scriptDir $rel
+                    $res  = $null
+                    try { $res = (Resolve-Path -LiteralPath $full -ErrorAction Stop).Path } catch {}
+                    if ($res -and $res.StartsWith($scriptDir, 'OrdinalIgnoreCase') -and (Test-Path -LiteralPath $res -PathType Leaf)) {
+                        $ext = [IO.Path]::GetExtension($res).ToLower()
+                        $ct = switch ($ext) {
+                            '.html' { 'text/html; charset=utf-8' }
+                            '.htm'  { 'text/html; charset=utf-8' }
+                            '.css'  { 'text/css; charset=utf-8' }
+                            '.js'   { 'application/javascript; charset=utf-8' }
+                            '.json' { 'application/json; charset=utf-8' }
+                            '.svg'  { 'image/svg+xml' }
+                            '.png'  { 'image/png' }
+                            '.jpg'  { 'image/jpeg' }
+                            '.jpeg' { 'image/jpeg' }
+                            '.gif'  { 'image/gif' }
+                            '.ico'  { 'image/x-icon' }
+                            default { 'application/octet-stream' }
+                        }
+                        if ($ext -in @('.html','.htm','.css','.js','.json','.svg')) {
+                            Send-HttpResponse $stream '200 OK' $ct ([IO.File]::ReadAllText($res, [Text.Encoding]::UTF8))
+                        } else {
+                            Send-HttpBytes $stream '200 OK' $ct ([IO.File]::ReadAllBytes($res))
+                        }
+                    } else {
+                        Send-HttpResponse $stream '404 Not Found' 'text/plain' 'Not found'
+                    }
                 }
             }
         } catch {

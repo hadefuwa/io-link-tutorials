@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+	<DocumentInfo copyright="Carlo Gavazzi" releaseDate="2021-05-01" version="V1.0" />
+<Language xml:lang="fr">
+	<Text id="T_VendorText" value="www.gavazziautomation.com" />
+	<Text id="T_VendorUrl" value="www.gavazziautomation.com" />
+	<Text id="T_DeviceName" value="PD30" />
+	<Text id="T_DeviceFamily" value="Capteur photoélectrique" />
+	<Text id="TD_ISDUDeviceVariant" value="Cellule photoélectrique, réflexion diffuse, émetteur de lumière rouge, 1000 mm, boîtier inox, IO-Link" />
+	<Text id="TN_Out1" value="Alimentation (+)" />
+	<Text id="TN_Out2" value="Sortie 2 / apprentissage" />
+	<Text id="TN_Out3" value="Alimentation (-)" />
+	<Text id="TN_Out4" value="Sortie 1 / IO-Link" />
+	<Text id="TD_Connection01" value="Connecteur M8 ou câble 2 m" />
+	<Text id="TN_V_FunctionTag" value="Étiquette de fonction" />
+	<Text id="TN_V_LocationTag" value="Emplacement de l'étiquette" />
+	<!-- Smart Sensor Profile parameters -->
+	<Text id="TN_DT_TI_Result_Flag_Nok" value="Pas OK" />
+	<Text id="TN_DT_TI_Result_Flag_OK" value="OK" />
+	<Text id="TN_DT_SSC_Param_SP1" value="Point de consigne 1" />
+	<Text id="TN_DT_SSC_Param_SP2" value="Point de consigne 2" />
+	<Text id="TN_DT_SSC_Config_Logic_High" value="Actif-haut" />
+	<Text id="TN_DT_SSC_Config_Logic_Low" value="Actif-bas" />
+	<Text id="TN_DT_SSC_Config_Logic" value="Logique de commutation" />
+	<Text id="TN_DT_SSC_Config_Mode_DIS" value="Désactivé" />
+	<Text id="TN_DT_SSC_Config_Mode_SPM" value="Point unique" />
+	<Text id="TN_DT_SSC_Config_Mode_WM" value="Fenêtre" />
+	<Text id="TN_DT_SSC_Config_Mode_TPM" value="Deux points" />
+	<Text id="TN_DT_SSC_Config_Mode" value="Mode" />
+	<Text id="TN_DT_SSC_Config_Hyst" value="Hystérésis" />
+	<Text id="TN_V_TI_Select_NO" value="Aucun canal sélectionné" />
+	<Text id="TN_V_TI_Select_SSC1" value="Signal de commutation Canal 1 (SSC 1)" />
+	<Text id="TN_V_TI_Select_SSC2" value="Signal de commutation Canal 2 (SSC 2)" />
+	<Text id="TN_V_TI_Select" value="Sélection  Apprentissage" />
+	<Text id="TN_V_TI_Result_State_IDLE" value="Inactif" />
+	<Text id="TN_V_TI_Result_State_Success" value="Succès" />
+	<Text id="TN_V_TI_Result_State_WAIT" value="Attendre la commande" />
+	<Text id="TN_V_TI_Result_State_BUSY" value="Occupé" />
+	<Text id="TN_V_TI_Result_State_ERROR" value="Erreur" />
+	<Text id="TN_V_TI_Result_State" value="État De l'apprentissage" />
+	<Text id="TN_V_TI_Result_SP1TP1" value="Point d’apprentissage 1 du point de consigne 1" />
+	<Text id="TN_V_TI_Result_SP1TP2" value="Point d’apprentissage 2 du point de consigne 1" />
+	<Text id="TN_V_TI_Result_SP2TP1" value="Point d’apprentissage 1 du point de consigne 2" />
+	<Text id="TN_V_TI_Result_SP2TP2" value="Point d’apprentissage 2 du point de consigne 2" />
+	<Text id="TN_V_TI_Result" value="Résultat de l'apprentissage" />
+	<Text id="TN_V_SSC1_Param" value="Paramètre SSC1" />
+	<Text id="TN_V_SSC1_Config" value="Configuration du SSC1" />
+	<Text id="TN_V_SSC2_Param" value="Paramètre SSC2" />
+	<Text id="TN_V_SSC2_Config" value="Configuration du SSC2" />
+	<!-- Output parameters -->
+	<Text id="TN_DT_SIOChN_Setup_StageMode_DIS" value=" Sortie désactivée" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_PNP" value="PNP" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_NPN" value="NPN" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Push-Pull" value="Push-Pull" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_high" value="Entrée logique numérique (actif haut/Pull-down)" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_low" value="Entrée logique numérique (actif bas/Pull-up)" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode_Teach-in" value="Apprentissage" />
+	<Text id="TN_DT_SIOChN_Setup_StageMode" value="Mode Etape" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_Deactivated" value="Désactivé" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 1" value="SSC 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 2" value="SSC 2" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA1" value="Alarme de poussière (DA1)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_DA2" value="Alarme de poussière (DA2)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_TA" value="Alarme de température (TA)" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_ELI" value="Entrée logique externe" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_SF" value="Fonctions d'application" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_1" value="Sélecteur d'entrée 1" />
+	<Text id="TN_DT_SIOChN_Setup_Configuration_2" value="Sélecteur d'entrée 2" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_DIS" value="Minuterie désactivée" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOn" value="Retard à la mise sous tension" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_Toff" value="Retard à la mise hors tension" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TOnOff" value="Retard à la mise sous / hors tension" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_LEdge" value="Impulsion sur bord d'attaque" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode_TEdge" value="Impulsion sur bord de sortie" />
+	<Text id="TN_DT_SIOChN_Setup_TimerMode" value="Mode minuterie" />
+	<Text id="TN_DT_SIOChN_Setup_Delay" value="Valeur de la minuterie" />
+	<Text id="TN_DT_SIOChN_Setup_Empty" value="Non utilisé" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_ms" value="Millisecondes" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_s" value="Secondes" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale_min" value="Minutes" />
+	<Text id="TN_DT_SIOChN_Setup_TimerScale" value="Plage de temps" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Direct" value="Direct" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_AND" value="ET" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_OR" value="OU" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_XOR" value="XOR" />
+	<Text id="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" value="Set Reset-Flip Flop" />
+	<Text id="TN_DT_SIOChN_Setup_Logic" value="Fonctions logiques" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_NI" value="Non inversé (normalement ouvert)" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter_INV" value="Inversé (normalement fermé)" />
+	<Text id="TN_DT_SIOChN_Setup_Inverter" value="Inversion de la sortie" />
+	<Text id="TN_V_SIOCh1_Setup" value="Configuration du canal 1" />
+	<Text id="TN_V_SIOCh2_Setup" value="Configuration du canal 2" />
+	<!-- Sensor specific adjustable parameters -->
+	<Text id="TN_V_SelectAdjustment_Adjustment_Trim-in" value="Entrée réglage potentiomètre" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_EWT" value="Apprentissage par fil" />
+	<Text id="TN_V_SelectAdjustment_Adjustment_DIS" value="Réglage IO-Link" />
+	<Text id="TN_V_SelectAdjustment" value="Sélection du réglage local/à distance" />
+	<Text id="TN_V_TrimmerSetting" value="Valeur du trimmer SP1" />
+	<Text id="TN_V_PDConfiguration_Analogue_Inactive" value="Valeur analogique Inactive" />
+	<Text id="TN_V_PDConfiguration_Analogue_Normal" value="Valeur analogique normale" />
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Length" value="Valeur analogique comme longueur de l'objet" /> 
+	<Text id="TN_V_PDConfiguration_Analogue_Obj_Speed" value="Valeur analogique comme vitesse de l'objet" />
+	<Text id="TN_V_PDConfiguration_Analogue_Divider" value="Valeur analogique comme compteur" />
+	<Text id="TN_V_PDConfiguration_Analogue" value="Valeur analogique" />
+	<Text id="TN_V_PDConfiguration_SO1_Inactive" value="Sortie de commutation 1 Inactive" />
+	<Text id="TN_V_PDConfiguration_SO1_Active" value="Sortie de commutation 1 Active" />
+	<Text id="TN_V_PDConfiguration_SO1" value="Sortie de commutation 1" />
+	<Text id="TN_V_PDConfiguration_SO2_Inactive" value="Sortie de commutation 2 Inactive" />
+	<Text id="TN_V_PDConfiguration_SO2_Active" value="Sortie de commutation 2 Active" />
+	<Text id="TN_V_PDConfiguration_SO2" value="Sortie de commutation 2" />
+	<Text id="TN_V_PDConfiguration_SSC1_Inactive" value="SSC1 Inactif" />
+	<Text id="TN_V_PDConfiguration_SSC1_Active" value="SSC1 Actif" />
+	<Text id="TN_V_PDConfiguration_SSC1" value="Signal de commutation  Canal 1 (SSC1)" /> 
+	<Text id="TN_V_PDConfiguration_SSC2_Inactive" value="SSC2 Inactif" />
+	<Text id="TN_V_PDConfiguration_SSC2_Active" value="SSC2 Actif" />
+	<Text id="TN_V_PDConfiguration_SSC2" value="Signal de commutation Canal 2 (SSC2)" />
+	<Text id="TN_V_PDConfiguration_DA1_Inactive" value="DA1 Inactif" />
+	<Text id="TN_V_PDConfiguration_DA1_Active" value="DA1 Actif" />
+	<Text id="TN_V_PDConfiguration_DA1" value="Alarme poussière 1 (DA1)" />
+	<Text id="TN_V_PDConfiguration_DA2_Inactive" value="DA2 Inactif" />
+	<Text id="TN_V_PDConfiguration_DA2_Active" value="DA2 Actif" />
+	<Text id="TN_V_PDConfiguration_DA2" value="Alarme poussière 2 (DA2)" />
+	<Text id="TN_V_PDConfiguration_TA_Inactive" value="TA Inactif" />
+	<Text id="TN_V_PDConfiguration_TA_Active" value="TA Actif" />
+	<Text id="TN_V_PDConfiguration_TA" value="Alarme de température (TA)" />
+	<Text id="TN_V_PDConfiguration_SC_Inactive" value="SC Inactif" />
+	<Text id="TN_V_PDConfiguration_SC_Active" value="SC Actif" />
+	<Text id="TN_V_PDConfiguration_SC" value="Court-circuit (SC)" />
+	
+	<Text id="TN_V_PDConfiguration_WDA1_Inactive" value="WDA1 Inactif" />
+	<Text id="TN_V_PDConfiguration_WDA1_Active" value="WDA1 Actif" />
+	<Text id="TN_V_PDConfiguration_WDA1" value="Alarme de goutte d'eau 1" />
+	<Text id="TN_V_PDConfiguration_WDA2_Inactive" value="WDA2 Inactif" />
+	<Text id="TN_V_PDConfiguration_WDA2_Active" value="WDA2 Actif" />
+	<Text id="TN_V_PDConfiguration_WDA2" value="Alarme de goutte d'eau 2" />
+	
+
+	
+	
+	<Text id="TN_V_PDConfiguration_SFO1_Inactive" value="AFO1 Inactif"/>
+	<Text id="TN_V_PDConfiguration_SFO1_Active" value="AFO1 Actif"/>
+	<Text id="TN_V_PDConfiguration_SFO1" value="Fonctions d'application sortie 1"/> 
+	<Text id="TN_V_PDConfiguration" value="Configuration des données de process" />  
+	<Text id="TN_V_SensorPresets_FS" value="Personnalisé (degré de filtrage)"/>
+	<Text id="TN_V_SensorPresets_Slow" value="Haute précision"/>
+	<Text id="TN_V_SensorPresets_Fast" value="Précision par défaut"/>
+	<Text id="TN_V_SensorPresets" value ="Préréglage du filtre du capteur"/>
+	<Text id="TN_V_TempAlarmThres_High" value="Seuil haut" />
+	<Text id="TN_V_TempAlarmThres_Low" value="Seuil bas" />
+	<Text id="TN_V_TempAlarmThres" value="Seuil d'alarme de température" />
+	<Text id="TN_V_SafeOnOffLimit_SSC1" value="SSC 1 - Limite de sécurité" />
+	<Text id="TN_V_SafeOnOffLimit_SSC2" value="SSC 2 - Limite de sécurité" />
+	<Text id="TN_V_SafeOnOffLimit" value="Limites de sécurité ON/OFF" />
+	<Text id="TN_V_EventConfiguration_Maintenance_DIS" value="Événement de maintenance Inactif" />
+	<Text id="TN_V_EventConfiguration_Maintenance_ENA" value="Événement de maintenance Actif" />
+	<Text id="TN_V_EventConfiguration_Maintenance" value="Maintenace (0x8C30)" />
+	<Text id="TN_V_EventConfiguration_Temperature_DIS" value="Événement de défaut de température Inactif" />
+	<Text id="TN_V_EventConfiguration_Temperature_ENA" value="Événement de défaut de température Actif" />
+	<Text id="TN_V_EventConfiguration_Temperature" value="Événement de défaut de température (0x4000)" />
+	<Text id="TN_V_EventConfiguration_Overrun_DIS" value="Événement de sur-température Inactif" />
+	<Text id="TN_V_EventConfiguration_Overrun_ENA" value="Événement de sur-température Actif" />
+	<Text id="TN_V_EventConfiguration_Overrun" value="Sur-température (0x4210) " />
+	<Text id="TN_V_EventConfiguration_Underrun_DIS" value="Événement de sous-température Inactif" />
+	<Text id="TN_V_EventConfiguration_Underrun_ENA" value="Événement de sous-température Actif" />
+	<Text id="TN_V_EventConfiguration_Underrun" value="Sous-température (0x4220)" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_DIS" value="Événement de court-circuit Inactif" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit_ENA" value="Événement de court-circuit Actif" />
+	<Text id="TN_V_EventConfiguration_ShortCircuit" value="Court-circuit (0x7710)" />
+	<Text id="TN_V_EventConfiguration" value="Configuration des événements" />
+	<Text id="TN_V_QualityOfTeach" value="Qualité de l'apprentissage" />
+	<Text id="TN_V_QualityOfRun" value="Qualité de l'exécution" />
+	<Text id="TN_V_Excess_gain" value= "Excès de gain"/>
+	<Text id="TN_V_FilterScaler" value="Echelle du filtre" />
+	<Text id="TN_V_LedIndication_DIS" value="Indication par LED Inactif" /> 
+	<Text id="TN_V_LedIndication_ENA" value="Indication par LED Actif" />
+	<Text id="TN_V_LedIndication_FMS" value="Trouver mon capteur" />
+	<Text id="TN_V_LedIndication" value="Indication par led" />
+	
+	<Text id="TN_V_SSC1_Hyst_Mode" value="Mode d'hystérésis"/>
+	<Text id="TN_V_SSC1_Hyst_Mode_Man" value="Hystérésis réglée manuellement"/>
+	<Text id="TN_V_SSC1_Hyst_Mode_Auto" value="Hystérésis réglée automatiquement"/>
+	<Text id="TN_V_Auto_Hyst_Values" value="Valeurs d'hystérésis calculées automatiquement"/>
+	<Text id="TN_V_Auto_Hyst_Values_SP1" value="Pour SP1"/>
+	<Text id="TN_V_Auto_Hyst_Values_SP2" value="Pour SP2"/>
+	
+	<Text id="TN_V_IP_off" value="Inactif"/>
+	<Text id="TN_V_IP_1sensor_filter" value="Mode 1capteur"/>
+	<Text id="TN_V_IP_2sensor-sensor1" value="2capteurs - capteur1"/>
+	<Text id="TN_V_IP_2sensor-sensor2" value="2capteurs - capteur2"/>
+	<Text id="TN_V_IP_3sensor-sensor1" value="3capteurs - capteur1"/>
+	<Text id="TN_V_IP_3sensor-sensor2" value="3capteurs - capteur2"/>
+	<Text id="TN_V_IP_3sensor-sensor3" value ="3capteurs - capteur3"/>
+	<Text id="TN_V_interference_protection" value="Protection contre les interférences mutuelles"/>
+
+	<Text id="TN_V_AA_OFF" value="Réglage automatique inactif"/>
+	<Text id="TN_V_AA_ON" value="Réglage automatique actif"/>
+	<Text id="TN_V_AA_Enable" value="Réglage automatique"/>
+	<Text id="TN_V_AA_AdjustWindowPct" value="Régler la taille de la fenêtre"/>
+	<Text id="TN_V_AA_AdjustResolutionPct" value="Changer la résolution"/>
+	<Text id="TN_V_AutoAdjust_setup" value="Configuration du réglage automatique"/>
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC1" value="SSC1"/>
+	<Text id="TN_V_AA_CorrectedSetpoint_SSC2" value="SSC2"/>
+	<Text id="TN_V_AA_Corrected_setpoint" value="Points de consigne corrigés"/>
+
+	<Text id="TN_V_SFS_Normale" value="Aucune fonction d'application sélectionnée"/>
+	<Text id="TN_V_SFS_Speed_And_Lenght" value ="Vitesse et longueur"/>
+	<Text id="TN_V_SFS_Pattern_Recognition" value="Reconnaissance de motif"/>
+	<Text id="TN_V_SFS_Divider" value="Diviseur"/>
+	<Text id="TN_V_SFS_Object_And_Gap_monitoring" value="Surveillance des objets et des espaces"/>
+	<Text id="TN_V_Special_Func_Selector" value="Sélecteur de fonction d'application"/>
+	<Text id="TN_V_SF_NoSensor" value="Aucun rôle sélectionné"/>
+	<Text id="TN_V_SF_SensorA" value="Déclencher le capteur"/>
+	<Text id="TN_V_SF_SensorB" value="Capteur principal"/>
+	<Text id="TN_V_Distance_Between_Sensors" value="Distance entre capteurs"/>
+	<Text id="TN_V_SAL_measurement_Setup" value="Configuration de la mesure de la vitesse et de la longueur"/>
+	<Text id="TN_V_Object_length" value="Longueur de l'objet"/>
+	<Text id="TN_V_Object_speed" value="Vitesse de l'objet"/>
+	<Text id="TN_V_SAL_Mode" value="Rôle du capteur"/>
+	<Text id="TN_V_SAL_STATUS_DISABLED" value="IDLE"/>
+	<Text id="TN_V_SAL_STATUS_MEASUREMENT_RUNNING" value="Mesure en cours"/>
+	<Text id="TN_V_SAL_STATUS_ERR_SPEED_TOO_HIGH" value="Vitesse trop élevée"/>
+	<Text id="TN_V_SAL_STATUS_ERR_TIMEOUT" value="Temporisation"/>
+	<Text id="TN_V_SAL_STATUS_ERR_OBJ_TOO_LONG" value="Objet trop haut"/>
+	<Text id="TN_V_SAL_STATUS_ERR_LOGIC_FAIL" value="Défaillance logique"/>
+	<Text id="TN_V_SAL_Status" value="État"/>
+	<Text id="TN_V_SAL_measurement_Result" value="Résultat de la mesure de la vitesse et de la longueur"/>
+	<Text id="TN_V_PR_Mode" value="Rôle du capteur"/>
+	<Text id="TN_V_PR_Timeout" value="Temporisation"/>
+	<Text id="TN_V_PR_PatternTolerancePromille" value="Tolérance"/>
+	<Text id="TN_V_PR_Setup" value="Configuration de la reconnaissance de motif"/>
+	<Text id="TN_Pattern_Not_Saved" value="Non sauvegardé"/>
+	<Text id="TN_Pattern_Saved" value="Sauvegardé"/>
+	<Text id="TN_V_PR_Ref_Pattern_SavedOrNot" value="Motif de référence"/>
+	<Text id="TN_V_Reference_pattern_NoOfEdges" value="Motif de référence - Nombre de bords"/>
+	<Text id="TN_V_NoOfEdges_last_scan" value="Nombre de bords du dernier motif"/>
+	<Text id="TN_V_PR_STATUS_CLEAR" value="IDLE"/>
+	<Text id="TN_V_PR_STATUS_MEASUREMENT_RUNNING" value="Messung läuft"/>
+	<Text id="TN_V_PR_STATUS_PATTERN_MATCH" value="Musterabgleich"/>
+	<Text id="TN_V_PR_STATUS_ERR_TIMEOUT" value="Temporisation"/>
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_EXCEED_MAX" value="Trop de bords"/>  
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_CNT_ERR" value="ERREUR du compteur de BORDS"/>
+	<Text id="TN_V_PR_STATUS_ERR_EDGE_TIMING_ERR" value="ERREUR de timing des BORDS"/>
+	<Text id="TN_V_PR_Status" value="État de la reconnaissance de motif"/>
+	<Text id="TN_V_PR_Result" value="Résultat de la reconnaissance de motif"/>
+	<Text id="TN_V_DaC_CounterLimit" value="Limite du compteur"/>
+	<Text id="TN_V_DaC_PCV" value="Prérégler la valeur du compteur"/>
+	<Text id="TN_V_DaC_Setup" value="Configuration du diviseur et du compteur"/>
+	<Text id="TN_V_DaC_Result" value="Valeur du compteur"/>
+	<Text id="TN_V_OaGM_GapMinT" value="Durée minimale de l'espace"/>
+	<Text id="TN_V_OaGM_GapMaxT" value="Durée maximale de l'espace"/>
+	<Text id="TN_V_OaGM_objMinT" value="Durée minimale de l'objet"/>
+	<Text id="TN_V_OaGM_objMaxT" value="Durée maximale de l'objet"/>
+	<Text id="TN_V_OaGM_Setup" value="Configuration de la surveillance des objets et des espaces"/>
+	<Text id="TN_V_OaGM_ObjT" value="Durée de l'objet"/>
+	<Text id="TN_V_OaGM_GapT" value="Durée de l'espace"/>
+	<Text id="TN_V_OaGM_STATUS_Obj_IDLE" value="IDLE"/>
+	<Text id="TN_V_OaGM_STATUS_Obj_Measurement_Run" value="Mesure en cours"/>
+	<Text id="TN_V_OaGM_STATUS_Obj_Passed" value="Objet dans la limite"/>
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Long" value="Objet trop long"/>
+	<Text id="TN_V_OaGM_STATUS_Obj_To_Short" value="Objet trop court"/>
+	<Text id="TN_V_OaGM_Obj_Status" value="État de l'objet"/>
+	<Text id="TN_V_OaGM_STATUS_Gap_IDLE" value="IDLE"/>
+	<Text id="TN_V_OaGM_STATUS_Gap_Measurement_Run" value="Mesure en cours"/>
+	<Text id="TN_V_OaGM_STATUS_Gap_Passed" value="Espace dans la limite"/>
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Long" value="Espace trop long"/>
+	<Text id="TN_V_OaGM_STATUS_Gap_To_Short" value="Espace trop court"/>
+	<Text id="TN_V_OaGM_Gap_Status" value="État de l'espace"/>
+	<Text id="TN_V_OaGM_Result" value="Résultat de la surveillance des objets et des espaces"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_1" value="Horodatage 1"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_2" value="Horodatage 2"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_3" value="Horodatage 3"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_4" value="Horodatage 4"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_5" value="Horodatage 5"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_6" value="Horodatage 6"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_7" value="Horodatage 7"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_8" value="Horodatage 8"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_9" value="Horodatage 9"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_10" value="Horodatage 10"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_11" value="Horodatage 11"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_12" value="Horodatage 12"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_13" value="Horodatage 13"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_14" value="Horodatage 14"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_15" value="Horodatage 15"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_16" value="Horodatage 16"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_17" value="Horodatage 17"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_18" value="Horodatage 18"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_19" value="Horodatage 19"/>
+	<Text id="TN_V_Ref_Pattern_timestamp_20" value="Horodatage 20"/>
+	<Text id="TN_V_P_EVENT_NONE" value="Pas de flanc" />
+	<Text id="TN_V_P_EVENT_POS_EDGE" value="Flanc positif" />
+	<Text id="TN_V_P_EVENT_NEG_EDGE" value="Flanc négatif" />
+	<Text id="TN_V_Ref_Pattern_edge_type_1" value="Motif de l'horodatage 1"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_2" value="Motif de l'horodatage 2"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_3" value="Motif de l'horodatage 3"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_4" value="Motif de l'horodatage 4"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_5" value="Motif de l'horodatage 5"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_6" value="Motif de l'horodatage 6"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_7" value="Motif de l'horodatage 7"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_8" value="Motif de l'horodatage 8"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_9" value="Motif de l'horodatage 9"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_10" value="Motif de l'horodatage 10"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_11" value="Motif de l'horodatage 11"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_12" value="Motif de l'horodatage 12"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_13" value="Motif de l'horodatage 13"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_14" value="Motif de l'horodatage 14"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_15" value="Motif de l'horodatage 15"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_16" value="Motif de l'horodatage 16"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_17" value="Motif de l'horodatage 17"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_18" value="Motif de l'horodatage 18"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_19" value="Motif de l'horodatage 19"/>
+	<Text id="TN_V_Ref_Pattern_edge_type_20" value="Motif de l'horodatage 20"/>
+	<Text id="TN_V_Ref_ObjectTimeLength" value="Durée de la détection d'objet" />
+	<Text id="TN_V_Pattern" value="" />
+	<!-- Diagnostics parameters -->
+	<Text id="TN_V_DiagOperatingHours" value="Heures de fonctionnement" />
+	<Text id="TN_V_DiagPowerCycles" value="Nombre de cycles de commutation" />
+	<Text id="TN_V_DiagMaxTemp" value="Température maximale - Toujour haut" />
+	<Text id="TN_V_DiagMinTemp" value="Température minimale - Toujour bas" />
+	<Text id="TN_V_DiagMaxTempStartup" value="Température maximale depuis la mise sous tension" />
+	<Text id="TN_V_DiagMinTempStartup" value="Température minimale depuis la mise sous tension" />
+	<Text id="TN_V_DiagCurrentTemp" value="Température actuelle" />
+	<Text id="TN_V_NonDS_NV_DataMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_ProdSetMemReloadErr_NotShown" value="" />
+	<Text id="TN_V_DiagEE_MemoryFailure" value="" />
+	<Text id="TN_V_MemoryFailFlag" value="Défaillance de la mémoire" />
+	<Text id="TN_V_DiagFrontendFailure" value="Erreur à l'avant" />
+	<Text id="TN_V_DiagDetectionCnt" value="Compteur de détection SSC1" />
+	<Text id="TN_V_DiagOpTempOverun" value="Minutes au-dessus de la température maximale " />
+	<Text id="TN_V_DiagOpTempUnderrun" value="Minutes en dessous de la température minimale" />
+	<Text id="TN_V_DiagMaintenanceCnt" value="Compteur d'événements de maintenance" />
+	<Text id="TN_V_DiagDownloadCnt" value="Compteur de téléchargement" />
+	<!-- System commands -->
+	<Text id="TN_FactoryReset" value="Retour aux paramètres d'usine" />
+	<Text id="TN_RestoreSSC" value="Restaurer SSC" />
+	<Text id="TN_PresetCounterValue" value="Prérégler la valeur du compteur" />
+	<Text id="TN_TeachApply" value="Appliquer Apprentissage" />
+	<Text id="TN_TeachSP1" value="Apprentissage SP1" />
+	<Text id="TN_TeachSP2" value="Apprentissage SP2" />
+	<Text id="TN_TeachSP1TP1" value="Apprentissage SP1 TP1" />
+	<Text id="TN_TeachSP1TP2" value="Apprentissage SP1 TP2" />
+	<Text id="TN_TeachSP2TP1" value="Apprentissage SP2 TP1" />
+	<Text id="TN_TeachSP2TP2" value="Apprentissage SP2 TP2" />
+	<Text id="TN_TeachSP1Start" value="Apprentissage SP1, Démarrage" />
+	<Text id="TN_TeachSP1Stop" value="Apprentissage SP1, Arrêt" />
+	<Text id="TN_TeachSP2Start" value="Apprentissage SP2, Démarrage" />
+	<Text id="TN_TeachSP2Stop" value="Apprentissage SP2, Arrêt" />
+	<Text id="TN_TeachPattern" value="Programmer le motif" />	
+	<Text id="TN_TeachCancel" value="Apprentissage, Annuler" />
+	<!-- Process data -->
+	<Text id="TN_PDI_Analogue" value="Valeur analogique" />
+	<Text id="TN_PDI_Analogue_obj_Length" value="Longueur de l'objet" />
+	<Text id="TN_PDI_Analogue_obj_Speed" value="Vitesse de l'objet" />
+	<Text id="TN_PDI_Analogue_Diveder" value="Valeur du compteur" />
+	<Text id="TN_PDI_SC" value="Court-circuit" />
+	<Text id="TN_PDI_TA1" value="Alarme température" />
+	<Text id="TN_PDI_DA2" value="Alarme poussière 2" />
+	<Text id="TN_PDI_DA1" value="Alarme poussière 1" />
+	<Text id="TN_PDI_SSC2" value="Signal de commutation, canal 2" />
+	<Text id="TN_PDI_SSC1" value="Signal de commutation, canal 1" />
+	<Text id="TN_PDI_SFO1" value="Fonction d'application sortie 1" />
+	<Text id="TN_PDI_WDA2" value="Alarme de goutte d'eau 2" />
+	<Text id="TN_PDI_WDA1" value="Alarme de goutte d'eau 1" />
+	<Text id="TN_PDI_SO2" value="Sortie de commutation 2" />
+	<Text id="TN_PDI_SO1" value="Sortie de commutation 1" />
+	<Text id="TN_Active" value="Active" />
+	<Text id="TN_Inactive" value="Inactive" />
+	<Text id="TI_PDI" value="Process-Entrée données" />
+	<!-- Events -->
+	<!-- Menus -->
+	<Text id="TN_ME_Observation_Diag_Operating" value="Diagnostic en fonctionnement" />
+	<Text id="TN_ME_Observation_Diag_Sensor" value="Diagnostic du capteur" />
+	<Text id="TN_ME_Observation_Diag_Temp" value="Diagnostic de la température" />
+	<Text id="TN_ME_Observation_PD" value="Données de processus" />
+	<Text id="TN_ME_Parameter_Output_SIO_1" value="Canal 1 (SO1)" />
+	<Text id="TN_ME_Parameter_Output_SIO_1_Setup" value="Paramétrage canal 1 (SO1)" />
+	<Text id="TN_ME_Parameter_Output_SIO_2" value="Canal 2 (SO2)" />
+	<Text id="TN_ME_Parameter_Output_SIO_2_Setup" value="Paramétrage canal 2 (SO2)" />
+	<Text id="TN_ME_Parameter_Sensor Specific" value="Capteur spécifique" />
+	<Text id="TN_ME_Parameter_Special_Func" value="Fonctions spéciales" />
+	<Text id="TN_ME_Parameter_Application_Functions" value="Fonctions d'application" />
+	<Text id="TN_ME_Param_Temp" value="Configuration de l'alarme de température" />
+	<Text id="TN_ME_Param_Measurment" value="Sélection de la mesure du capteur" />
+	<Text id="TN_ME_Param_Hyst_Auto" value="Hystérésis automatique" />
+	<Text id="TN_ME_Param_Hyst_Man" value="Hystérésis manuelle" />
+	<Text id="TN_ME_SSC1_TW_Single_P" value="Points de consigne" />
+	<Text id="TN_ME_AA_Corrected_setpoint" value="Points de consigne corrigés" />
+	<Text id="TN_ME_Param_PR" value="Reconnaissance de motif" />
+	<Text id="TN_ME_Param_PR_Smart" value="Reconnaissance de motif - capteur principal" />
+	<Text id="TN_ME_Param_SAL" value="Mesure de la vitesse et de la longueur" />
+	<Text id="TN_ME_Param_SAL_Smart" value="Mesure de la vitesse et de la longueur - capteur principal" />
+	<Text id="TN_ME_Param_DaC" value="Diviseur et compteur" />
+	<Text id="TN_ME_Param_OaGM" value="Surveillance des objets et des espaces" />
+	<Text id="TN_ME_PDConfiguration" value="Configuration des données de process" />
+	<Text id="TN_ME_Pattern" value="Motif de référence" />
+	<Text id="TN_ME_EventConfiguration" value="Configuration des événement" />
+	<Text id="TN_ME_Parameter_Command" value="Commande" />
+	<Text id="TN_ME_TI" value="Apprentissage" />
+	<Text id="TN_ME_TI_SSC1" value="Auto-apprentissage SSC1" />
+	<Text id="TN_ME_TI_SSC2" value="Auto-apprentissage SSC2" />
+	<Text id="TN_ME_DeviceAccessLocks" value="Verrouillage de l'accès" />
+	<Text id="TN_ME_TI_SingleValue_SSC1" value="Auto-apprentissagepour une valeur SSC1" />
+	<Text id="TN_ME_TI_SingleValue_SSC2" value="Auto-apprentissagepour une valeur SSC2" />
+	<Text id="TN_ME_TI_TwoValue_SSC1" value="Auto-apprentissage pour deux valeurs SSC1" />
+	<Text id="TN_ME_TI_TwoValue_SSC2" value="Auto-apprentissage pour deux valeurs SSC2" />
+	<Text id="TN_ME_TI_Dynamic_SSC1" value="Auto-apprentissage dynamique SSC1" />
+	<Text id="TN_ME_TI_Dynamic_SSC2" value="Auto-apprentissage dynamique SSC2" />
+	<Text id="TN_ME_SSC1" value="Signal de commutation, canal 1" />
+	<Text id="TN_ME_SSC1_Adjust_IOL1" value="Point de consigne" />
+	<Text id="TN_ME_SSC1_SP" value="SSC1 - 1 Point de consigne" />
+	<Text id="TN_ME_SSC1_Window" value="SSC1 Réglage de la fenêtre via IO-Link" />
+	<Text id="TN_ME_SSC1_TP" value="SSC1 Réglage deux points via IO-Link" />
+	<Text id="TN_ME_SSC2" value="Signal de commutation, canal 2" />
+	<Text id="TN_ME_SSC2_Single_P" value="Signal de commutation canal 2 ''1 Point de consigne''" />
+	<Text id="TN_ME_SSC2_Window" value="Signal de commutation canal 2 ''Mode fenêtre''" />
+	<Text id="TN_ME_SSC2_two_P" value="Signal de commutation canal 2 ''2 Points de consigne''" />
+	<Text id="TD_ME_TI_TeachApply" value="Appliquer Apprentissage" />
+	<Text id="TD_ME_TI_TeachSP1" value="Apprentissage SP1" />
+	<Text id="TD_ME_TI_TeachSP2" value="Apprentissage SP2" />
+	<Text id="TD_ME_TI_TeachSP1TP1" value="Apprentissage SP1 TP1" />
+	<Text id="TD_ME_TI_TeachSP1TP2" value="Apprentissage SP1 TP2" />
+	<Text id="TD_ME_TI_TeachSP2TP1" value="Apprentissage SP2 TP1" />
+	<Text id="TD_ME_TI_TeachSP2TP2" value="Apprentissage SP2 TP2" />
+	<Text id="TD_ME_TI_TeachSP1Start" value="Apprentissage SP1, démarrage" />
+	<Text id="TD_ME_TI_TeachSP1Stop" value="Apprentissage SP1, arrêt" />
+	<Text id="TD_ME_TI_TeachSP2Start" value="Apprentissage SP2, démarrage" />
+	<Text id="TD_ME_TI_TeachSP2Stop" value="Apprentissage SP2, arrêt" />
+	<Text id="TD_ME_TI_TeachCancel" value="Apprentissage Annuler" />
+	</Language>
+	
+	<Stamp crc="4182329554"><Checker name="IODD-Checker V1.1.4" version="V1.1.4.0"/></Stamp>
+</ExternalTextDocument>

@@ -11,3 +11,6 @@ desktop.ini
 
 # Logs
 *.log
+
+# Dashboard runtime state
+io-link-dashboard/running.txt

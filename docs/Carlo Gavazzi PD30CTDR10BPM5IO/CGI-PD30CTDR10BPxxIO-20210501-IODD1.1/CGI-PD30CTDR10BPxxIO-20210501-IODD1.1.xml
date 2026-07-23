@@ -1,0 +1,4054 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<IODevice xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+	<DocumentInfo copyright="Carlo Gavazzi" releaseDate="2021-05-01" version="V1.0" />
+	<ProfileHeader>
+		<ProfileIdentification>IO Device Profile</ProfileIdentification>
+		<ProfileRevision>1.1</ProfileRevision>
+		<ProfileName>Device Profile for IO Devices</ProfileName>
+		<ProfileSource>IO-Link Consortium</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>1</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>IODD</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity vendorId="896" vendorName="Carlo Gavazzi" deviceId="4099">
+			<VendorText textId="T_VendorText" />
+			<VendorUrl textId="T_VendorUrl" />
+			<VendorLogo name="CGI-logo.png" />
+			<DeviceName textId="T_DeviceName" />
+			<DeviceFamily textId="T_DeviceFamily"/>
+			
+			<DeviceVariantCollection>
+				<DeviceVariant productId="5709870398693" deviceSymbol="CGI-PD30CTDR10BPxxIO-pic.png" deviceIcon="CGI-PD30CTDR10BPxxIO-icon.png">
+					<Name textId="TN_Plug" />
+					<Description textId="TD_ISDUDeviceVariant" />
+				</DeviceVariant>
+				<DeviceVariant productId="5709870398709" deviceSymbol="CGI-PD30CTDR10BPxxIO-pic.png" deviceIcon="CGI-PD30CTDR10BPxxIO-icon.png">
+					<Name textId="TN_Cable" />
+					<Description textId="TD_ISDUDeviceVariant" />
+				</DeviceVariant>
+			</DeviceVariantCollection>
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Features blockParameter="true" dataStorage="true" profileCharacteristic="1 16384 32768 32769 32769 32770 32771 32772">
+				<SupportedAccessLocks dataStorage="true" localUserInterface="false" localParameterization="true" parameter="true"/>
+			</Features>
+			<DatatypeCollection>
+				<!-- ____________________ Smart Sensor Profile datatypes ____________________ -->
+				<!-- DT_V_TI_Result_Flag -->
+				<Datatype xsi:type="BooleanT" id="DT_TI_Result_Flag">
+					<SingleValue value="false">
+						<Name textId="TN_DT_TI_Result_Flag_Nok" />
+					</SingleValue>
+					<SingleValue value="true">
+						<Name textId="TN_DT_TI_Result_Flag_OK" />
+					</SingleValue>
+				</Datatype>
+				<!-- DT_V_SSC_Param -->
+				<Datatype xsi:type="RecordT" subindexAccessSupported="true" bitLength="32" id="DT_SSC_Param">
+					<!-- x.1 SSCn Param: SP1 -->
+					<RecordItem bitOffset="16" subindex="1">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="13500" />
+						</SimpleDatatype>
+						<Name textId="TN_DT_SSC_Param_SP1" />
+					</RecordItem>
+					<!-- x.2 SSCn Param: SP2 -->
+					<RecordItem bitOffset="0" subindex="2">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="13500" />
+						</SimpleDatatype>
+						<Name textId="TN_DT_SSC_Param_SP2" />
+					</RecordItem>
+				</Datatype>
+				<!-- DT_V_SSC_Config -->
+				<Datatype xsi:type="RecordT" subindexAccessSupported="true" bitLength="32" id="DT_SSC_Config">
+					<!-- x.1 SSCn Config: Logic -->
+					<RecordItem bitOffset="24" subindex="1">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SSC_Config_Logic_High" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SSC_Config_Logic_Low" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SSC_Config_Logic" />
+					</RecordItem>
+					<!-- x.2 SSCn Config: Mode -->
+					<RecordItem bitOffset="16" subindex="2">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SSC_Config_Mode_DIS" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SSC_Config_Mode_SPM" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SSC_Config_Mode_WM" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SSC_Config_Mode_TPM" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SSC_Config_Mode" />
+					</RecordItem>
+					<!-- x.3 SSCn Config: Hyst -->
+					<RecordItem bitOffset="0" subindex="3">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="5" upperValue="99" />
+						</SimpleDatatype>
+						<Name textId="TN_DT_SSC_Config_Hyst" />
+					</RecordItem>
+				</Datatype>			
+				<!-- ____________________ Output parameter datatypes ____________________ -->
+				<!-- DT_V_SIOCh1_Setup -->
+				<Datatype xsi:type="RecordT" subindexAccessSupported="true" bitLength="80" id="DT_SIOCh1">
+					<!-- x.1 SIO Channel 1 Setup: Stage Mode -->
+					<RecordItem bitOffset="72" subindex="1">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_DIS" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_PNP" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_NPN" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_Push-Pull" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_StageMode" />
+					</RecordItem>
+					<!-- x.2 SIO Channel 1 Setup: Configuration (Mux1) -->
+					<RecordItem bitOffset="64" subindex="2">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_Deactivated" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SSC 1" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SSC 2" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_DA1" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_DA2" />
+							</SingleValue>
+							<SingleValue value="5">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_TA" />
+							</SingleValue>
+							<SingleValue value="6">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_ELI" />
+							</SingleValue>
+							<SingleValue value="7">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SF" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Configuration_1" />
+					</RecordItem>
+					<!-- x.3 SIO Channel 1 Setup: Timer Mode -->
+					<RecordItem bitOffset="56" subindex="3">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_DIS" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TOn" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_Toff" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TOnOff" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_LEdge" />
+							</SingleValue>
+							<SingleValue value="5">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TEdge" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_TimerMode" />
+					</RecordItem>
+					<!-- x.4 SIO Channel 1 Setup: Timer Scale -->
+					<RecordItem bitOffset="48" subindex="4">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_ms" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_s" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_min" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_TimerScale" />
+					</RecordItem>
+					<!-- x.5 SIO Channel 1 Setup: Delay -->
+					<RecordItem bitOffset="32" subindex="5">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="32767" />
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Delay" />
+					</RecordItem>
+					<!-- x.6 SIO Channel 1 Setup: Empty -->
+					<RecordItem bitOffset="16" subindex="6">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16"/>
+						<Name textId="TN_DT_SIOChN_Setup_Empty" />
+					</RecordItem>
+					<!-- x.7 SIO Channel 1 Setup: Logic -->
+					<RecordItem bitOffset="8" subindex="7">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_Direct" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_AND" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_OR" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_XOR" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Logic" />
+					</RecordItem>
+					<!-- x.8 SIO Channel 1 Setup: Inverter -->
+					<RecordItem bitOffset="0" subindex="8">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Inverter_NI" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Inverter_INV" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Inverter" />
+					</RecordItem>
+				</Datatype>
+				<Datatype xsi:type="RecordT" subindexAccessSupported="true" bitLength="80" id="DT_SIOCh2">
+					<!-- x.1 SIO Channel 2 Setup: Stage Mode -->
+					<RecordItem bitOffset="72" subindex="1">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_DIS" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_PNP" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_NPN" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_Push-Pull" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_Digital-in_high" />
+							</SingleValue>
+							<SingleValue value="5">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_Digital-in_low" />
+							</SingleValue>
+							<SingleValue value="6">
+								<Name textId="TN_DT_SIOChN_Setup_StageMode_Teach-in" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_StageMode" />
+					</RecordItem>
+					<!-- x.2 SIO Channel 2 Setup: Configuration (Mux2) -->
+					<RecordItem bitOffset="64" subindex="2">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_Deactivated" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SSC 1" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SSC 2" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_DA1" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_DA2" />
+							</SingleValue>
+							<SingleValue value="5">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_TA" />
+							</SingleValue>
+							<SingleValue value="6">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_ELI" />
+							</SingleValue>
+							<SingleValue value="7">
+								<Name textId="TN_DT_SIOChN_Setup_Configuration_SF" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Configuration_2" />
+					</RecordItem>
+					<!-- x.3 SIO Channel 2 Setup: Timer Mode -->
+					<RecordItem bitOffset="56" subindex="3">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_DIS" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TOn" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_Toff" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TOnOff" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_LEdge" />
+							</SingleValue>
+							<SingleValue value="5">
+								<Name textId="TN_DT_SIOChN_Setup_TimerMode_TEdge" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_TimerMode" />
+					</RecordItem>
+					<!-- x.4 SIO Channel 2 Setup: Timer Scale -->
+					<RecordItem bitOffset="48" subindex="4">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_ms" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_s" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_TimerScale_min" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_TimerScale" />
+					</RecordItem>
+					<!-- x.5 SIO Channel 2 Setup: Delay -->
+					<RecordItem bitOffset="32" subindex="5">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="32767" />
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Delay" />
+					</RecordItem>
+					<!-- x.6 SIO Channel 2 Setup: Empty -->
+					<RecordItem bitOffset="16" subindex="6">
+						<SimpleDatatype xsi:type="IntegerT" bitLength="16"/>
+						<Name textId="TN_DT_SIOChN_Setup_Empty" />
+					</RecordItem>
+					<!-- x.7 SIO Channel 2 Setup: Logic -->
+					<RecordItem bitOffset="8" subindex="7">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_Direct" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_AND" />
+							</SingleValue>
+							<SingleValue value="2">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_OR" />
+							</SingleValue>
+							<SingleValue value="3">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_XOR" />
+							</SingleValue>
+							<SingleValue value="4">
+								<Name textId="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Logic" />
+					</RecordItem>
+					<!-- x.8 SIO Channel 2 Setup: Inverter -->
+					<RecordItem bitOffset="0" subindex="8">
+						<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<SingleValue value="0">
+								<Name textId="TN_DT_SIOChN_Setup_Inverter_NI" />
+							</SingleValue>
+							<SingleValue value="1">
+								<Name textId="TN_DT_SIOChN_Setup_Inverter_INV" />
+							</SingleValue>
+						</SimpleDatatype>
+						<Name textId="TN_DT_SIOChN_Setup_Inverter" />
+					</RecordItem>
+				</Datatype>
+			</DatatypeCollection>
+			
+			<VariableCollection>
+				<StdVariableRef id="V_DirectParameters_1" /><!--0-->
+				<StdVariableRef id="V_DirectParameters_2" /><!--1-->
+				<StdVariableRef id="V_SystemCommand"><!--2-->
+					<!-- 130 FactoryReset: Factory Reset -->
+					<StdSingleValueRef value="130" />
+					<!-- 160 RestoreSSC: Restore SSC -->
+					<SingleValue value="160">
+						<Name textId="TN_RestoreSSC" />
+					</SingleValue>
+					<!-- 64 TeachApply: Teach Apply -->
+					<SingleValue value="64">
+						<Name textId="TN_TeachApply" />
+					</SingleValue>
+					<!-- 65 TeachSP1: Teach SP1 -->
+					<SingleValue value="65">
+						<Name textId="TN_TeachSP1" />
+					</SingleValue>
+					<!-- 66 TeachSP2: Teach SP2 -->
+					<SingleValue value="66">
+						<Name textId="TN_TeachSP2" />
+					</SingleValue>
+					<!-- 67 TeachSP1TP1: Teach SP1 TP1 -->
+					<SingleValue value="67">
+						<Name textId="TN_TeachSP1TP1" />
+					</SingleValue>
+					<!-- 68 TeachSP1TP2: Teach SP1 TP2 -->
+					<SingleValue value="68">
+						<Name textId="TN_TeachSP1TP2" />
+					</SingleValue>
+					<!-- 69 TeachSP2TP1: Teach SP2 TP1 -->
+					<SingleValue value="69">
+						<Name textId="TN_TeachSP2TP1" />
+					</SingleValue>
+					<!-- 70 TeachSP2TP2: Teach SP2 TP2 -->
+					<SingleValue value="70">
+						<Name textId="TN_TeachSP2TP2" />
+					</SingleValue>
+					<!-- 71 TeachSP1Start: Teach SP1 Start -->
+					<SingleValue value="71">
+						<Name textId="TN_TeachSP1Start" />
+					</SingleValue>
+					<!-- 72 TeachSP1Stop: Teach SP1 Stop -->
+					<SingleValue value="72">
+						<Name textId="TN_TeachSP1Stop" />
+					</SingleValue>
+					<!-- 73 TeachSP2Start: Teach SP2 Start -->
+					<SingleValue value="73">
+						<Name textId="TN_TeachSP2Start" />
+					</SingleValue>
+					<!-- 74 TeachSP2Stop: Teach SP2 Stop -->
+					<SingleValue value="74">
+						<Name textId="TN_TeachSP2Stop" />
+					</SingleValue>	
+					<!-- 78 TeachPattern: Teach Pattern -->
+					<SingleValue value="78">
+						<Name textId="TN_TeachPattern" />
+					</SingleValue>						
+					<!-- 79 TeachCancel: Teach Cancel -->
+					<SingleValue value="79">
+						<Name textId="TN_TeachCancel" />
+					</SingleValue>
+					<!-- 80 PresetCounterValue: Preset Counter Value -->
+					<SingleValue value="80">
+						<Name textId="TN_PresetCounterValue" />
+					</SingleValue>
+				</StdVariableRef>
+				<StdVariableRef id="V_DeviceAccessLocks">
+					<StdRecordItemRef subindex="1" defaultValue="false"/>
+					<StdRecordItemRef subindex="2" defaultValue="false"/>
+					<StdRecordItemRef subindex="3" defaultValue="false" />	
+				</StdVariableRef><!--12-->
+				<StdVariableRef id="V_VendorName" defaultValue="Carlo Gavazzi" /><!--16-->
+				<StdVariableRef id="V_VendorText" defaultValue="www.gavazziautomation.com" /><!--17-->
+				<StdVariableRef id="V_ProductName" defaultValue="PD30CTDR10BPxxIO" /> <!--18-->
+				<StdVariableRef id="V_ProductID" defaultValue="EAN code" /><!--19-->
+				<StdVariableRef id="V_ProductText" defaultValue="Photoelectric sensor" /><!--20-->
+				<StdVariableRef id="V_SerialNumber" /><!--21-->
+				<StdVariableRef id="V_HardwareRevision" /><!--22-->
+				<StdVariableRef id="V_FirmwareRevision" /><!--23-->
+				<StdVariableRef id="V_ApplicationSpecificTag" fixedLengthRestriction="32" defaultValue="***"/><!--24-->
+				<StdVariableRef id="V_ErrorCount" /><!--32-->
+				<StdVariableRef id="V_DeviceStatus" /><!--36-->
+				<StdVariableRef id="V_DetailedDeviceStatus" fixedLengthRestriction="5" /><!--37-->
+				<StdVariableRef id="V_ProcessDataInput" /><!--40-->
+				<!-- __________ Extended Identification : Function Class 0x8100 __________ -->
+				<Variable accessRights="rw" id="V_FunctionTag" index="25" defaultValue="***"><!--25-->
+					<Datatype xsi:type="StringT" fixedLength="32" encoding="UTF-8"/>
+					<Name textId="TN_V_FunctionTag"/>
+				</Variable>
+				<Variable accessRights="rw" id="V_LocationTag" index="26" defaultValue="***"><!--26-->
+					<Datatype xsi:type="StringT" fixedLength="32" encoding="UTF-8"/>
+					<Name textId="TN_V_LocationTag"/>
+				</Variable>
+				<!-- ____________________ Smart Sensor Profile parameters ____________________ -->
+				<!-- 58 V_TI_Select: TI Select -->
+				<Variable id="V_TI_Select" index="58" accessRights="rw" defaultValue="0">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_TI_Select_NO" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_TI_Select_SSC1" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_TI_Select_SSC2" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_TI_Select" />
+				</Variable>
+				<!-- 59 V_TI_Result: TI Result -->
+				<Variable id="V_TI_Result" index="59" accessRights="ro" dynamic="true">
+					<Datatype xsi:type="RecordT" bitLength="8" subindexAccessSupported="false">
+						<!-- 59.1 V_TI_Result: State -->
+						<RecordItem bitOffset="0" subindex="1">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="4">
+								<SingleValue value="0">
+									<Name textId="TN_V_TI_Result_State_IDLE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_TI_Result_State_Success" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_TI_Result_State_WAIT" />
+								</SingleValue>
+								<SingleValue value="5">
+									<Name textId="TN_V_TI_Result_State_BUSY" />
+								</SingleValue>
+								<SingleValue value="7">
+									<Name textId="TN_V_TI_Result_State_ERROR" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_TI_Result_State" />
+						</RecordItem>
+						<!-- 59.2 V_TI_Result: Flag SP1 TP1 -->
+						<RecordItem bitOffset="4" subindex="2">
+							<DatatypeRef datatypeId="DT_TI_Result_Flag" />
+							<Name textId="TN_V_TI_Result_SP1TP1" />
+						</RecordItem>
+						<!-- 59.3 V_TI_Result: Flag SP1 TP2 -->
+						<RecordItem bitOffset="5" subindex="3">
+							<DatatypeRef datatypeId="DT_TI_Result_Flag" />
+							<Name textId="TN_V_TI_Result_SP1TP2" />
+						</RecordItem>
+						<!-- 59.4 V_TI_Result: Flag SP2 TP1 -->
+						<RecordItem bitOffset="6" subindex="4">
+							<DatatypeRef datatypeId="DT_TI_Result_Flag" />
+							<Name textId="TN_V_TI_Result_SP2TP1" />
+						</RecordItem>
+						<!-- 59.5 V_TI_Result: Flag SP2 TP2 -->
+						<RecordItem bitOffset="7" subindex="5">
+							<DatatypeRef datatypeId="DT_TI_Result_Flag" />
+							<Name textId="TN_V_TI_Result_SP2TP2" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="false" />
+					<RecordItemInfo subindex="3" defaultValue="false" />
+					<RecordItemInfo subindex="4" defaultValue="false" />
+					<RecordItemInfo subindex="5" defaultValue="false" />
+					<Name textId="TN_V_TI_Result" />
+				</Variable>
+				<!-- 60 V_SSC1_Param: SSC1 Param -->
+				<Variable id="V_SSC1_Param" index="60" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SSC_Param" />
+					<RecordItemInfo subindex="1" defaultValue="100" />
+					<RecordItemInfo subindex="2" defaultValue="13500" />
+					<Name textId="TN_V_SSC1_Param" />
+				</Variable>
+				<!-- 61 V_SSC1_Config: SSC1 Config -->
+				<Variable id="V_SSC1_Config" index="61" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SSC_Config" />
+					<RecordItemInfo subindex="2" defaultValue="1" />
+					<RecordItemInfo subindex="3" defaultValue="25" />
+					<Name textId="TN_V_SSC1_Config" />
+				</Variable>
+				<!-- 62 V_SSC2_Param: SSC2 Param -->
+				<Variable id="V_SSC2_Param" index="62" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SSC_Param" />
+					<RecordItemInfo subindex="1" defaultValue="100" />
+					<RecordItemInfo subindex="2" defaultValue="13500" />
+					<Name textId="TN_V_SSC2_Param" />
+				</Variable>
+				<!-- 63 V_SSC2_Config: SSC2 Config -->
+				<Variable id="V_SSC2_Config" index="63" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SSC_Config" />
+					<RecordItemInfo subindex="2" defaultValue="0" />
+					<RecordItemInfo subindex="3" defaultValue="25" />
+					<Name textId="TN_V_SSC2_Config" />
+				</Variable>
+				<!-- ____________________ Output parameters ____________________ -->
+				<!-- 64 V_SIOCh1_Setup: SIO Channel 1 Setup -->
+				<Variable id="V_SIOCh1_Setup" index="64" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SIOCh1" />
+					<RecordItemInfo subindex="1" defaultValue="1" />
+					<RecordItemInfo subindex="2" defaultValue="1" />
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<RecordItemInfo subindex="4" defaultValue="0" />
+					<RecordItemInfo subindex="5" defaultValue="0" />
+					<RecordItemInfo subindex="7" defaultValue="0" />
+					<RecordItemInfo subindex="8" defaultValue="0" />
+					<Name textId="TN_V_SIOCh1_Setup" />
+				</Variable>
+				<!-- 65 V_SIOCh2_Setup: SIO Channel 2 Setup -->
+				<Variable id="V_SIOCh2_Setup" index="65" accessRights="rw">
+					<DatatypeRef datatypeId="DT_SIOCh2" />
+					<RecordItemInfo subindex="1" defaultValue="1" />
+					<RecordItemInfo subindex="2" defaultValue="1" />
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<RecordItemInfo subindex="4" defaultValue="0" />
+					<RecordItemInfo subindex="5" defaultValue="0" />
+					<RecordItemInfo subindex="7" defaultValue="0" />
+					<RecordItemInfo subindex="8" defaultValue="1" />
+					<Name textId="TN_V_SIOCh2_Setup" />
+				</Variable>
+				<!-- ____________________ Sensor specific adjustable parameters ____________________ -->
+				<!-- 68 V_SelectAdjustment: Selection of local/remote adjustment -->
+				<Variable id="V_SelectAdjustment" index="68" accessRights="rw" defaultValue="1">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<!-- 68.1 V_SelectAdjustment: Trimmer input setup -->
+						<SingleValue value="0">
+							<Name textId="TN_V_SelectAdjustment_Adjustment_DIS" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_SelectAdjustment_Adjustment_Trim-in" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_SelectAdjustment_Adjustment_EWT" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_SelectAdjustment" />
+				</Variable>
+				<!-- 69 V_TrimmerSetting: -->
+                <Variable id="V_TrimmerSetting" index="69" accessRights="ro" defaultValue="100" dynamic="true">
+                    <Datatype xsi:type="UIntegerT" bitLength="16" />
+                    <Name textId="TN_V_TrimmerSetting" />
+                </Variable>
+				<!-- 70 V_PDConfiguration: Process data configuration -->
+				<Variable id="V_PDConfiguration" index="70" accessRights="rw">
+					<Datatype xsi:type="RecordT" bitLength="16" subindexAccessSupported="false">
+						<!-- 70.1 V_PDConfiguration: Analogue value -->
+						<RecordItem bitOffset="0" subindex="1">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="3">
+								<SingleValue value="0">
+									<Name textId="TN_V_PDConfiguration_Analogue_Inactive" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_PDConfiguration_Analogue_Normal" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_PDConfiguration_Analogue_Obj_Length" />
+								</SingleValue>
+								<SingleValue value="3">
+									<Name textId="TN_V_PDConfiguration_Analogue_Obj_Speed" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_PDConfiguration_Analogue_Divider" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_Analogue" />
+						</RecordItem>
+						<!-- 70.2 V_PDConfiguration: SO1 -->
+						<RecordItem bitOffset="3" subindex="2">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SO1_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SO1_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SO1" />
+						</RecordItem>
+						<!-- 70.3 V_PDConfiguration: SO2 -->
+						<RecordItem bitOffset="4" subindex="3">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SO2_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SO2_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SO2" />
+						</RecordItem>
+						<!-- 70.4 V_PDConfiguration: SSC1 -->
+						<RecordItem bitOffset="5" subindex="4">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SSC1_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SSC1_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SSC1" />
+						</RecordItem>
+						<!-- 70.5 V_PDConfiguration: SSC2 -->
+						<RecordItem bitOffset="6" subindex="5">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SSC2_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SSC2_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SSC2" />
+						</RecordItem>
+						<!-- 70.6 V_PDConfiguration: DA1 -->
+						<RecordItem bitOffset="7" subindex="6">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_DA1_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_DA1_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_DA1" />
+						</RecordItem>
+						<!-- 70.7 V_PDConfiguration: DA2 -->
+						<RecordItem bitOffset="8" subindex="7">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_DA2_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_DA2_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_DA2" />
+						</RecordItem>
+						<!-- 70.8 V_PDConfiguration: TA -->
+						<RecordItem bitOffset="9" subindex="8">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_TA_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_TA_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_TA" />
+						</RecordItem>
+						<!-- 70.9 V_PDConfiguration: SC -->
+						<RecordItem bitOffset="10" subindex="9">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SC_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SC_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SC" />
+						</RecordItem>
+						<!-- 70.10 V_PDConfiguration: WDA1 -->
+						<RecordItem bitOffset="11" subindex="10">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_WDA1_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_WDA1_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_WDA1" />
+						</RecordItem>
+						<!-- 70.11 V_PDConfiguration: WDA2 -->
+						<RecordItem bitOffset="12" subindex="11">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_WDA2_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_WDA2_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_WDA2" />
+						</RecordItem>
+						<!-- 70.12 V_PDConfiguration: SFO1 -->
+						<RecordItem bitOffset="13" subindex="12">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_PDConfiguration_SFO1_Inactive" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_PDConfiguration_SFO1_Active" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PDConfiguration_SFO1" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="1" />
+					<RecordItemInfo subindex="2" defaultValue="true" />
+					<RecordItemInfo subindex="3" defaultValue="true" />
+					<RecordItemInfo subindex="4" defaultValue="false" />
+					<RecordItemInfo subindex="5" defaultValue="false" />
+					<RecordItemInfo subindex="6" defaultValue="false" />
+					<RecordItemInfo subindex="7" defaultValue="false" />
+					<RecordItemInfo subindex="8" defaultValue="false" />
+					<RecordItemInfo subindex="9" defaultValue="false" />
+					<RecordItemInfo subindex="10" defaultValue="false" />
+					<RecordItemInfo subindex="11" defaultValue="false" />
+					<RecordItemInfo subindex="12" defaultValue="false" />
+					<Name textId="TN_V_PDConfiguration" />
+				</Variable>
+				<!-- 7171 V_SensorPresets: Sensor application presets -->
+				<Variable id="V_SensorPresets" index="71" accessRights="rw" defaultValue="0">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_SensorPresets_Fast" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_SensorPresets_Slow" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_SensorPresets_FS" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_SensorPresets" />
+				</Variable>
+				<!-- 72 V_TempAlarmThres: Temperature alarm threshold -->
+				<Variable id="V_TempAlarmThres" index="72" accessRights="rw">
+					<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="true">
+						<!-- 72.1 V_TempAlarmThres: Temperature alarm threshold high -->
+						<RecordItem bitOffset="16" subindex="1">
+							<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+								<ValueRange lowerValue="-30" upperValue="125" />
+							</SimpleDatatype>
+						<Name textId="TN_V_TempAlarmThres_High" />
+						</RecordItem>
+						<!-- 72.2 V_TempAlarmThres: Temperature alarm threshold low -->
+						<RecordItem bitOffset="0" subindex="2">
+							<SimpleDatatype xsi:type="IntegerT" bitLength="16" >
+								<ValueRange lowerValue="-30" upperValue="125" />
+							</SimpleDatatype>
+							<Name textId="TN_V_TempAlarmThres_Low" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="120" />
+					<RecordItemInfo subindex="2" defaultValue="-30" />
+					<Name textId="TN_V_TempAlarmThres" />
+				</Variable>
+				<!-- 73 V_SafeOnOffLimit: Safe ON / OFF limit -->
+				<Variable id="V_SafeOnOffLimit" index="73" accessRights="rw">
+					<Datatype xsi:type="RecordT" bitLength="16" subindexAccessSupported="true">
+						<!-- 73.1 V_SafeOnOffLimit: SSC 1 Safe limit -->
+						<RecordItem bitOffset="8" subindex="1">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+								<ValueRange lowerValue="1" upperValue="100" />
+							</SimpleDatatype>
+							<Name textId="TN_V_SafeOnOffLimit_SSC1" />
+						</RecordItem>
+						<!-- 73.2 V_SafeOnOffLimit: SSC 2 Safe limit -->
+						<RecordItem bitOffset="0" subindex="2">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+								<ValueRange lowerValue="1" upperValue="100" />
+							</SimpleDatatype>
+							<Name textId="TN_V_SafeOnOffLimit_SSC2" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="20" />
+					<RecordItemInfo subindex="2" defaultValue="20" />
+					<Name textId="TN_V_SafeOnOffLimit" />
+				</Variable>
+				<!-- 74 V_EventConfiguration: Event configuration -->
+				<Variable id="V_EventConfiguration" index="74" accessRights="rw">
+					<Datatype xsi:type="RecordT" bitLength="16" subindexAccessSupported="false">
+						<!-- 74.1 V_EventConfiguration: Maintenance event (0x8C40) -->
+						<RecordItem bitOffset="0" subindex="1">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_EventConfiguration_Maintenance_DIS" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_EventConfiguration_Maintenance_ENA" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_EventConfiguration_Maintenance" />
+						</RecordItem>
+						<!-- 74.2 V_EventConfiguration: Temperature fault (0x4000) -->
+						<RecordItem bitOffset="1" subindex="2">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_EventConfiguration_Temperature_DIS" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_EventConfiguration_Temperature_ENA" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_EventConfiguration_Temperature" />
+						</RecordItem>
+						<!-- 74.3 V_EventConfiguration: Device temperature over-run (0x4210) -->
+						<RecordItem bitOffset="2" subindex="3">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_EventConfiguration_Overrun_DIS" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_EventConfiguration_Overrun_ENA" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_EventConfiguration_Overrun" />
+						</RecordItem>
+						<!-- 74.4 V_EventConfiguration: Device temperature under-run (0x4220) -->
+						<RecordItem bitOffset="3" subindex="4">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_EventConfiguration_Underrun_DIS" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_EventConfiguration_Underrun_ENA" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_EventConfiguration_Underrun" />
+						</RecordItem>
+						<!-- 74.5 V_EventConfiguration: Short circuit (0x7710) -->
+						<RecordItem bitOffset="4" subindex="5">
+							<SimpleDatatype xsi:type="BooleanT">
+								<SingleValue value="false">
+									<Name textId="TN_V_EventConfiguration_ShortCircuit_DIS" />
+								</SingleValue>
+								<SingleValue value="true">
+									<Name textId="TN_V_EventConfiguration_ShortCircuit_ENA" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_EventConfiguration_ShortCircuit" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="false" />
+					<RecordItemInfo subindex="2" defaultValue="false" />
+					<RecordItemInfo subindex="3" defaultValue="false" />
+					<RecordItemInfo subindex="4" defaultValue="false" />
+					<RecordItemInfo subindex="5" defaultValue="false" />
+					<Name textId="TN_V_EventConfiguration" />
+				</Variable>
+				<!-- 75 V_QualityOfTeach: Quality of teach -->
+				<Variable id="V_QualityOfTeach" index="75" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<ValueRange lowerValue="0" upperValue="100" />
+					</Datatype>
+					<Name textId="TN_V_QualityOfTeach" />
+				</Variable>
+				<!-- 76 V_QualityOfRun: Quality of run -->
+				<Variable id="V_QualityOfRun" index="76" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="UIntegerT" bitLength="8" />
+					<Name textId="TN_V_QualityOfRun" />
+				</Variable>		
+				<!-- 77 V_FilterScaler: Filter scaler -->
+				<Variable id="V_FilterScaler" index="77" accessRights="rw" defaultValue="1">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<ValueRange lowerValue="1" upperValue="255" />
+					</Datatype>
+					<Name textId="TN_V_FilterScaler" />
+				</Variable>
+				<!-- 78 V_LedIndication: LED indication -->
+				<Variable id="V_LedIndication" index="78" accessRights="rw" defaultValue="1">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_LedIndication_DIS" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_LedIndication_ENA" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_LedIndication_FMS" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_LedIndication" />
+				</Variable>
+				<!-- 80 V_SSC1_Hyst_Mode: Hysteresis mode -->
+				<Variable id="V_SSC1_Hyst_Mode" index="80" accessRights="rw" defaultValue="1" >
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_SSC1_Hyst_Mode_Man" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_SSC1_Hyst_Mode_Auto" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_SSC1_Hyst_Mode" />
+				</Variable>
+				<!-- 81 V_Auto_Hyst_Values: Automatic hysteresis values-->
+				<Variable id="V_Auto_Hyst_Values" index="81" accessRights="ro">
+					<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="true">
+						<!-- 72.1 V_V_Auto_Hyst_Values_SP1: Auto_Hyst_Values_SP1 -->
+						<RecordItem bitOffset="16" subindex="1">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+						<Name textId="TN_V_Auto_Hyst_Values_SP1" />
+						</RecordItem>
+						<!-- 72.2 V_V_Auto_Hyst_Values_SP2: Auto_Hyst_Values_SP1 -->
+						<RecordItem bitOffset="0" subindex="2">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Auto_Hyst_Values_SP2" />
+						</RecordItem>
+					</Datatype>
+					<Name textId="TN_V_Auto_Hyst_Values" />
+				</Variable>				
+				<!-- 83 V_Excess_gain: Excess gain -->				
+				<Variable id="V_Excess_gain" index="83" accessRights="ro" >
+					<Datatype xsi:type="UIntegerT" bitLength="8"/>
+					<Name textId="TN_V_Excess_gain" />
+				</Variable>
+				<!-- 84 V_interference_protection: Mutual interference protection -->
+				<Variable id="V_interference_protection" index="84" accessRights="rw" defaultValue="0">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_IP_off" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_IP_1sensor_filter" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_IP_2sensor-sensor1" />
+						</SingleValue>
+						<SingleValue value="3">
+							<Name textId="TN_V_IP_2sensor-sensor2" />
+						</SingleValue>
+						<SingleValue value="4">
+							<Name textId="TN_V_IP_3sensor-sensor1" />
+						</SingleValue>
+						<SingleValue value="5">
+							<Name textId="TN_V_IP_3sensor-sensor2" />
+						</SingleValue>
+						<SingleValue value="6">
+							<Name textId="TN_V_IP_3sensor-sensor3" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_interference_protection" />
+				</Variable>
+				
+				<!-- 85 V_AutoAdjust_setup: Auto Adjust setup -->
+				<Variable id="V_AutoAdjust_setup" index="85" accessRights="rw">
+					<Datatype xsi:type="RecordT" bitLength="24" subindexAccessSupported="true">
+						<!-- 85.1 V_AA_Enable: Enable Auto Adjust -->
+						<RecordItem bitOffset="16" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_AA_OFF" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_AA_ON" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_AA_Enable" />
+						</RecordItem>
+						<!-- 85.2 V_AA_AdjustWindowPct : Auto Adjust Window size in % -->
+						<RecordItem bitOffset="8" subindex="2">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="5" upperValue="50" />
+							</SimpleDatatype>
+							<Name textId="TN_V_AA_AdjustWindowPct" />
+						</RecordItem>
+						<!-- 85.3 V_AA_AdjustResolutionPct : Auto Adjust Resolution size in % -->
+						<RecordItem bitOffset="0" subindex="3">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="5" upperValue="100" />
+							</SimpleDatatype>
+							<Name textId="TN_V_AA_AdjustResolutionPct" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="1" />
+					<RecordItemInfo subindex="2" defaultValue="20" />
+					<RecordItemInfo subindex="3" defaultValue="50" />
+					<Name textId="TN_V_AutoAdjust_setup" />
+				</Variable>
+				
+				<!-- 86 V_AA_Corrected_setpoint: Auto Adjust Corrected setpoint -->
+				<Variable id="V_AA_Corrected_setpoint" index="86" accessRights="ro">
+					<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="true">
+						<!-- 86.1 V_AA_CorrectedSetpoint_SSC1 : Auto Adjust CorrectedSetpoint SSC1 -->
+						<RecordItem bitOffset="16" subindex="1">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_AA_CorrectedSetpoint_SSC1" />
+						</RecordItem>
+						<!-- 86.2 V_AA_CorrectedSetpoint_SSC2 : Auto Adjust CorrectedSetpoint SSC2 -->
+						<RecordItem bitOffset="0" subindex="2">
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_AA_CorrectedSetpoint_SSC2" />
+						</RecordItem>
+					</Datatype>
+					<Name textId="TN_V_AA_Corrected_setpoint" />
+				</Variable>
+				
+				<!-- 88 V_Special_Func_Selector: Special functions selector -->
+				<Variable id="V_Special_Func_Selector" index="88" accessRights="rw" defaultValue="0">
+					<Datatype xsi:type="UIntegerT" bitLength="8">
+						<SingleValue value="0">
+							<Name textId="TN_V_SFS_Normale" />
+						</SingleValue>
+						<SingleValue value="1">
+							<Name textId="TN_V_SFS_Speed_And_Lenght" />
+						</SingleValue>
+						<SingleValue value="2">
+							<Name textId="TN_V_SFS_Pattern_Recognition" />
+						</SingleValue>
+						<SingleValue value="3">
+							<Name textId="TN_V_SFS_Divider" />
+						</SingleValue>
+						<SingleValue value="4">
+							<Name textId="TN_V_SFS_Object_And_Gap_monitoring" />
+						</SingleValue>
+					</Datatype>
+					<Name textId="TN_V_Special_Func_Selector" />
+				</Variable>
+				
+				<!-- 89 V_SAL_measurement_Setup: Speed and Lenght measurement setup -->
+				<Variable id="V_SAL_measurement_Setup" index="89" accessRights="rw" > 
+					<Datatype xsi:type="RecordT" bitLength="16" subindexAccessSupported="true">
+						<!-- 89.1 V_SAL_Mode: Mode-->
+						<RecordItem bitOffset="8" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_SF_NoSensor" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_SF_SensorA" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_SF_SensorB" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_SAL_Mode" />
+						</RecordItem>
+						<!-- 89.2 V_Distance_Between_Semsors: Distance between sensors -->
+						<RecordItem bitOffset="0" subindex="2"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="25" upperValue="150" />
+							</SimpleDatatype>
+						<Name textId="TN_V_Distance_Between_Sensors" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="100" />
+					<Name textId="TN_V_SAL_measurement_Setup" />
+				</Variable>
+				
+				<!-- 90 V_SAL_measurement_Result: Speed and Lenght measurement Result -->
+				<Variable id="V_SAL_measurement_Result" index="90" accessRights="ro" > 
+					<Datatype xsi:type="RecordT" bitLength="40" subindexAccessSupported="true">
+						<!-- 90.1 V_Object_speed: Object speed -->
+						<RecordItem bitOffset="24" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16">
+							<ValueRange lowerValue="0" upperValue="2000" />
+							</SimpleDatatype>
+							<Name textId="TN_V_Object_speed" />
+						</RecordItem>
+						<!-- 90.2 V_Object_length: Object length -->
+						<RecordItem bitOffset="8" subindex="2" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="60000" />
+							</SimpleDatatype>
+							<Name textId="TN_V_Object_length" />
+						</RecordItem>
+						<!-- 90.3 V_SAL_Status: Status -->
+						<RecordItem bitOffset="0" subindex="3" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_SAL_STATUS_DISABLED" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_SAL_STATUS_MEASUREMENT_RUNNING" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_SAL_STATUS_ERR_SPEED_TOO_HIGH" />
+								</SingleValue>
+								<SingleValue value="3">
+									<Name textId="TN_V_SAL_STATUS_ERR_TIMEOUT" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_SAL_STATUS_ERR_OBJ_TOO_LONG" />
+								</SingleValue>
+								<SingleValue value="5">
+									<Name textId="TN_V_SAL_STATUS_ERR_LOGIC_FAIL" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_SAL_Status" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="0" />
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<Name textId="TN_V_SAL_measurement_Result" />
+				</Variable>
+				
+				<!-- 91 V_PR_Setup: Pattern recognition setup -->
+				<Variable id="V_PR_Setup" index="91" accessRights="rw" > 
+					<Datatype xsi:type="RecordT" bitLength="24" subindexAccessSupported="true">
+						<!-- 91.1 V_PR_Mode: Mode-->
+						<RecordItem bitOffset="16" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_SF_NoSensor" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_SF_SensorA" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_SF_SensorB" />
+								</SingleValue>
+							</SimpleDatatype>
+							<Name textId="TN_V_PR_Mode" />
+						</RecordItem>
+						<!-- 91.2 V_PR_Timeout: Timeout -->
+						<RecordItem bitOffset="8" subindex="2"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="1" upperValue="60" />
+							</SimpleDatatype>
+						<Name textId="TN_V_PR_Timeout" />
+						</RecordItem>
+						<!-- 91.3 V_PR_PatternTolerancePromille : ProcessData Mode--> 
+						<RecordItem bitOffset="0" subindex="3"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="1" upperValue="200" />
+							</SimpleDatatype>
+						<Name textId="TN_V_PR_PatternTolerancePromille" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="60" />
+					<RecordItemInfo subindex="3" defaultValue="50" />
+					<Name textId="TN_V_PR_Setup" />
+				</Variable>				
+				
+				<!-- 92 V_PR_Result: Pattern Recognition Result -->
+				<Variable id="V_PR_Result" index="92" accessRights="ro" > 
+					<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="true">
+						<!-- 92.1 V_REf_Pattern: Reference pattern found -->
+						<RecordItem bitOffset="24" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+									<SingleValue value = "0">
+										<Name textId = "TN_Pattern_Not_Saved"/>
+									</SingleValue>
+									<SingleValue value = "1">
+										<Name textId = "TN_Pattern_Saved"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_V_PR_Ref_Pattern_SavedOrNot"/>
+							</RecordItem>
+						<!-- 92.2 V_REF_Pattern_Edges: Reference pattern NoOfEdges -->
+						<RecordItem bitOffset="16" subindex="2" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="0" upperValue="20" />
+							</SimpleDatatype>
+							<Name textId="TN_V_Reference_pattern_NoOfEdges" />
+						</RecordItem>
+						<!-- 92.3 V_Edges_Last_Pattern: NoOfEdges last scan -->
+						<RecordItem bitOffset="8" subindex="3" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" >
+							<ValueRange lowerValue="0" upperValue="20" />
+							</SimpleDatatype>
+							<Name textId="TN_V_NoOfEdges_last_scan" />
+						</RecordItem>
+						<!-- 92.4 V_PR_Status: Pattern Recognition Status -->
+						<RecordItem bitOffset="0" subindex="4" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_PR_STATUS_CLEAR" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_PR_STATUS_MEASUREMENT_RUNNING" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_PR_STATUS_PATTERN_MATCH" />
+								</SingleValue>
+								<SingleValue value="3">
+									<Name textId="TN_V_PR_STATUS_ERR_TIMEOUT" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_PR_STATUS_ERR_EDGE_EXCEED_MAX" />
+								</SingleValue>
+								<SingleValue value="5">
+									<Name textId="TN_V_PR_STATUS_ERR_EDGE_CNT_ERR" />
+								</SingleValue>
+								<SingleValue value="6">
+									<Name textId="TN_V_PR_STATUS_ERR_EDGE_TIMING_ERR" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_PR_Status" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="0" />
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<Name textId="TN_V_PR_Result" />
+				</Variable>
+				
+				<!-- 93 V_DaC_Setup: Divider and counter Setup -->
+				<Variable id="V_DaC_Setup" index="93" accessRights="rw" > 
+					<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="true">
+						<!-- 91.1 V_DaC_CounterLimit: Counter limit-->
+						<RecordItem bitOffset="16" subindex="1"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="1" upperValue="65535" />
+							</SimpleDatatype>
+						<Name textId="TN_V_DaC_CounterLimit" />
+						</RecordItem>
+						<!-- 91.2 V_DaC_PCV: Preset counter value -->
+						<RecordItem bitOffset="0" subindex="2"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="65535" />
+							</SimpleDatatype>
+						<Name textId="TN_V_DaC_PCV" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="1" />
+					<RecordItemInfo subindex="2" defaultValue="0" />
+					<Name textId="TN_V_DaC_Setup" />
+				</Variable>
+				
+				<!-- 94 V_DaC_Result: Divider and counter Result -->
+				<Variable id="V_DaC_Result" index="94" accessRights="ro" >
+					<Datatype xsi:type="UIntegerT" bitLength="16"/>
+					<Name textId="TN_V_DaC_Result" />
+				</Variable>
+				
+				<!-- 95 V_OaGM_Setup: Object and Gap Monitor Setup -->
+				<Variable id="V_OaGM_Setup" index="95" accessRights="rw" > 
+					<Datatype xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+						<!-- 95.1 V_GaM_objMinT: Object minium time -->
+						<RecordItem bitOffset="48" subindex="1"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="10" upperValue="60000" />
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_objMinT" />
+						</RecordItem>
+						<!-- 95.2 V_GaM_objMaxT: Object maxium time -->
+						<RecordItem bitOffset="32" subindex="2"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="10" upperValue="60000" />
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_objMaxT" />
+						</RecordItem>
+						<!-- 95.3 V_GaM_GapMinT: Gap minium time-->
+						<RecordItem bitOffset="16" subindex="3"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="10" upperValue="60000" />
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_GapMinT" />
+						</RecordItem>
+						<!-- 95.4 V_GaM_GapMaxT: Gap maxium time -->
+						<RecordItem bitOffset="0" subindex="4"  >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="10" upperValue="60000" />
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_GapMaxT" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="1000" />
+					<RecordItemInfo subindex="2" defaultValue="60000" />
+					<RecordItemInfo subindex="3" defaultValue="1000" />
+					<RecordItemInfo subindex="4" defaultValue="60000" />
+					<Name textId="TN_V_OaGM_Setup" />
+				</Variable>
+				
+				<!-- 96 V_OaGM_Result: Object and Gap Monitor Result -->
+				<Variable id="V_OaGM_Result" index="96" accessRights="ro" > 
+					<Datatype xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+						<!-- 96.1 V_OaGM_ObjT: Object time -->
+						<RecordItem bitOffset="32" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16">
+							<ValueRange lowerValue="0" upperValue="60000" />
+							</SimpleDatatype>
+							<Name textId="TN_V_OaGM_ObjT" />
+						</RecordItem>
+						<!-- 96.2 V_OaGM_GapT: Gap time -->
+						<RecordItem bitOffset="16" subindex="2" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" >
+							<ValueRange lowerValue="0" upperValue="60000" />
+							</SimpleDatatype>
+							<Name textId="TN_V_OaGM_GapT" />
+						</RecordItem>
+						<!-- 96.3 V_OaGM_Status: Object and Gap Monitor Status -->
+						<RecordItem bitOffset="8" subindex="3" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_OaGM_STATUS_Obj_IDLE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_OaGM_STATUS_Obj_Measurement_Run" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_OaGM_STATUS_Obj_Passed" />
+								</SingleValue>
+								<SingleValue value="3">
+									<Name textId="TN_V_OaGM_STATUS_Obj_To_Long" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_OaGM_STATUS_Obj_To_Short" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_Obj_Status" />
+						</RecordItem>
+						<!-- 96.4 V_OaGM_Status: Object and Gap Monitor Status -->
+						<RecordItem bitOffset="0" subindex="4" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_OaGM_STATUS_Gap_IDLE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_OaGM_STATUS_Gap_Measurement_Run" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_OaGM_STATUS_Gap_Passed" />
+								</SingleValue>
+								<SingleValue value="3">
+									<Name textId="TN_V_OaGM_STATUS_Gap_To_Long" />
+								</SingleValue>
+								<SingleValue value="4">
+									<Name textId="TN_V_OaGM_STATUS_Gap_To_Short" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_OaGM_Gap_Status" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<RecordItemInfo subindex="4" defaultValue="0" />
+					<Name textId="TN_V_OaGM_Result" />
+				</Variable>
+				
+				<!-- 97 V_Pattern: PR Safed Pattern  -->
+				<Variable id="V_Pattern" index="97" accessRights="rw" > 
+					<Datatype xsi:type="RecordT" bitLength="512" subindexAccessSupported="true">
+						<!-- 97.1 V_Ref_Pattern_timestamp_1: Ref Pattern timestamp_1 -->
+						<RecordItem bitOffset="496" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_1" />
+						</RecordItem>
+						<!-- 97.2 V_Ref_Pattern_timestamp_2: Ref Pattern timestamp_2 -->
+						<RecordItem bitOffset="480" subindex="2" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_2" />
+						</RecordItem>
+						<!-- 97.3 V_Ref_Pattern_timestamp_3: Ref Pattern timestamp_3 -->
+						<RecordItem bitOffset="464" subindex="3" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_3" />
+						</RecordItem>
+						<!-- 97.4 V_Ref_Pattern_timestamp_4: Ref Pattern timestamp_4 -->
+						<RecordItem bitOffset="448" subindex="4" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_4" />
+						</RecordItem>
+						<!-- 97.5 V_Ref_Pattern_timestamp_5: Ref Pattern timestamp_5 -->
+						<RecordItem bitOffset="432" subindex="5" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_5" />
+						</RecordItem>
+						<!-- 97.6 V_Ref_Pattern_timestamp_6: Ref Pattern timestamp_6 -->
+						<RecordItem bitOffset="416" subindex="6" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_6" />
+						</RecordItem>
+						<!-- 97.7 V_Ref_Pattern_timestamp_7: Ref Pattern timestamp_7 -->
+						<RecordItem bitOffset="400" subindex="7" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_7" />
+						</RecordItem>
+						<!-- 97.8 V_Ref_Pattern_timestamp_8: Ref Pattern timestamp_8 -->
+						<RecordItem bitOffset="384" subindex="8" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_8" />
+						</RecordItem>
+						<!-- 97.9 V_Ref_Pattern_timestamp_9: Ref Pattern timestamp_9 -->
+						<RecordItem bitOffset="368" subindex="9" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_9" />
+						</RecordItem>
+						<!-- 97.10 V_Ref_Pattern_timestamp_10: Ref Pattern timestamp_10 -->
+						<RecordItem bitOffset="352" subindex="10" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_10" />
+						</RecordItem>
+						<!-- 97.11 V_Ref_Pattern_timestamp_11: Ref Pattern timestamp_11 -->
+						<RecordItem bitOffset="336" subindex="11" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_11" />
+						</RecordItem>
+						<!-- 97.12 V_Ref_Pattern_timestamp_12: Ref Pattern timestamp_12 -->
+						<RecordItem bitOffset="320" subindex="12" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_12" />
+						</RecordItem>
+						<!-- 97.13 V_Ref_Pattern_timestamp_13: Ref Pattern timestamp_13 -->
+						<RecordItem bitOffset="304" subindex="13" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_13" />
+						</RecordItem>
+						<!-- 97.14 V_Ref_Pattern_timestamp_14: Ref Pattern timestamp_14 -->
+						<RecordItem bitOffset="288" subindex="14" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_14" />
+						</RecordItem>
+						<!-- 97.15 V_Ref_Pattern_timestamp_15: Ref Pattern timestamp_15 -->
+						<RecordItem bitOffset="272" subindex="15" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_15" />
+						</RecordItem>
+						<!-- 97.16 V_Ref_Pattern_timestamp_16: Ref Pattern timestamp_16 -->
+						<RecordItem bitOffset="256" subindex="16" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_16" />
+						</RecordItem>
+						<!-- 97.17 V_Ref_Pattern_timestamp_17: Ref Pattern timestamp_17 -->
+						<RecordItem bitOffset="240" subindex="17" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_17" />
+						</RecordItem>
+						<!-- 97.18 V_Ref_Pattern_timestamp_18: Ref Pattern timestamp_18 -->
+						<RecordItem bitOffset="224" subindex="18" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_18" />
+						</RecordItem>
+						<!-- 97.19 V_Ref_Pattern_timestamp_19: Ref Pattern timestamp_19 -->
+						<RecordItem bitOffset="208" subindex="19" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_19" />
+						</RecordItem>
+						<!-- 97.20 V_Ref_Pattern_timestamp_20: Ref Pattern timestamp_20 -->
+						<RecordItem bitOffset="192" subindex="20" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_Pattern_timestamp_20" />
+						</RecordItem>
+						<!-- 97.21 V_Ref_Pattern_edge_type_1: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="184" subindex="21" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_1" />
+						</RecordItem>
+						<!-- 97.22 V_Ref_Pattern_edge_type_2: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="176" subindex="22" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_2" />
+						</RecordItem>
+						<!-- 97.23 V_Ref_Pattern_edge_type_3: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="168" subindex="23" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_3" />
+						</RecordItem>
+						<!-- 97.24 V_Ref_Pattern_edge_type_4 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="160" subindex="24" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_4" />
+						</RecordItem>
+						<!-- 97.25 V_Ref_Pattern_edge_type_5: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="152" subindex="25" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_5" />
+						</RecordItem>
+						<!-- 97.26 V_Ref_Pattern_edge_type_6: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="144" subindex="26" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_6" />
+						</RecordItem>
+						<!-- 97.27 V_Ref_Pattern_edge_type_7: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="136" subindex="27" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_7" />
+						</RecordItem>
+						<!-- 97.28 V_Ref_Pattern_edge_type_8: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="128" subindex="28" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_8" />
+						</RecordItem>
+						<!-- 97.29 V_Ref_Pattern_edge_type_9: Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="120" subindex="29" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_9" />
+						</RecordItem>
+						<!-- 97.30 V_Ref_Pattern_edge_type_10 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="112" subindex="30" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_10" />
+						</RecordItem>
+						<!-- 97.31 V_Ref_Pattern_edge_type_11 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="104" subindex="31" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_11" />
+						</RecordItem>
+						<!-- 97.32 V_Ref_Pattern_edge_type_12 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="96" subindex="32" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_12" />
+						</RecordItem>
+						<!-- 97.33 V_Ref_Pattern_edge_type_13 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="88" subindex="33" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_13" />
+						</RecordItem>
+						<!-- 97.34 V_Ref_Pattern_edge_type_14 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="80" subindex="34" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_14" />
+						</RecordItem>
+						<!-- 97.35 V_Ref_Pattern_edge_type_15 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="72" subindex="35" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_15" />
+						</RecordItem>
+						<!-- 97.36 V_Ref_Pattern_edge_type_16 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="64" subindex="36" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_16" />
+						</RecordItem>
+						<!-- 97.37 V_Ref_Pattern_edge_type_17 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="56" subindex="37" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_17" />
+						</RecordItem>
+						<!-- 97.38 V_Ref_Pattern_edge_type_18 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="48" subindex="38" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_18" />
+						</RecordItem>
+						<!-- 97.39 V_Ref_Pattern_edge_type_19 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="40" subindex="39" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_19" />
+						</RecordItem>
+						<!-- 97.40 V_Ref_Pattern_edge_type_40 : Ref_Pattern_edge_type 1-20 -->
+						<RecordItem bitOffset="32" subindex="40" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_V_P_EVENT_NONE" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_V_P_EVENT_POS_EDGE" />
+								</SingleValue>
+								<SingleValue value="2">
+									<Name textId="TN_V_P_EVENT_NEG_EDGE" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_Ref_Pattern_edge_type_20" />
+						</RecordItem>
+						<!-- 97.41 V_Ref_ObjectTimeLength: Ref ObjectTimeLength -->
+						<RecordItem bitOffset="16" subindex="41" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+							<Name textId="TN_V_Ref_ObjectTimeLength" />
+						</RecordItem>
+						<!-- 97.42 V_Reference_pattern_found : Reference pattern found/safed  -->
+						<RecordItem bitOffset="8" subindex="42" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+								<SingleValue value="0">
+									<Name textId="TN_Pattern_Not_Saved" />
+								</SingleValue>
+								<SingleValue value="1">
+									<Name textId="TN_Pattern_Saved" />
+								</SingleValue>
+							</SimpleDatatype>
+						<Name textId="TN_V_PR_Ref_Pattern_SavedOrNot" />
+						</RecordItem>
+						<!-- 97.43 V_Reference_pattern_NoOfEdges: Reference pattern NoOfEdges -->
+						<RecordItem bitOffset="0" subindex="43" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8" />
+							<Name textId="TN_V_Reference_pattern_NoOfEdges" />
+						</RecordItem>
+					</Datatype>
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<RecordItemInfo subindex="2" defaultValue="0" />
+					<RecordItemInfo subindex="3" defaultValue="0" />
+					<RecordItemInfo subindex="4" defaultValue="0" />
+					<RecordItemInfo subindex="5" defaultValue="0" />
+					<RecordItemInfo subindex="6" defaultValue="0" />
+					<RecordItemInfo subindex="7" defaultValue="0" />
+					<RecordItemInfo subindex="8" defaultValue="0" />
+					<RecordItemInfo subindex="9" defaultValue="0" />
+					<RecordItemInfo subindex="10" defaultValue="0" />
+					<RecordItemInfo subindex="11" defaultValue="0" />
+					<RecordItemInfo subindex="12" defaultValue="0" />
+					<RecordItemInfo subindex="13" defaultValue="0" />
+					<RecordItemInfo subindex="14" defaultValue="0" />
+					<RecordItemInfo subindex="15" defaultValue="0" />
+					<RecordItemInfo subindex="16" defaultValue="0" />
+					<RecordItemInfo subindex="17" defaultValue="0" />
+					<RecordItemInfo subindex="18" defaultValue="0" />
+					<RecordItemInfo subindex="19" defaultValue="0" />
+					<RecordItemInfo subindex="20" defaultValue="0" />
+					<RecordItemInfo subindex="21" defaultValue="0" />
+					<RecordItemInfo subindex="22" defaultValue="0" />
+					<RecordItemInfo subindex="23" defaultValue="0" />
+					<RecordItemInfo subindex="24" defaultValue="0" />
+					<RecordItemInfo subindex="25" defaultValue="0" />
+					<RecordItemInfo subindex="26" defaultValue="0" />
+					<RecordItemInfo subindex="27" defaultValue="0" />
+					<RecordItemInfo subindex="28" defaultValue="0" />
+					<RecordItemInfo subindex="29" defaultValue="0" />
+					<RecordItemInfo subindex="30" defaultValue="0" />
+					<RecordItemInfo subindex="31" defaultValue="0" />
+					<RecordItemInfo subindex="32" defaultValue="0" />
+					<RecordItemInfo subindex="33" defaultValue="0" />
+					<RecordItemInfo subindex="34" defaultValue="0" />
+					<RecordItemInfo subindex="35" defaultValue="0" />
+					<RecordItemInfo subindex="36" defaultValue="0" />
+					<RecordItemInfo subindex="37" defaultValue="0" />
+					<RecordItemInfo subindex="38" defaultValue="0" />
+					<RecordItemInfo subindex="39" defaultValue="0" />
+					<RecordItemInfo subindex="40" defaultValue="0" />
+					<RecordItemInfo subindex="41" defaultValue="0" />
+					<RecordItemInfo subindex="42" defaultValue="0" />
+					<RecordItemInfo subindex="43" defaultValue="0" />
+					<Name textId="TN_V_Pattern" />
+				</Variable>
+				
+				
+				<!-- ____________________ Diagnostic parameters ____________________ -->
+				<!-- 201 V_DiagOperatingHours: Operating Hours -->
+				<Variable id="V_DiagOperatingHours" index="201" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagOperatingHours" />
+				</Variable>
+				<!-- 202 V_DiagPowerCycles: Number of Power Cycles -->
+				<Variable id="V_DiagPowerCycles" index="202" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagPowerCycles" />
+				</Variable>
+				<!-- 203 V_DiagMaxTemp: Maximum temperature -->
+				<Variable id="V_DiagMaxTemp" index="203" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagMaxTemp" />
+				</Variable>
+				<!-- 204 V_DiagMinTemp: Minimum temperature -->
+				<Variable id="V_DiagMinTemp" index="204" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagMinTemp" />
+				</Variable>
+				<!-- 205 V_DiagMaxTempStartup: Maximum temperature since startup -->
+				<Variable id="V_DiagMaxTempStartup" index="205" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagMaxTempStartup" />
+				</Variable>
+				<!-- 206 V_DiagMinTempStartup: Minimum temperature since startup -->
+				<Variable id="V_DiagMinTempStartup" index="206" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagMinTempStartup" />
+				</Variable>
+				<!-- 207 V_DiagCurrentTemp: Current temperature -->
+				<Variable id="V_DiagCurrentTemp" index="207" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagCurrentTemp" />
+				</Variable>
+				<!-- 208 V_DiagEE_MemoryFailure: Memory Failure -->
+				<Variable id="V_DiagEE_MemoryFailure" index="208" accessRights="ro" dynamic="true">
+					<Datatype xsi:type="RecordT" bitLength="24" >
+					<!-- 208.1 V_MemoryFailFlag: Memory Fail Flag -->
+						<RecordItem bitOffset="16" subindex="1" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8"/>
+							<Name textId="TN_V_MemoryFailFlag" />
+						</RecordItem>
+					<!-- 208.2 V_NonDS_NV_DataMemReloadErr: Non DS_NV_Data Mem Reload Err -->
+						<RecordItem bitOffset="8" subindex="2" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<ValueRange lowerValue="0" upperValue="255" />
+							</SimpleDatatype>
+							<Name textId="TN_V_NonDS_NV_DataMemReloadErr_NotShown" />
+						</RecordItem>
+					<!-- 208.3 V_ProdSetMemReloadErr: Prod Set Mem Reload Err -->
+						<RecordItem bitOffset="0" subindex="3" >
+							<SimpleDatatype xsi:type="UIntegerT" bitLength="8">
+							<ValueRange lowerValue="0" upperValue="255" />
+							</SimpleDatatype>
+							<Name textId="TN_V_ProdSetMemReloadErr_NotShown" />
+						</RecordItem>						
+					</Datatype>	
+					<RecordItemInfo subindex="1" defaultValue="0" />
+					<Name textId="TN_V_DiagEE_MemoryFailure" />
+				</Variable>
+				<!-- 209 V_DiagFrontEndFailure: Front End Failure -->
+				<Variable id="V_DiagFrontEndFailure" index="209" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="8" />
+					<Name textId="TN_V_DiagFrontendFailure" />
+				</Variable>
+				<!-- 210 V_DiagDetectionCnt: Detection counter -->
+				<Variable id="V_DiagDetectionCnt" index="210" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagDetectionCnt" />
+				</Variable>
+				<!-- 211 V_DiagOpTempOverun: Operating temperature overrun minutes -->
+				<Variable id="V_DiagOpTempOverun" index="211" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagOpTempOverun" />
+				</Variable>
+				<!-- 212 V_DiagOpTempUnderrun: Operating temperature underrun minutes -->
+				<Variable id="V_DiagOpTempUnderrun" index="212" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagOpTempUnderrun" />
+				</Variable>
+				<!-- 213 V_DiagMaintenanceCnt: Maintenance event counter -->
+				<Variable id="V_DiagMaintenanceCnt" index="213" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="IntegerT" bitLength="32" />
+					<Name textId="TN_V_DiagMaintenanceCnt" />
+				</Variable>
+				<!-- 214 V_DiagDownloadCnt: Download counter -->
+				<Variable id="V_DiagDownloadCnt" index="214" accessRights="ro" defaultValue="0" dynamic="true">
+					<Datatype xsi:type="UIntegerT" bitLength="16" />
+					<Name textId="TN_V_DiagDownloadCnt" />
+				</Variable>
+			</VariableCollection>
+
+			<ProcessDataCollection>
+					<!-- PD normal -->
+				<ProcessData id="PD_ProcessData0">
+				<Condition variableId="V_PDConfiguration" subindex="1" value="0"/>
+					<ProcessDataIn id="PD_ProcessDataIn0" bitLength="32">
+						<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="false">
+							<!-- PD_In: Analogue Value -->
+							<RecordItem bitOffset="16" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+								<Name textId="TN_PDI_Analogue" />
+							</RecordItem>
+							<!-- PD_In: SC -->
+							<RecordItem bitOffset="13" subindex="2">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_PDI_SC"/>
+							</RecordItem>
+							<!-- PD_In: TA1 -->
+							<RecordItem bitOffset="12" subindex="3">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_TA1" />
+							</RecordItem>
+							<!-- PD_In: DA2 -->
+							<RecordItem bitOffset="11" subindex="4">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA2" />
+							</RecordItem>
+							<!-- PD_In: DA1 -->
+							<RecordItem bitOffset="10" subindex="5">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA1" />
+							</RecordItem>
+							<!-- PD_In: SSC2 -->
+							<RecordItem bitOffset="9" subindex="6">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC2" />
+							</RecordItem>
+							<!-- PD_In: SSC1 -->
+							<RecordItem bitOffset="8" subindex="7">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC1" />
+							</RecordItem>
+							<!-- PD_In: SFO1 -->
+							<RecordItem bitOffset="7" subindex="8">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SFO1" />
+							</RecordItem>
+							<!-- PD_In: WDA2 -->
+							<RecordItem bitOffset="3" subindex="9">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA2" />
+							</RecordItem>
+							<!-- PD_In: WDA1 -->
+							<RecordItem bitOffset="2" subindex="10">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA1" />
+							</RecordItem>
+							<!-- PD_In: SO2 -->
+							<RecordItem bitOffset="1" subindex="11">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO2" />
+							</RecordItem>
+							<!-- PD_In: SO1 -->
+							<RecordItem bitOffset="0" subindex="12">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO1" />
+							</RecordItem>
+						</Datatype>
+						<Name textId="TI_PDI" />
+					</ProcessDataIn>
+				</ProcessData>
+				<!-- PD normal -->
+				<ProcessData id="PD_ProcessData1">
+				<Condition variableId="V_PDConfiguration" subindex="1" value="1"/>
+					<ProcessDataIn id="PD_ProcessDataIn1" bitLength="32">
+						<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="false">
+							<!-- PD_In: Analogue Value -->
+							<RecordItem bitOffset="16" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+								<Name textId="TN_PDI_Analogue" />
+							</RecordItem>
+							<!-- PD_In: SC -->
+							<RecordItem bitOffset="13" subindex="2">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_PDI_SC"/>
+							</RecordItem>
+							<!-- PD_In: TA1 -->
+							<RecordItem bitOffset="12" subindex="3">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_TA1" />
+							</RecordItem>
+							<!-- PD_In: DA2 -->
+							<RecordItem bitOffset="11" subindex="4">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA2" />
+							</RecordItem>
+							<!-- PD_In: DA1 -->
+							<RecordItem bitOffset="10" subindex="5">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA1" />
+							</RecordItem>
+							<!-- PD_In: SSC2 -->
+							<RecordItem bitOffset="9" subindex="6">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC2" />
+							</RecordItem>
+							<!-- PD_In: SSC1 -->
+							<RecordItem bitOffset="8" subindex="7">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC1" />
+							</RecordItem>
+							<!-- PD_In: SFO1 -->
+							<RecordItem bitOffset="7" subindex="8">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SFO1" />
+							</RecordItem>
+							<!-- PD_In: WDA2 -->
+							<RecordItem bitOffset="3" subindex="9">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA2" />
+							</RecordItem>
+							<!-- PD_In: WDA1 -->
+							<RecordItem bitOffset="2" subindex="10">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA1" />
+							</RecordItem>
+							<!-- PD_In: SO2 -->
+							<RecordItem bitOffset="1" subindex="11">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO2" />
+							</RecordItem>
+							<!-- PD_In: SO1 -->
+							<RecordItem bitOffset="0" subindex="12">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO1" />
+							</RecordItem>
+						</Datatype>
+						<Name textId="TI_PDI" />
+					</ProcessDataIn>
+				</ProcessData>
+				<!-- PD Length -->
+				<ProcessData id="PD_ProcessData2">
+				<Condition variableId="V_PDConfiguration" subindex="1" value="2"/>
+					<ProcessDataIn id="PD_ProcessDataIn2" bitLength="32">
+						<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="false">
+							<!-- PD_In: Analogue Value -->
+							<RecordItem bitOffset="16" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+								<Name textId="TN_PDI_Analogue_obj_Length" />
+							</RecordItem>
+							<!-- PD_In: SC -->
+							<RecordItem bitOffset="13" subindex="2">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_PDI_SC"/>
+							</RecordItem>
+							<!-- PD_In: TA1 -->
+							<RecordItem bitOffset="12" subindex="3">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_TA1" />
+							</RecordItem>
+							<!-- PD_In: DA2 -->
+							<RecordItem bitOffset="11" subindex="4">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA2" />
+							</RecordItem>
+							<!-- PD_In: DA1 -->
+							<RecordItem bitOffset="10" subindex="5">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA1" />
+							</RecordItem>
+							<!-- PD_In: SSC2 -->
+							<RecordItem bitOffset="9" subindex="6">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC2" />
+							</RecordItem>
+							<!-- PD_In: SSC1 -->
+							<RecordItem bitOffset="8" subindex="7">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC1" />
+							</RecordItem>
+							<!-- PD_In: SFO1 -->
+							<RecordItem bitOffset="7" subindex="8">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SFO1" />
+							</RecordItem>
+							<!-- PD_In: WDA2 -->
+							<RecordItem bitOffset="3" subindex="9">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA2" />
+							</RecordItem>
+							<!-- PD_In: WDA1 -->
+							<RecordItem bitOffset="2" subindex="10">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA1" />
+							</RecordItem>
+							<!-- PD_In: SO2 -->
+							<RecordItem bitOffset="1" subindex="11">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO2" />
+							</RecordItem>
+							<!-- PD_In: SO1 -->
+							<RecordItem bitOffset="0" subindex="12">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO1" />
+							</RecordItem>
+						</Datatype>
+						<Name textId="TI_PDI" />
+					</ProcessDataIn>
+				</ProcessData>
+				<!-- PD Speed -->
+				<ProcessData id="PD_ProcessData3">
+				<Condition variableId="V_PDConfiguration" subindex="1" value="3"/>
+					<ProcessDataIn id="PD_ProcessDataIn3" bitLength="32">
+						<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="false">
+							<!-- PD_In: Analogue Value -->
+							<RecordItem bitOffset="16" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+								<Name textId="TN_PDI_Analogue_obj_Speed" />
+							</RecordItem>
+							<!-- PD_In: SC -->
+							<RecordItem bitOffset="13" subindex="2">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_PDI_SC"/>
+							</RecordItem>
+							<!-- PD_In: TA1 -->
+							<RecordItem bitOffset="12" subindex="3">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_TA1" />
+							</RecordItem>
+							<!-- PD_In: DA2 -->
+							<RecordItem bitOffset="11" subindex="4">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA2" />
+							</RecordItem>
+							<!-- PD_In: DA1 -->
+							<RecordItem bitOffset="10" subindex="5">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA1" />
+							</RecordItem>
+							<!-- PD_In: SSC2 -->
+							<RecordItem bitOffset="9" subindex="6">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC2" />
+							</RecordItem>
+							<!-- PD_In: SSC1 -->
+							<RecordItem bitOffset="8" subindex="7">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC1" />
+							</RecordItem>
+							<!-- PD_In: SFO1 -->
+							<RecordItem bitOffset="7" subindex="8">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SFO1" />
+							</RecordItem>
+							<!-- PD_In: WDA2 -->
+							<RecordItem bitOffset="3" subindex="9">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA2" />
+							</RecordItem>
+							<!-- PD_In: WDA1 -->
+							<RecordItem bitOffset="2" subindex="10">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA1" />
+							</RecordItem>
+							<!-- PD_In: SO2 -->
+							<RecordItem bitOffset="1" subindex="11">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO2" />
+							</RecordItem>
+							<!-- PD_In: SO1 -->
+							<RecordItem bitOffset="0" subindex="12">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO1" />
+							</RecordItem>
+						</Datatype>
+						<Name textId="TI_PDI" />
+					</ProcessDataIn>
+				</ProcessData>
+				<!-- PD divider -->
+				<ProcessData id="PD_ProcessData4">
+				<Condition variableId="V_PDConfiguration" subindex="1" value="4"/>
+					<ProcessDataIn id="PD_ProcessDataIn4" bitLength="32">
+						<Datatype xsi:type="RecordT" bitLength="32" subindexAccessSupported="false">
+							<!-- PD_In: Analogue Value -->
+							<RecordItem bitOffset="16" subindex="1">
+								<SimpleDatatype xsi:type="UIntegerT" bitLength="16" />
+								<Name textId="TN_PDI_Analogue_Diveder" />
+							</RecordItem>
+							<!-- PD_In: SC -->
+							<RecordItem bitOffset="13" subindex="2">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>	
+								<Name textId="TN_PDI_SC"/>
+							</RecordItem>
+							<!-- PD_In: TA1 -->
+							<RecordItem bitOffset="12" subindex="3">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_TA1" />
+							</RecordItem>
+							<!-- PD_In: DA2 -->
+							<RecordItem bitOffset="11" subindex="4">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA2" />
+							</RecordItem>
+							<!-- PD_In: DA1 -->
+							<RecordItem bitOffset="10" subindex="5">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_DA1" />
+							</RecordItem>
+							<!-- PD_In: SSC2 -->
+							<RecordItem bitOffset="9" subindex="6">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC2" />
+							</RecordItem>
+							<!-- PD_In: SSC1 -->
+							<RecordItem bitOffset="8" subindex="7">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SSC1" />
+							</RecordItem>
+							<!-- PD_In: SFO1 -->
+							<RecordItem bitOffset="7" subindex="8">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SFO1" />
+							</RecordItem>
+							<!-- PD_In: WDA2 -->
+							<RecordItem bitOffset="3" subindex="9">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA2" />
+							</RecordItem>
+							<!-- PD_In: WDA1 -->
+							<RecordItem bitOffset="2" subindex="10">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_WDA1" />
+							</RecordItem>
+							<!-- PD_In: SO2 -->
+							<RecordItem bitOffset="1" subindex="11">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO2" />
+							</RecordItem>
+							<!-- PD_In: SO1 -->
+							<RecordItem bitOffset="0" subindex="12">
+								<SimpleDatatype xsi:type="BooleanT">
+									<SingleValue value = "true">
+										<Name textId = "TN_Active"/>
+									</SingleValue>
+									<SingleValue value = "false">
+										<Name textId = "TN_Inactive"/>
+									</SingleValue>
+								</SimpleDatatype>
+								<Name textId="TN_PDI_SO1" />
+							</RecordItem>
+						</Datatype>
+						<Name textId="TI_PDI" />
+					</ProcessDataIn>
+				</ProcessData>
+			</ProcessDataCollection>
+
+			<EventCollection>			
+				<!-- Temperature fault -->
+				<StdEventRef code="16384"/>
+				<!-- Device temperature over-run -->
+				<StdEventRef code="16912"/>	
+				<!-- Device temperature under-run -->
+				<StdEventRef code="16928"/>
+				<!-- Short Circuit -->
+				<StdEventRef code="30480"/>
+				<!-- Maintenance required - cleaning -->
+				<StdEventRef code="35904"/>
+			</EventCollection>
+
+			<UserInterface>
+				<ProcessDataRefCollection>
+					<ProcessDataRef processDataId="PD_ProcessDataIn2">
+						<ProcessDataRecordItemInfo subindex="1" unitCode="1013"/>
+					</ProcessDataRef>
+					<ProcessDataRef processDataId="PD_ProcessDataIn3">
+						<ProcessDataRecordItemInfo subindex="1" unitCode="1062"/>
+					</ProcessDataRef>
+				</ProcessDataRefCollection>
+				<MenuCollection>
+					<Menu id="ME_OR_Identification">
+						<VariableRef variableId="V_VendorName"/>
+						<VariableRef variableId="V_VendorText"/>
+						<VariableRef variableId="V_ProductName"/>
+						<VariableRef variableId="V_ProductID" />
+						<VariableRef variableId="V_ProductText" />
+						<VariableRef variableId="V_SerialNumber" />
+						<VariableRef variableId="V_HardwareRevision"/>
+						<VariableRef variableId="V_FirmwareRevision"/>
+						<VariableRef variableId="V_ApplicationSpecificTag" accessRightRestriction="ro"/>
+						<VariableRef variableId="V_FunctionTag" accessRightRestriction="ro"/>
+						<VariableRef variableId="V_LocationTag" accessRightRestriction="ro"/>
+					</Menu>
+					<Menu id="ME_MR_SR_Identification">
+						<VariableRef variableId="V_VendorName"/>
+						<VariableRef variableId="V_VendorText"/>
+						<VariableRef variableId="V_ProductName"/>
+						<VariableRef variableId="V_ProductID" />
+						<VariableRef variableId="V_ProductText" />
+						<VariableRef variableId="V_SerialNumber" />
+						<VariableRef variableId="V_HardwareRevision"/>
+						<VariableRef variableId="V_FirmwareRevision"/>
+						<VariableRef variableId="V_ApplicationSpecificTag"/>
+						<VariableRef variableId="V_FunctionTag"/>
+						<VariableRef variableId="V_LocationTag"/>
+					</Menu>
+					<Menu id="ME_Observation">
+						<RecordItemRef variableId="V_PDConfiguration" subindex="1" accessRightRestriction="ro" />
+						<MenuRef menuId="ME_Observation_PD" />
+					</Menu>
+					<Menu id="ME_Observation_Specialist">
+						<MenuRef menuId="ME_Observation_PD" />
+						<MenuRef menuId="ME_PDConfiguration" />
+						<MenuRef menuId="ME_pattern">
+							<Condition variableId="V_Special_Func_Selector" value="2" />
+						</MenuRef>
+					</Menu>
+					<Menu id="ME_Observation_PD">
+						<Name textId="TN_ME_Observation_PD" />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="1"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="2"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="3"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="4"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="5"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="6"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="7"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="8"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="9"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="10"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="11"  />
+						<RecordItemRef variableId="V_ProcessDataInput" subindex="12"  />
+					</Menu>						
+					<Menu id="ME_PDConfiguration">
+						<Name textId="TN_ME_PDConfiguration" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="1" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="2" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="3" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="4" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="5" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="6" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="7" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="8" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="9" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="10" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="11" />
+						<RecordItemRef variableId="V_PDConfiguration" subindex="12" />
+                    </Menu>
+					<Menu id="ME_pattern">
+						<Name textId="TN_ME_Pattern" />
+						<RecordItemRef variableId="V_Pattern" subindex="42" />
+						<RecordItemRef variableId="V_Pattern" subindex="41" />
+						<RecordItemRef variableId="V_Pattern" subindex="43" />
+						<RecordItemRef variableId="V_Pattern" subindex="1" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="21" />
+						<RecordItemRef variableId="V_Pattern" subindex="2" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="22" />
+						<RecordItemRef variableId="V_Pattern" subindex="3" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="23" />
+						<RecordItemRef variableId="V_Pattern" subindex="4" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="24" />
+						<RecordItemRef variableId="V_Pattern" subindex="5" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="25" />
+						<RecordItemRef variableId="V_Pattern" subindex="6" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="26" />
+						<RecordItemRef variableId="V_Pattern" subindex="7" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="27" />
+						<RecordItemRef variableId="V_Pattern" subindex="8" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="28" />
+						<RecordItemRef variableId="V_Pattern" subindex="9" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="29" />
+						<RecordItemRef variableId="V_Pattern" subindex="10" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="30" />
+						<RecordItemRef variableId="V_Pattern" subindex="11" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="31" />
+						<RecordItemRef variableId="V_Pattern" subindex="12" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="32" />
+						<RecordItemRef variableId="V_Pattern" subindex="13" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="33" />
+						<RecordItemRef variableId="V_Pattern" subindex="14" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="34" />
+						<RecordItemRef variableId="V_Pattern" subindex="15" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="35" />
+						<RecordItemRef variableId="V_Pattern" subindex="16" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="36" />
+						<RecordItemRef variableId="V_Pattern" subindex="17" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="37" />
+						<RecordItemRef variableId="V_Pattern" subindex="18" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="38" />
+						<RecordItemRef variableId="V_Pattern" subindex="19" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="39" />
+						<RecordItemRef variableId="V_Pattern" subindex="20" unitCode="1056" />
+						<RecordItemRef variableId="V_Pattern" subindex="40" />
+                    </Menu>
+					
+					<Menu id="ME_Parameter">
+						<MenuRef menuId="ME_Parameter_Output_SIO_1" />
+						<MenuRef menuId="ME_Parameter_Output_SIO_2" />
+						<MenuRef menuId="ME_Param_SSC1" />
+						<MenuRef menuId="ME_Param_SSC1_Single_P">
+							<Condition variableId="V_SSC1_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_SSC1_Window">
+							<Condition variableId="V_SSC1_Config" subindex="2" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_SSC1_two_P">
+							<Condition variableId="V_SSC1_Config" subindex="2" value="3" />
+						</MenuRef>	
+						<MenuRef menuId="ME_Param_SSC2" />
+						<MenuRef menuId="ME_Parameter_Sensor Specific" />
+						<MenuRef menuId="ME_Parameter_Special_Func" />
+						<MenuRef menuId="ME_Parameter_Application_Functions" />
+						<MenuRef menuId="ME_Param_SAL">
+							<Condition variableId="V_Special_Func_Selector" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_PR">
+							<Condition variableId="V_Special_Func_Selector" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_DaC">
+							<Condition variableId="V_Special_Func_Selector" value="3" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_OaGM">
+							<Condition variableId="V_Special_Func_Selector" value="4" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI" />
+						<MenuRef menuId="ME_Param_TI_SSC1" >
+							<Condition variableId="V_TI_Select" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_SSC2" >
+							<Condition variableId="V_TI_Select" value="2" />
+						</MenuRef>
+						
+						<MenuRef menuId="ME_DeviceAccessLocks" />
+						<MenuRef menuId="ME_Parameter_Command" />	
+					</Menu>
+					
+					<Menu id="ME_Parameter_Output_SIO_1">
+						<Name textId="TN_ME_Parameter_Output_SIO_1" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="1" />
+						<MenuRef menuId="ME_Parameter_Output_SIO_1_Setup_logic">
+							<Condition variableId="V_SIOCh1_Setup" subindex="1" value="0" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_1_Setup">
+							<Condition variableId="V_SIOCh1_Setup" subindex="1" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_1_Setup">
+							<Condition variableId="V_SIOCh1_Setup" subindex="1" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_1_Setup">
+							<Condition variableId="V_SIOCh1_Setup" subindex="1" value="3" />
+						</MenuRef>
+                    </Menu>	
+					<Menu id="ME_Parameter_Output_SIO_1_Setup_logic">
+						<Name textId="TN_ME_Parameter_Output_SIO_1_Setup" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="2" />
+                    </Menu>					
+					<Menu id="ME_Parameter_Output_SIO_1_Setup">
+						<Name textId="TN_ME_Parameter_Output_SIO_1_Setup" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="2" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="7" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="3" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="4" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="5" />
+						<RecordItemRef variableId="V_SIOCh1_Setup" subindex="8" />
+                    </Menu>
+					<Menu id="ME_Parameter_Output_SIO_2">
+						<Name textId="TN_ME_Parameter_Output_SIO_2" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="1" />
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup_logic">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="0" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="3" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="4" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="5" />
+						</MenuRef>
+						<MenuRef menuId="ME_Parameter_Output_SIO_2_Setup">
+							<Condition variableId="V_SIOCh2_Setup" subindex="1" value="6" />
+						</MenuRef>
+                    </Menu>	
+					<Menu id="ME_Parameter_Output_SIO_2_Setup_logic">
+						<Name textId="TN_ME_Parameter_Output_SIO_2_Setup" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="2" />
+                    </Menu>	
+					<Menu id="ME_Parameter_Output_SIO_2_Setup">
+						<Name textId="TN_ME_Parameter_Output_SIO_2_Setup" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="2" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="7" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="3" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="4" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="5" />
+						<RecordItemRef variableId="V_SIOCh2_Setup" subindex="8" />
+                    </Menu>					
+					<Menu id="ME_Parameter_Sensor Specific">
+						<Name textId="TN_ME_Parameter_Sensor Specific" />
+						<VariableRef variableId="V_LedIndication" />
+						<MenuRef menuId="ME_Param_Temp" />
+						<MenuRef menuId="ME_Param_Measurment" />
+					</Menu>	
+					<Menu id="ME_Param_Temp">
+						<Name textId="TN_ME_Param_Temp" />
+						<RecordItemRef variableId="V_TempAlarmThres" subindex="1" unitCode="1001" />
+						<RecordItemRef variableId="V_TempAlarmThres" subindex="2" unitCode="1001" />
+					</Menu>
+					<Menu id="ME_Param_Measurment">
+						<Name textId="TN_ME_Param_Measurment" />
+						<VariableRef variableId="V_SensorPresets" />
+						<VariableRef variableId="V_FilterScaler" />	
+					</Menu>	
+		
+					<Menu id="ME_Parameter_Special_Func">
+						<Name textId="TN_ME_Parameter_Special_Func" />
+						<VariableRef variableId="V_interference_protection" />
+						<RecordItemRef variableId="V_AutoAdjust_setup" subindex="1"  />
+						<RecordItemRef variableId="V_AutoAdjust_setup" subindex="2" unitCode="1342" />
+						<RecordItemRef variableId="V_AutoAdjust_setup" subindex="3" unitCode="1342" />
+						<MenuRef menuId="ME_AA_Corrected_setpoint">
+							<Condition variableId="V_AutoAdjust_setup" subindex="1" value="1" />
+						</MenuRef>
+					</Menu>	
+					
+					<Menu id="ME_Parameter_Application_Functions">
+						<Name textId="TN_ME_Parameter_Application_Functions" />
+						<VariableRef variableId="V_Special_Func_Selector" />
+					</Menu>	
+					
+					<Menu id="ME_AA_Corrected_setpoint">
+						<Name textId="TN_ME_AA_Corrected_setpoint" />
+								<VariableRef variableId="V_AA_Corrected_setpoint" />
+					</Menu>
+					<Menu id="ME_Param_SAL">
+						<Name textId="TN_ME_Param_SAL" />
+							<RecordItemRef variableId="V_SAL_measurement_Setup" subindex="1"  />
+							<MenuRef menuId="ME_Param_SAL_Smart">
+								<Condition variableId="V_SAL_measurement_Setup" subindex="1" value="2" />
+							</MenuRef>
+					</Menu>	
+					<Menu id="ME_Param_SAL_Smart">
+						<Name textId="TN_ME_Param_SAL_Smart" />
+							<RecordItemRef variableId="V_SAL_measurement_Setup" subindex="2" unitCode="1013" />
+							<RecordItemRef variableId="V_SAL_measurement_Result" subindex="1" unitCode="1062" />
+							<RecordItemRef variableId="V_SAL_measurement_Result" subindex="2" unitCode="1013" />
+							<RecordItemRef variableId="V_SAL_measurement_Result" subindex="3"  />
+					</Menu>
+					<Menu id="ME_Param_PR">
+						<Name textId="TN_ME_Param_PR" />
+							<RecordItemRef variableId="V_PR_Setup" subindex="1" />
+							<MenuRef menuId="ME_Param_PR_Smart">
+								<Condition variableId="V_PR_Setup" subindex="1" value="2" />
+							</MenuRef>
+					</Menu>
+					<Menu id="ME_Param_PR_Smart">
+						<Name textId="TN_ME_Param_PR_Smart" />
+							<RecordItemRef variableId="V_PR_Setup" subindex="2" unitCode="1054" />
+							<RecordItemRef variableId="V_PR_Setup" subindex="3" unitCode="1425" />
+							<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+								<Button buttonValue="78">
+									<Description textId="TN_TeachPattern" />
+								</Button>
+							</VariableRef>	
+							<VariableRef variableId="V_PR_Result" />
+					</Menu>
+					<Menu id="ME_Param_DaC">
+						<Name textId="TN_ME_Param_DaC" />
+							<RecordItemRef variableId="V_DaC_Setup" subindex="1" />
+							<RecordItemRef variableId="V_DaC_Setup" subindex="2" />
+							<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+								<Button buttonValue="80">
+									<Description textId="TN_PresetCounterValue" />
+								</Button>
+							</VariableRef>	
+							<VariableRef variableId="V_DaC_Result" />
+					</Menu>
+					<Menu id="ME_Param_OaGM">
+						<Name textId="TN_ME_Param_OaGM" />
+							<RecordItemRef variableId="V_OaGM_Setup" subindex="1" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Setup" subindex="2" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Setup" subindex="3" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Setup" subindex="4" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Result" subindex="1" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Result" subindex="2" unitCode="1056" />
+							<RecordItemRef variableId="V_OaGM_Result" subindex="3" />
+							<RecordItemRef variableId="V_OaGM_Result" subindex="4" />
+					</Menu>
+					<Menu id="ME_Parameter_Command">
+						<Name textId="TN_ME_Parameter_Command" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="130">
+								<Description textId="TN_FactoryReset" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="160">
+								<Description textId="TN_RestoreSSC" />
+							</Button>
+						</VariableRef>
+					</Menu>
+					
+					<Menu id="ME_Param_SSC1">
+						<Name textId="TN_ME_SSC1" />
+						<RecordItemRef variableId="V_SSC1_Config" subindex="2" />
+					</Menu>	
+					
+					<Menu id="ME_Param_Hyst_auto1">
+						<Name textId="TN_ME_Param_Hyst_Auto" />
+							<RecordItemRef variableId="V_Auto_Hyst_Values" subindex="1" unitCode="1342" />
+							<RecordItemRef variableId="V_SafeOnOffLimit" subindex="1" unitCode="1342" />
+							<RecordItemRef variableId="V_SSC1_Config" subindex="1" />
+					</Menu>
+					<Menu id="ME_Param_Hyst_auto2">
+						<Name textId="TN_ME_Param_Hyst_Auto" />
+							<RecordItemRef variableId="V_Auto_Hyst_Values" subindex="1" unitCode="1342" />
+							<RecordItemRef variableId="V_Auto_Hyst_Values" subindex="2" unitCode="1342" />
+							<RecordItemRef variableId="V_SafeOnOffLimit" subindex="1" unitCode="1342" />	
+							<RecordItemRef variableId="V_SSC1_Config" subindex="1" />
+					</Menu>
+					<Menu id="ME_Param_Hyst_man">
+						<Name textId="TN_ME_Param_Hyst_Man" />
+							<RecordItemRef variableId="V_SSC1_Config" subindex="3" unitCode="1342"/>
+							<RecordItemRef variableId="V_SafeOnOffLimit" subindex="1" unitCode="1342" />
+							<RecordItemRef variableId="V_SSC1_Config" subindex="1" />
+					</Menu>
+					
+					<Menu id="ME_Param_Adjust_Trim_SinglePoint">
+						<Name textId="TN_ME_SSC1_TW_Single_P" />
+						<VariableRef variableId="V_TrimmerSetting" />
+						<VariableRef variableId="V_SSC1_Hyst_Mode"/>
+					</Menu>
+					<Menu id="ME_Param_Adjust_IOL1">
+						<Name textId="TN_ME_SSC1_Adjust_IOL1" />
+						<RecordItemRef variableId="V_SSC1_Param" subindex="1" />
+						<VariableRef variableId="V_SSC1_Hyst_Mode"/>
+					</Menu>
+					
+					<!-- SSC1 Single Point -->
+					<Menu id="ME_Param_SSC1_Single_P">
+						<Name textId="TN_ME_SSC1_SP" />
+						
+						<VariableRef variableId="V_SelectAdjustment" />						
+						
+							<MenuRef menuId="ME_Param_Adjust_IOL1" >
+								<Condition variableId="V_SelectAdjustment"  value="0" />
+							</MenuRef>
+							<MenuRef menuId="ME_Param_Adjust_Trim_SinglePoint" >
+								<Condition variableId="V_SelectAdjustment"  value="1" />
+							</MenuRef>
+							<MenuRef menuId="ME_Param_Adjust_IOL1" >
+								<Condition variableId="V_SelectAdjustment"  value="2" />
+							</MenuRef>
+						
+							<MenuRef menuId="ME_Param_Hyst_man" >
+								<Condition variableId="V_SSC1_Hyst_Mode"  value="0" />
+							</MenuRef>
+							<MenuRef menuId="ME_Param_Hyst_auto1" >
+								<Condition variableId="V_SSC1_Hyst_Mode"  value="1" />
+							</MenuRef>
+						
+                    </Menu>	
+					
+					<!-- SSC1 Window -->
+					<Menu id="ME_Param_SSC1_Window">
+						<Name textId="TN_ME_SSC1_Window" />
+						<RecordItemRef variableId="V_SSC1_Param" subindex="1" />
+						<RecordItemRef variableId="V_SSC1_Param" subindex="2" />
+						
+						<VariableRef variableId="V_SSC1_Hyst_Mode"/>
+						
+						<MenuRef menuId="ME_Param_Hyst_auto2" >
+							<Condition variableId="V_SSC1_Hyst_Mode"  value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_Hyst_man" >
+							<Condition variableId="V_SSC1_Hyst_Mode"  value="0" />
+						</MenuRef>
+						
+                    </Menu>	
+					<!-- SSC1 Two Point -->
+					<Menu id="ME_Param_SSC1_two_P">
+						<Name textId="TN_ME_SSC1_TP" />
+						<RecordItemRef variableId="V_SSC1_Param" subindex="1" />
+						<RecordItemRef variableId="V_SSC1_Param" subindex="2" />
+						<RecordItemRef variableId="V_SafeOnOffLimit" subindex="1" unitCode="1342" />	
+						<RecordItemRef variableId="V_SSC1_Config" subindex="1" />
+						
+                    </Menu>	
+					
+					<!-- SSC2 -->
+					<Menu id="ME_Param_SSC2">
+						<Name textId="TN_ME_SSC2" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="2" />
+						<MenuRef menuId="ME_Param_SSC2_Single_P">
+							<Condition variableId="V_SSC2_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_SSC2_Window">
+							<Condition variableId="V_SSC2_Config" subindex="2" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_SSC2_two_P">
+							<Condition variableId="V_SSC2_Config" subindex="2" value="3" />
+						</MenuRef>						
+					</Menu>	
+					<Menu id="ME_Param_SSC2_Single_P">
+						<Name textId="TN_ME_SSC2_Single_P" />
+						<RecordItemRef variableId="V_SSC2_Param" subindex="1" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="3" unitCode="1342"/>
+						<RecordItemRef variableId="V_SafeOnOffLimit" subindex="2" unitCode="1342" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="1" />
+                    </Menu>	
+					<Menu id="ME_Param_SSC2_Window">
+						<Name textId="TN_ME_SSC2_Window" />
+						<RecordItemRef variableId="V_SSC2_Param" subindex="1" />
+						<RecordItemRef variableId="V_SSC2_Param" subindex="2" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="3" unitCode="1342" />
+						<RecordItemRef variableId="V_SafeOnOffLimit" subindex="2" unitCode="1342" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="1" />
+                    </Menu>	
+					<Menu id="ME_Param_SSC2_two_P">
+						<Name textId="TN_ME_SSC2_two_P" />
+						<RecordItemRef variableId="V_SSC2_Param" subindex="1" />
+						<RecordItemRef variableId="V_SSC2_Param" subindex="2" />
+						<RecordItemRef variableId="V_SafeOnOffLimit" subindex="2" unitCode="1342" />
+						<RecordItemRef variableId="V_SSC2_Config" subindex="1" />
+                    </Menu>
+					<!-- SingleValue Teach -->
+					<Menu id="ME_Param_TI_SingleValue_SSC1_SP">
+						<Name textId="TN_ME_TI_SingleValue_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="65">
+								<Description textId="TD_ME_TI_TeachSP1" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_SingleValue_SSC2_SP">
+						<Name textId="TN_ME_TI_SingleValue_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="65">
+								<Description textId="TD_ME_TI_TeachSP1" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_SingleValue_SSC1_TP_W">
+						<Name textId="TN_ME_TI_SingleValue_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="65">
+								<Description textId="TD_ME_TI_TeachSP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="66">
+								<Description textId="TD_ME_TI_TeachSP2" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_SingleValue_SSC2_TP_W">
+						<Name textId="TN_ME_TI_SingleValue_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="65">
+								<Description textId="TD_ME_TI_TeachSP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="66">
+								<Description textId="TD_ME_TI_TeachSP2" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<!-- TwoValue Teach -->
+					<Menu id="ME_Param_TI_TwoValue_SSC1_SP">
+						<Name textId="TN_ME_TI_TwoValue_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="67">
+								<Description textId="TD_ME_TI_TeachSP1TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="68">
+								<Description textId="TD_ME_TI_TeachSP1TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="64">
+								<Description textId="TD_ME_TI_TeachApply" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="79">
+								<Description textId="TD_ME_TI_TeachCancel" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="2" />
+						<RecordItemRef variableId="V_TI_Result" subindex="3" />
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_TwoValue_SSC2_SP">
+						<Name textId="TN_ME_TI_TwoValue_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="67">
+								<Description textId="TD_ME_TI_TeachSP1TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="68">
+								<Description textId="TD_ME_TI_TeachSP1TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="64">
+								<Description textId="TD_ME_TI_TeachApply" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="79">
+								<Description textId="TD_ME_TI_TeachCancel" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="2" />
+						<RecordItemRef variableId="V_TI_Result" subindex="3" />
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_TwoValue_SSC1_TP_W">
+						<Name textId="TN_ME_TI_TwoValue_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="67">
+								<Description textId="TD_ME_TI_TeachSP1TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="68">
+								<Description textId="TD_ME_TI_TeachSP1TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="69">
+								<Description textId="TD_ME_TI_TeachSP2TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="70">
+								<Description textId="TD_ME_TI_TeachSP2TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="64">
+								<Description textId="TD_ME_TI_TeachApply" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="79">
+								<Description textId="TD_ME_TI_TeachCancel" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="2" />
+						<RecordItemRef variableId="V_TI_Result" subindex="3" />
+						<RecordItemRef variableId="V_TI_Result" subindex="4" />
+						<RecordItemRef variableId="V_TI_Result" subindex="5" />
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_TwoValue_SSC2_TP_W">
+						<Name textId="TN_ME_TI_TwoValue_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="67">
+								<Description textId="TD_ME_TI_TeachSP1TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="68">
+								<Description textId="TD_ME_TI_TeachSP1TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="69">
+								<Description textId="TD_ME_TI_TeachSP2TP1" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="70">
+								<Description textId="TD_ME_TI_TeachSP2TP2" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="64">
+								<Description textId="TD_ME_TI_TeachApply" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="79">
+								<Description textId="TD_ME_TI_TeachCancel" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="2" />
+						<RecordItemRef variableId="V_TI_Result" subindex="3" />
+						<RecordItemRef variableId="V_TI_Result" subindex="4" />
+						<RecordItemRef variableId="V_TI_Result" subindex="5" />
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<!-- Dynamic Teach -->
+					<Menu id="ME_Param_TI_Dynamic_SSC1_SP">
+						<Name textId="TN_ME_TI_Dynamic_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="71">
+								<Description textId="TD_ME_TI_TeachSP1Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="72">
+								<Description textId="TD_ME_TI_TeachSP1Stop" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_Dynamic_SSC2_SP">
+						<Name textId="TN_ME_TI_Dynamic_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="71">
+								<Description textId="TD_ME_TI_TeachSP1Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="72">
+								<Description textId="TD_ME_TI_TeachSP1Stop" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI_Dynamic_SSC1_TP_W">
+						<Name textId="TN_ME_TI_Dynamic_SSC1" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="71">
+								<Description textId="TD_ME_TI_TeachSP1Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="72">
+								<Description textId="TD_ME_TI_TeachSP1Stop" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="73">
+								<Description textId="TD_ME_TI_TeachSP2Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="74">
+								<Description textId="TD_ME_TI_TeachSP2Stop" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>	
+					<Menu id="ME_Param_TI_Dynamic_SSC2_TP_W">
+						<Name textId="TN_ME_TI_Dynamic_SSC2" />
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="71">
+								<Description textId="TD_ME_TI_TeachSP1Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="72">
+								<Description textId="TD_ME_TI_TeachSP1Stop" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="73">
+								<Description textId="TD_ME_TI_TeachSP2Start" />
+							</Button>
+						</VariableRef>
+						<VariableRef variableId="V_SystemCommand" accessRightRestriction="wo">
+							<Button buttonValue="74">
+								<Description textId="TD_ME_TI_TeachSP2Stop" />
+							</Button>
+						</VariableRef>
+						<RecordItemRef variableId="V_TI_Result" subindex="1" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+					</Menu>
+					<Menu id="ME_Param_TI">
+                        <Name textId="TN_ME_TI" />
+						<VariableRef variableId="V_TI_Select" />	
+					</Menu>
+					<Menu id="ME_Param_TI_SSC1">
+                        <Name textId="TN_ME_TI_SSC1" />	
+						<!-- SingleValue Teach SSC1 -->
+						<MenuRef menuId="ME_Param_TI_SingleValue_SSC1_SP">
+							<Condition variableId="V_SSC1_Config" subindex="2" value="1" /> 
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_SingleValue_SSC1_TP_W"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="2" />
+						</MenuRef>					
+						<!-- TwoValue Teach SSC1 -->
+						<MenuRef menuId="ME_Param_TI_TwoValue_SSC1_SP"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="1" />
+						</MenuRef>				
+						<MenuRef menuId="ME_Param_TI_TwoValue_SSC1_TP_W"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="3" />
+						</MenuRef>
+						<!-- Dynamic Teach SSC1 -->
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC1_SP"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC1_TP_W"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC1_TP_W"> 
+							<Condition variableId="V_SSC1_Config" subindex="2" value="3" />
+						</MenuRef>					
+					</Menu>		
+					<Menu id="ME_Param_TI_SSC2">
+                        <Name textId="TN_ME_TI_SSC2" />		
+						<!-- SingleValue Teach SSC2-->
+						<MenuRef menuId="ME_Param_TI_SingleValue_SSC2_SP"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_SingleValue_SSC2_TP_W"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="2" />
+						</MenuRef>				
+						<!-- TwoValue Teach SSC2 -->
+						<MenuRef menuId="ME_Param_TI_TwoValue_SSC2_SP"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_TwoValue_SSC2_TP_W"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="3" />
+						</MenuRef>
+						<!-- Dynamic Teach SSC2-->
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC2_SP"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="1" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC2_TP_W"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="2" />
+						</MenuRef>
+						<MenuRef menuId="ME_Param_TI_Dynamic_SSC2_TP_W"> 
+							<Condition variableId="V_SSC2_Config" subindex="2" value="3" />
+						</MenuRef>					
+					</Menu>
+					<Menu id="ME_DeviceAccessLocks">
+                        <Name textId="TN_ME_DeviceAccessLocks" />
+						<RecordItemRef variableId="V_DeviceAccessLocks" subindex="1"/>
+						<RecordItemRef variableId="V_DeviceAccessLocks" subindex="2"/>
+						<RecordItemRef variableId="V_DeviceAccessLocks" subindex="3"/>
+					</Menu>
+					<Menu id="ME_Diagnosis">
+						<MenuRef menuId="ME_Observation_Diag_Sensor" />
+						<MenuRef menuId="ME_Observation_Diag_Temp" />
+						<MenuRef menuId="ME_Observation_Diag_Operating" />
+						<MenuRef menuId="ME_EventConfiguration" />
+					</Menu>
+					<Menu id="ME_EventConfiguration">
+						<Name textId="TN_ME_EventConfiguration" />
+						<VariableRef variableId="V_EventConfiguration" />
+                    </Menu>
+					<Menu id="ME_Observation_Diag_Sensor">
+						<Name textId="TN_ME_Observation_Diag_Sensor" />
+						<VariableRef variableId="V_DiagFrontEndFailure" />	
+						<RecordItemRef variableId="V_DiagEE_MemoryFailure" subindex="1"/>
+					</Menu>
+					<Menu id="ME_Observation_Diag_Temp">
+						<Name textId="TN_ME_Observation_Diag_Temp" />
+						<VariableRef variableId="V_DiagCurrentTemp" unitCode="1001" />
+						<VariableRef variableId="V_DiagMaxTemp" unitCode="1001" />
+						<VariableRef variableId="V_DiagMinTemp" unitCode="1001" />
+						<VariableRef variableId="V_DiagMaxTempStartup" unitCode="1001" />
+						<VariableRef variableId="V_DiagMinTempStartup" unitCode="1001" />
+						<VariableRef variableId="V_DiagOpTempOverun" unitCode="1058" />
+						<VariableRef variableId="V_DiagOpTempUnderrun" unitCode="1058" />
+					</Menu>					
+					<Menu id="ME_Observation_Diag_Operating">
+						<Name textId="TN_ME_Observation_Diag_Operating" />
+						<VariableRef variableId="V_DiagOperatingHours" unitCode="1059" />
+						<VariableRef variableId="V_DiagPowerCycles" />
+						<VariableRef variableId="V_DiagDetectionCnt" />
+						<VariableRef variableId="V_DiagMaintenanceCnt" />
+						<VariableRef variableId="V_DiagDownloadCnt" />
+						<VariableRef variableId="V_QualityOfTeach" unitCode="1342"/>
+						<VariableRef variableId="V_QualityOfRun" unitCode="1342"/>
+						<VariableRef variableId="V_Excess_gain" />
+						<VariableRef variableId="V_ErrorCount" />
+						<VariableRef variableId="V_DeviceStatus" />
+						<VariableRef variableId="V_DetailedDeviceStatus" />
+					</Menu>
+					
+				</MenuCollection>
+				<ObserverRoleMenuSet>
+					<IdentificationMenu menuId="ME_OR_Identification" />
+					<ObservationMenu menuId="ME_Observation" />
+					<DiagnosisMenu menuId="ME_Diagnosis" />
+				</ObserverRoleMenuSet>
+				<MaintenanceRoleMenuSet>
+					<IdentificationMenu menuId="ME_MR_SR_Identification" />
+					<ParameterMenu menuId="ME_Parameter" />
+					<ObservationMenu menuId="ME_Observation" />
+					<DiagnosisMenu menuId="ME_Diagnosis" />
+				</MaintenanceRoleMenuSet>
+				<SpecialistRoleMenuSet>
+					<IdentificationMenu menuId="ME_MR_SR_Identification" />
+					<ParameterMenu menuId="ME_Parameter" />
+					<ObservationMenu menuId="ME_Observation_Specialist" />
+					<DiagnosisMenu menuId="ME_Diagnosis" />
+				</SpecialistRoleMenuSet>
+			</UserInterface>
+		</DeviceFunction>
+	</ProfileBody>
+
+	<CommNetworkProfile xsi:type="IOLinkCommNetworkProfileT" iolinkRevision="V1.1">
+		<TransportLayers>
+			<PhysicalLayer bitrate="COM2" minCycleTime="5000" sioSupported="true" mSequenceCapability="43">
+				<Connection xsi:type="CableConnectionT" connectionSymbol="CGI-PD30CTDR10BPxxIO-con-pic.png">
+					<ProductRef productId="5709870398693" />
+					<ProductRef productId="5709870398709" />
+					<Description textId="TD_Connection01"/>
+					<Wire1 function="L+" color="BN" >
+						<Name textId="TN_Out1" />
+					</Wire1>
+					<Wire2 function="Other" color="WH">
+						<Name textId="TN_Out2" />
+					</Wire2>
+					<Wire3 function="L-" color="BU">
+						<Name textId="TN_Out3" />
+					</Wire3>
+					<Wire4 function="C/Q" color="BK">
+						<Name textId="TN_Out4" />
+					</Wire4>
+				</Connection>
+			</PhysicalLayer>
+		</TransportLayers>
+		<Test>
+			<Config1 index="250" testValue="0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2A,0x2B,0x2C,0x2D,0x2E,0x2F"/>
+			<Config2 index="1000" testValue="0x55"/>
+			<Config3 index="24" testValue="0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F,0x50,0x61,0x62,0x63,0x64,0x65,0x66,0x67,0x68,0x69,0x6A,0x6B,0x6C,0x6D,0x6E,0x6F,0x70"/>
+			<Config7 index="251">
+				<EventTrigger disappearValue="2" appearValue="1"/>
+				<EventTrigger disappearValue="4" appearValue="3"/>
+			</Config7>
+		</Test>
+	</CommNetworkProfile>
+
+	<ExternalTextCollection>
+		<PrimaryLanguage xml:lang="en">
+			<Text id="T_VendorText" value="www.gavazziautomation.com" />
+			<Text id="T_VendorUrl" value="www.gavazziautomation.com" />
+			<Text id="T_DeviceName" value="PD30" />
+			<Text id="T_DeviceFamily" value="Photoelectric sensors" />
+			<Text id="TN_Plug" value="PD30CTDR10BPM5IO" />
+			<Text id="TN_Cable" value="PD30CTDR10BPA2IO" />
+			<Text id="TD_ISDUDeviceVariant" value="Photoelectric Sensor, Diffuse Reflective, Red Light Emitter, 1000 mm, Plastic Housing, IO-Link" />
+			<Text id="TN_Out1" value="Power supply (+)" />
+			<Text id="TN_Out2" value="Out 2 / Teach-in" />
+			<Text id="TN_Out3" value="Power supply (-)" />
+			<Text id="TN_Out4" value="Out 1 / IO-Link" />
+			<Text id="TD_Connection01" value="M8 connector or with cable 2 m" />
+			<Text id="TN_V_FunctionTag" value="Function Tag" />
+			<Text id="TN_V_LocationTag" value="Location Tag" />
+			<!-- Smart Sensor Profile parameters -->
+			<Text id="TN_DT_TI_Result_Flag_Nok" value="Not OK" />
+			<Text id="TN_DT_TI_Result_Flag_OK" value="OK" />
+			<Text id="TN_DT_SSC_Param_SP1" value="Set Point 1" />
+			<Text id="TN_DT_SSC_Param_SP2" value="Set Point 2" />
+			<Text id="TN_DT_SSC_Config_Logic_High" value="High active" />
+			<Text id="TN_DT_SSC_Config_Logic_Low" value="Low active" />
+			<Text id="TN_DT_SSC_Config_Logic" value="Switching Logic" />
+			<Text id="TN_DT_SSC_Config_Mode_DIS" value="Deactivated" />
+			<Text id="TN_DT_SSC_Config_Mode_SPM" value="Single Point" />
+			<Text id="TN_DT_SSC_Config_Mode_WM" value="Window" />
+			<Text id="TN_DT_SSC_Config_Mode_TPM" value="Two Point" />
+			<Text id="TN_DT_SSC_Config_Mode" value="Mode" />
+			<Text id="TN_DT_SSC_Config_Hyst" value="Hysteresis" />
+			<Text id="TN_V_TI_Select_NO" value="No Channel selected" />
+			<Text id="TN_V_TI_Select_SSC1" value="Switching Signal Channel 1" />
+			<Text id="TN_V_TI_Select_SSC2" value="Switching Signal Channel 2" />
+			
+			<Text id="TN_V_TI_Select" value="Teach-in Select" />
+			<Text id="TN_V_TI_Result_State_IDLE" value="IDLE" />
+			<Text id="TN_V_TI_Result_State_Success" value="SUCCESS" />
+			<Text id="TN_V_TI_Result_State_WAIT" value="WAIT FOR COMMAND" />
+			<Text id="TN_V_TI_Result_State_BUSY" value="BUSY" />
+			<Text id="TN_V_TI_Result_State_ERROR" value="ERROR" />
+			<Text id="TN_V_TI_Result_State" value="Teach-in State" />
+			<Text id="TN_V_TI_Result_SP1TP1" value="TeachPoint 1 of Set point 1 " />
+			<Text id="TN_V_TI_Result_SP1TP2" value="TeachPoint 2 of Set point 1" />
+			<Text id="TN_V_TI_Result_SP2TP1" value="TeachPoint 1 of Set point 2" />
+			<Text id="TN_V_TI_Result_SP2TP2" value="TeachPoint 2 of Set point 2" />
+			<Text id="TN_V_TI_Result" value="Teach-in Result" />
+			<Text id="TN_V_SSC1_Param" value="SSC1 Parameter" />
+			<Text id="TN_V_SSC1_Config" value="SSC1 Configuration" />
+			<Text id="TN_V_SSC2_Param" value="SSC2 Parameter" />
+			<Text id="TN_V_SSC2_Config" value="SSC2 Configuration" />
+			<!-- Output parameters -->
+			<Text id="TN_DT_SIOChN_Setup_StageMode_DIS" value="Disabled output" />
+			<Text id="TN_DT_SIOChN_Setup_StageMode_PNP" value="PNP" />
+			<Text id="TN_DT_SIOChN_Setup_StageMode_NPN" value="NPN" />
+			<Text id="TN_DT_SIOChN_Setup_StageMode_Push-Pull" value="Push-Pull" />
+			<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_high" value="Digital logic input (Active high/Pull-down)"/>
+			<Text id="TN_DT_SIOChN_Setup_StageMode_Digital-in_low" value="Digital logic input (Active low/Pull-up)"/>
+			<Text id="TN_DT_SIOChN_Setup_StageMode_Teach-in" value="Teach-in"/>
+			<Text id="TN_DT_SIOChN_Setup_StageMode" value="Stage Mode" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_Deactivated" value="Deactivated" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 1" value="SSC 1" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_SSC 2" value="SSC 2" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_DA1" value="Dust Alarm 1 (DA1)" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_DA2" value="Dust Alarm 2 (DA2)" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_TA" value="Temperature Alarm (TA)" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_ELI" value="External logic input" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_SF" value="Application functions" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_1" value="Input Selector 1" />
+			<Text id="TN_DT_SIOChN_Setup_Configuration_2" value="Input Selector 2" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_DIS" value="Disabled Timer" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_TOn" value="T-on delay" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_Toff" value="T-off delay" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_TOnOff" value="T-on/T-off delay" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_LEdge" value="One-shot leading edge" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode_TEdge" value="One-shot trailing edge" />
+			<Text id="TN_DT_SIOChN_Setup_TimerMode" value="Timer Mode" />
+			<Text id="TN_DT_SIOChN_Setup_Delay" value="Timer Value" />
+			<Text id="TN_DT_SIOChN_Setup_Empty" value="Not in use" />
+			<Text id="TN_DT_SIOChN_Setup_TimerScale_ms" value="Milliseconds" />
+			<Text id="TN_DT_SIOChN_Setup_TimerScale_s" value="Seconds" />
+			<Text id="TN_DT_SIOChN_Setup_TimerScale_min" value="Minutes" />
+			<Text id="TN_DT_SIOChN_Setup_TimerScale" value="Timer Scale" />
+			<Text id="TN_DT_SIOChN_Setup_Logic_Direct" value="Direct" />
+			<Text id="TN_DT_SIOChN_Setup_Logic_AND" value="AND" />
+			<Text id="TN_DT_SIOChN_Setup_Logic_OR" value="OR" />
+			<Text id="TN_DT_SIOChN_Setup_Logic_XOR" value="XOR" />
+			<Text id="TN_DT_SIOChN_Setup_Logic_Set-reset_Flip-flop" value="Set-reset Flip-flop" />
+			<Text id="TN_DT_SIOChN_Setup_Logic" value="Logic function" />
+			<Text id="TN_DT_SIOChN_Setup_Inverter_NI" value="Not inverted (Normal Open)" />
+			<Text id="TN_DT_SIOChN_Setup_Inverter_INV" value="Inverted (Normal Closed)" />
+			<Text id="TN_DT_SIOChN_Setup_Inverter" value="Output Inverter" />
+			<Text id="TN_V_SIOCh1_Setup" value="Channel 1 Setup" />
+			<Text id="TN_V_SIOCh2_Setup" value="Channel 2 Setup" />
+			<!-- Sensor specific adjustable parameters -->
+			<Text id="TN_V_SelectAdjustment_Adjustment_Trim-in" value="Trimmer input" />
+			<Text id="TN_V_SelectAdjustment_Adjustment_EWT" value="Teach by wire" />
+			<Text id="TN_V_SelectAdjustment_Adjustment_DIS" value="IO-Link adjustment" />
+			<Text id="TN_V_SelectAdjustment" value="Selection of local/remote adjustment" />
+			<Text id="TN_V_TrimmerSetting" value="SP1 Trimmer Value" />
+			<Text id="TN_V_PDConfiguration_Analogue_Inactive" value="Inactive" />
+			<Text id="TN_V_PDConfiguration_Analogue_Normal" value="Normal" />
+			<Text id="TN_V_PDConfiguration_Analogue_Obj_Length" value="Object Length" />
+			<Text id="TN_V_PDConfiguration_Analogue_Obj_Speed" value="Object Speed" />
+			<Text id="TN_V_PDConfiguration_Analogue_Divider" value="Counter Value" />
+			<Text id="TN_V_PDConfiguration_Analogue" value="Analogue value" />
+			<Text id="TN_V_PDConfiguration_SO1_Inactive" value="Switching Output 1 Inactive" />
+			<Text id="TN_V_PDConfiguration_SO1_Active" value="Switching Output 1 Active" />
+			<Text id="TN_V_PDConfiguration_SO1" value="Switching Output 1" />
+			<Text id="TN_V_PDConfiguration_SO2_Inactive" value="Switching Output 2 Inactive" />
+			<Text id="TN_V_PDConfiguration_SO2_Active" value="Switching Output 2 Active" />
+			<Text id="TN_V_PDConfiguration_SO2" value="Switching Output 2" />
+			<Text id="TN_V_PDConfiguration_SSC1_Inactive" value="SSC1 Inactive" />
+			<Text id="TN_V_PDConfiguration_SSC1_Active" value="SSC1 Active" />
+			<Text id="TN_V_PDConfiguration_SSC1" value="Switching Signal Channel 1" />
+			<Text id="TN_V_PDConfiguration_SSC2_Inactive" value="SSC2 Inactive" />
+			<Text id="TN_V_PDConfiguration_SSC2_Active" value="SSC2 Active" />
+			<Text id="TN_V_PDConfiguration_SSC2" value="Switching Signal Channel 2" />
+			<Text id="TN_V_PDConfiguration_DA1_Inactive" value="DA1 Inactive" />
+			<Text id="TN_V_PDConfiguration_DA1_Active" value="DA1 Active" />
+			<Text id="TN_V_PDConfiguration_DA1" value="Dust alarm 1" />
+			<Text id="TN_V_PDConfiguration_DA2_Inactive" value="DA2 Inactive" />
+			<Text id="TN_V_PDConfiguration_DA2_Active" value="DA2 Active" />
+			<Text id="TN_V_PDConfiguration_DA2" value="Dust alarm 2" />
+			<Text id="TN_V_PDConfiguration_TA_Inactive" value="TA Inactive" />
+			<Text id="TN_V_PDConfiguration_TA_Active" value="TA Active" />
+			<Text id="TN_V_PDConfiguration_TA" value="Temperature alarm" />
+			<Text id="TN_V_PDConfiguration_SC_Inactive" value="SC Inactive" />
+			<Text id="TN_V_PDConfiguration_SC_Active" value="SC Active" />
+			<Text id="TN_V_PDConfiguration_SC" value="Short-circuit" />
+			<Text id="TN_V_PDConfiguration_WDA1_Inactive" value="WDA1 Inactive"  />
+			<Text id="TN_V_PDConfiguration_WDA1_Active" value="WDA1 Active"  />
+			<Text id="TN_V_PDConfiguration_WDA1" value="Water Drop Alarm 1"  />
+			<Text id="TN_V_PDConfiguration_WDA2_Inactive" value="WDA2 Inactive"  />
+			<Text id="TN_V_PDConfiguration_WDA2_Active" value="WDA2 Active"  />
+			<Text id="TN_V_PDConfiguration_WDA2" value="Water Drop Alarm 2"  />
+			<Text id="TN_V_PDConfiguration_SFO1_Inactive" value="AFO1 Inactive"  />
+			<Text id="TN_V_PDConfiguration_SFO1_Active" value="AFO1 Active"  />
+			<Text id="TN_V_PDConfiguration_SFO1" value="Application Functions Output 1"  />
+			<Text id="TN_V_PDConfiguration" value="Process data configuration" />
+			<Text id="TN_V_SensorPresets_FS" value="Customized (Filter scaler)" />
+			<Text id="TN_V_SensorPresets_Slow" value="High precision" />
+			<Text id="TN_V_SensorPresets_Fast" value="Default precision" />
+			<Text id="TN_V_SensorPresets" value="Sensor filter pre-set" />
+			<Text id="TN_V_TempAlarmThres_High" value="High Threshold" />
+			<Text id="TN_V_TempAlarmThres_Low" value="Low Threshold" />
+			<Text id="TN_V_TempAlarmThres" value="Temperature alarm threshold" />
+			<Text id="TN_V_SafeOnOffLimit_SSC1" value="SSC 1 - Safe limit" />
+			<Text id="TN_V_SafeOnOffLimit_SSC2" value="SSC 2 - Safe limit" />
+			<Text id="TN_V_SafeOnOffLimit" value="Safe ON/OFF limit" />
+			<Text id="TN_V_EventConfiguration_Maintenance_DIS" value="Maintenance event Inactive" />
+			<Text id="TN_V_EventConfiguration_Maintenance_ENA" value="Maintenance event Active" />
+			<Text id="TN_V_EventConfiguration_Maintenance" value="Maintenance event (0x8C40)" />
+			<Text id="TN_V_EventConfiguration_Temperature_DIS" value="Temperature fault event Inactive" />
+			<Text id="TN_V_EventConfiguration_Temperature_ENA" value="Temperature fault event Active" />
+			<Text id="TN_V_EventConfiguration_Temperature" value="Temperature fault event (0x4000)" />
+			<Text id="TN_V_EventConfiguration_Overrun_DIS" value="Temperature over-run event Inactive" />
+			<Text id="TN_V_EventConfiguration_Overrun_ENA" value="Temperature over-run event Active" />
+			<Text id="TN_V_EventConfiguration_Overrun" value="Temperature over-run event (0x4210)" />
+			<Text id="TN_V_EventConfiguration_Underrun_DIS" value="Temperature under-run event Inactive" />
+			<Text id="TN_V_EventConfiguration_Underrun_ENA" value="Temperature under-run event Active" />
+			<Text id="TN_V_EventConfiguration_Underrun" value="Temperature under-run event (0x4220)" />
+			<Text id="TN_V_EventConfiguration_ShortCircuit_DIS" value="Short circuit event Inactive" />
+			<Text id="TN_V_EventConfiguration_ShortCircuit_ENA" value="Short circuit event Active" />
+			<Text id="TN_V_EventConfiguration_ShortCircuit" value="Short circuit event (0x7710)" />
+			<Text id="TN_V_EventConfiguration" value="Event configuration" />
+			<Text id="TN_V_QualityOfTeach" value="Quality of Teach" />
+			<Text id="TN_V_QualityOfRun" value="Quality of Run" />
+			<Text id="TN_V_Excess_gain" value="Excess gain" />
+			<Text id="TN_V_FilterScaler" value="Filter scaler" />
+			<Text id="TN_V_LedIndication_DIS" value="LED indication Inactive" />
+			<Text id="TN_V_LedIndication_ENA" value="LED indication Active" />
+			<Text id="TN_V_LedIndication_FMS" value="Find my sensor" />
+			<Text id="TN_V_LedIndication" value="LED indication" />
+			<Text id="TN_V_SSC1_Hyst_Mode" value="Hysteresis mode" />
+			<Text id="TN_V_SSC1_Hyst_Mode_Man" value="Hysteresis set manually" />
+			<Text id="TN_V_SSC1_Hyst_Mode_Auto" value="Hysteresis set automatically" />
+			<Text id="TN_V_Auto_Hyst_Values" value="Automatically calculated hysteresis values" />
+			<Text id="TN_V_Auto_Hyst_Values_SP1" value="SP1" />	
+			<Text id="TN_V_Auto_Hyst_Values_SP2" value="SP2" />	
+						
+			<Text id="TN_V_IP_off" value="Off" />
+			<Text id="TN_V_IP_1sensor_filter" value="1sensor mode" />
+			<Text id="TN_V_IP_2sensor-sensor1" value="2sensor - sensor1" />
+			<Text id="TN_V_IP_2sensor-sensor2" value="2sensor - sensor2" />
+			<Text id="TN_V_IP_3sensor-sensor1" value="3sensor - sensor1" />
+			<Text id="TN_V_IP_3sensor-sensor2" value="3sensor - sensor2" />
+			<Text id="TN_V_IP_3sensor-sensor3" value="3sensor - sensor3" />
+			<Text id="TN_V_interference_protection" value="Mutual Interference protection" />
+			
+			<Text id="TN_V_AA_OFF" value="Auto Adjust Inactive" />
+			<Text id="TN_V_AA_ON" value="Auto Adjust Active" />
+			<Text id="TN_V_AA_Enable" value="Auto Adjust" />
+			<Text id="TN_V_AA_AdjustWindowPct" value="Adjust Window Size" />
+			<Text id="TN_V_AA_AdjustResolutionPct" value="Resolution Size" />
+			<Text id="TN_V_AutoAdjust_setup" value="AutoAdjust Setup" />
+			
+			<Text id="TN_V_AA_CorrectedSetpoint_SSC1" value="SSC1" />
+			<Text id="TN_V_AA_CorrectedSetpoint_SSC2" value="SSC2" />
+			<Text id="TN_V_AA_Corrected_setpoint" value="Corrected Setpoints" />
+			
+			
+			<Text id="TN_V_SFS_Normale" value="No Application Function Selected" />
+			<Text id="TN_V_SFS_Speed_And_Lenght" value="Speed and length" />
+			<Text id="TN_V_SFS_Pattern_Recognition" value="Pattern Recognition" />
+			<Text id="TN_V_SFS_Divider" value="Divider" />
+			<Text id="TN_V_SFS_Object_And_Gap_monitoring" value="Object and Gap monitoring" />
+			<Text id="TN_V_Special_Func_Selector" value="Application Function Selector" />
+			
+			<Text id="TN_V_SF_NoSensor" value="No role selected" />
+			<Text id="TN_V_SF_SensorA" value="Trigger Sensor" />
+			<Text id="TN_V_SF_SensorB" value="Main Sensor" />
+			<Text id="TN_V_Distance_Between_Sensors" value="Distance Between Sensor" />
+			<Text id="TN_V_SAL_measurement_Setup" value="Speed and and Lenght measurement Setup" />
+			
+			<Text id="TN_V_Object_length" value="Object Lenght" />
+			<Text id="TN_V_Object_speed" value="Object Speed" />
+		
+			<Text id="TN_V_SAL_Mode" value="Sensor role" />
+			<Text id="TN_V_SAL_STATUS_DISABLED" value="IDLE" />
+			<Text id="TN_V_SAL_STATUS_MEASUREMENT_RUNNING" value="Measurement running" />
+			<Text id="TN_V_SAL_STATUS_ERR_SPEED_TOO_HIGH" value="Speed Too High" />
+			<Text id="TN_V_SAL_STATUS_ERR_TIMEOUT" value="Timeout" />
+			<Text id="TN_V_SAL_STATUS_ERR_OBJ_TOO_LONG" value="Object Too Long" />
+			<Text id="TN_V_SAL_STATUS_ERR_LOGIC_FAIL" value="Logic Fail" />
+			<Text id="TN_V_SAL_Status" value="Status" />
+			
+			<Text id="TN_V_SAL_measurement_Result" value="Speed and and Lenght measurement Result" />
+			
+			<Text id="TN_V_PR_Mode" value="Sensor role" />
+			<Text id="TN_V_PR_Timeout" value="Timeout" />
+			<Text id="TN_V_PR_PatternTolerancePromille" value="Tolerance" />
+			<Text id="TN_V_PR_Setup" value="Pattern Recognition Setup" />
+			
+			
+			<Text id="TN_Pattern_Not_Saved" value="Not Saved" />
+			<Text id="TN_Pattern_Saved" value="Saved" />
+			<Text id="TN_V_PR_Ref_Pattern_SavedOrNot" value="Reference Pattern" />
+			
+			<Text id="TN_V_Reference_pattern_NoOfEdges" value="Reference Pattern No Of Edges" /> 
+			<Text id="TN_V_NoOfEdges_last_scan" value="No Of Edges Last Pattern" />
+			
+			<Text id="TN_V_PR_STATUS_CLEAR" value="IDLE" />
+			<Text id="TN_V_PR_STATUS_MEASUREMENT_RUNNING" value="Measurement running" />
+			<Text id="TN_V_PR_STATUS_PATTERN_MATCH" value="Pattern Match" />
+			<Text id="TN_V_PR_STATUS_ERR_TIMEOUT" value="Timeout" />
+			<Text id="TN_V_PR_STATUS_ERR_EDGE_EXCEED_MAX" value="Too many edges" />
+			<Text id="TN_V_PR_STATUS_ERR_EDGE_CNT_ERR" value="EDGE count ERROR" />
+			<Text id="TN_V_PR_STATUS_ERR_EDGE_TIMING_ERR" value="EDGE Timing ERROR" />	
+			<Text id="TN_V_PR_Status" value="Pattern Recognition Status" />
+			<Text id="TN_V_PR_Result" value="Pattern Recognition Result" />
+			
+			<Text id="TN_V_DaC_CounterLimit" value="Counter Limit" />
+			<Text id="TN_V_DaC_PCV" value="Preset counter value" />
+			<Text id="TN_V_DaC_Setup" value="Divider and counter Setup" />
+			
+			<Text id="TN_V_DaC_Result" value="Counter value" />
+			
+			<Text id="TN_V_OaGM_GapMinT" value="Gap minimum time" />
+			<Text id="TN_V_OaGM_GapMaxT" value="Gap maximum time " />
+			<Text id="TN_V_OaGM_objMinT" value="Object minimum time" />
+			<Text id="TN_V_OaGM_objMaxT" value="Object maximum time" />
+			<Text id="TN_V_OaGM_Setup" value="Object and Gap Monitoring Setup" />
+			
+			<Text id="TN_V_OaGM_ObjT" value="Object time" />
+			<Text id="TN_V_OaGM_GapT" value="Gap time" />
+			
+			<Text id="TN_V_OaGM_STATUS_Obj_IDLE" value="IDLE" />
+			<Text id="TN_V_OaGM_STATUS_Obj_Measurement_Run" value="Measurement running" />
+			<Text id="TN_V_OaGM_STATUS_Obj_Passed" value="Object inside limit" />
+			<Text id="TN_V_OaGM_STATUS_Obj_To_Long" value="Object to long" />
+			<Text id="TN_V_OaGM_STATUS_Obj_To_Short" value="Object to short" />
+			<Text id="TN_V_OaGM_Obj_Status" value="Object status" />
+			<Text id="TN_V_OaGM_STATUS_Gap_IDLE" value="IDLE" />
+			<Text id="TN_V_OaGM_STATUS_Gap_Measurement_Run" value="Measurement running" />
+			<Text id="TN_V_OaGM_STATUS_Gap_Passed" value="Gap inside limit" />
+			<Text id="TN_V_OaGM_STATUS_Gap_To_Long" value="Gap too long" />
+			<Text id="TN_V_OaGM_STATUS_Gap_To_Short" value="Gap too short" />
+			<Text id="TN_V_OaGM_Gap_Status" value="Gap status" />
+			<Text id="TN_V_OaGM_Result" value="Object and Gap Monitoring Result" />
+			
+			<Text id="TN_V_Ref_Pattern_timestamp_1" value="Timestamp 1" />
+			<Text id="TN_V_Ref_Pattern_timestamp_2" value="Timestamp 2" />
+			<Text id="TN_V_Ref_Pattern_timestamp_3" value="Timestamp 3" />
+			<Text id="TN_V_Ref_Pattern_timestamp_4" value="Timestamp 4" />
+			<Text id="TN_V_Ref_Pattern_timestamp_5" value="Timestamp 5" />
+			<Text id="TN_V_Ref_Pattern_timestamp_6" value="Timestamp 6" />
+			<Text id="TN_V_Ref_Pattern_timestamp_7" value="Timestamp 7" />
+			<Text id="TN_V_Ref_Pattern_timestamp_8" value="Timestamp 8" />
+			<Text id="TN_V_Ref_Pattern_timestamp_9" value="Timestamp 9" />
+			<Text id="TN_V_Ref_Pattern_timestamp_10" value="Timestamp 10" />
+			<Text id="TN_V_Ref_Pattern_timestamp_11" value="Timestamp 11" />
+			<Text id="TN_V_Ref_Pattern_timestamp_12" value="Timestamp 12" />
+			<Text id="TN_V_Ref_Pattern_timestamp_13" value="Timestamp 13" />
+			<Text id="TN_V_Ref_Pattern_timestamp_14" value="Timestamp 14" />
+			<Text id="TN_V_Ref_Pattern_timestamp_15" value="Timestamp 15" />
+			<Text id="TN_V_Ref_Pattern_timestamp_16" value="Timestamp 16" />
+			<Text id="TN_V_Ref_Pattern_timestamp_17" value="Timestamp 17" />
+			<Text id="TN_V_Ref_Pattern_timestamp_18" value="Timestamp 18" />
+			<Text id="TN_V_Ref_Pattern_timestamp_19" value="Timestamp 19" />
+			<Text id="TN_V_Ref_Pattern_timestamp_20" value="Timestamp 20" />
+			
+			<Text id="TN_V_P_EVENT_NONE" value="No edge" />
+			<Text id="TN_V_P_EVENT_POS_EDGE" value="Positiv egde" />
+			<Text id="TN_V_P_EVENT_NEG_EDGE" value="Negativ egde" />
+			
+			<Text id="TN_V_Ref_Pattern_edge_type_1" value="Pattern Timestamp 1" />
+			<Text id="TN_V_Ref_Pattern_edge_type_2" value="Pattern Timestamp 2" />
+			<Text id="TN_V_Ref_Pattern_edge_type_3" value="Pattern Timestamp 3" />
+			<Text id="TN_V_Ref_Pattern_edge_type_4" value="Pattern Timestamp 4" />
+			<Text id="TN_V_Ref_Pattern_edge_type_5" value="Pattern Timestamp 5" />
+			<Text id="TN_V_Ref_Pattern_edge_type_6" value="Pattern Timestamp 6" />
+			<Text id="TN_V_Ref_Pattern_edge_type_7" value="Pattern Timestamp 7" />
+			<Text id="TN_V_Ref_Pattern_edge_type_8" value="Pattern Timestamp 8" />
+			<Text id="TN_V_Ref_Pattern_edge_type_9" value="Pattern Timestamp 9" />
+			<Text id="TN_V_Ref_Pattern_edge_type_10" value="Pattern Timestamp 10" />
+			<Text id="TN_V_Ref_Pattern_edge_type_11" value="Pattern Timestamp 11" />
+			<Text id="TN_V_Ref_Pattern_edge_type_12" value="Pattern Timestamp 12" />
+			<Text id="TN_V_Ref_Pattern_edge_type_13" value="Pattern Timestamp 13" />
+			<Text id="TN_V_Ref_Pattern_edge_type_14" value="Pattern Timestamp 14" />
+			<Text id="TN_V_Ref_Pattern_edge_type_15" value="Pattern Timestamp 15" />
+			<Text id="TN_V_Ref_Pattern_edge_type_16" value="Pattern Timestamp 16" />
+			<Text id="TN_V_Ref_Pattern_edge_type_17" value="Pattern Timestamp 17" />
+			<Text id="TN_V_Ref_Pattern_edge_type_18" value="Pattern Timestamp 18" />
+			<Text id="TN_V_Ref_Pattern_edge_type_19" value="Pattern Timestamp 19" />
+			<Text id="TN_V_Ref_Pattern_edge_type_20" value="Pattern Timestamp 20" />
+			
+			<Text id="TN_V_Ref_ObjectTimeLength" value="Object Time Length" />
+			
+			<Text id="TN_V_Pattern" value="" />
+			
+			<!-- Diagnostics parameters -->
+			<Text id="TN_V_DiagOperatingHours" value="Operating Hours" />
+			<Text id="TN_V_DiagPowerCycles" value="Number of Power Cycles" />
+			<Text id="TN_V_DiagMaxTemp" value="Maximum temperature – All time high" />
+			<Text id="TN_V_DiagMinTemp" value="Minimum temperature - All time low" />
+			<Text id="TN_V_DiagMaxTempStartup" value="Maximum temperature since power-up" />
+			<Text id="TN_V_DiagMinTempStartup" value="Minimum temperature since power-up" />
+			<Text id="TN_V_DiagCurrentTemp" value="Current temperature" />
+			<Text id="TN_V_NonDS_NV_DataMemReloadErr_NotShown" value="" />
+			<Text id="TN_V_ProdSetMemReloadErr_NotShown" value="" />
+			<Text id="TN_V_MemoryFailFlag" value="Memory Failure" />
+			<Text id="TN_V_DiagEE_MemoryFailure" value="" />
+			<Text id="TN_V_DiagFrontendFailure" value="Frontend Failure" />
+			<Text id="TN_V_DiagDetectionCnt" value="Detection counter SSC1" />
+			<Text id="TN_V_DiagOpTempOverun" value="Minutes above Maximum Temperature" />
+			<Text id="TN_V_DiagOpTempUnderrun" value="Minutes below Minimum Temperature" />
+			<Text id="TN_V_DiagMaintenanceCnt" value="Maintenance event counter" />
+			<Text id="TN_V_DiagDownloadCnt" value="Download counter" />
+			<!-- System commands -->
+			<Text id="TN_FactoryReset" value="Factory Reset" />
+			<Text id="TN_RestoreSSC" value="Restore SSC" />
+			<Text id="TN_PresetCounterValue" value="Preset Counter Value" />
+			<Text id="TN_TeachApply" value="Teach Apply" />
+			<Text id="TN_TeachSP1" value="Teach SP1" />
+			<Text id="TN_TeachSP2" value="Teach SP2" />
+			<Text id="TN_TeachSP1TP1" value="Teach SP1 TP1" />
+			<Text id="TN_TeachSP1TP2" value="Teach SP1 TP2" />
+			<Text id="TN_TeachSP2TP1" value="Teach SP2 TP1" />
+			<Text id="TN_TeachSP2TP2" value="Teach SP2 TP2" />
+			<Text id="TN_TeachSP1Start" value="Teach SP1 Start" />
+			<Text id="TN_TeachSP1Stop" value="Teach SP1 Stop" />
+			<Text id="TN_TeachSP2Start" value="Teach SP2 Start" />
+			<Text id="TN_TeachSP2Stop" value="Teach SP2 Stop" />		
+			<Text id="TN_TeachPattern" value="Teach Pattern" />
+			<Text id="TN_TeachCancel" value="Teach Cancel" />
+			<!-- Process data -->
+			<Text id="TN_PDI_Analogue" value="Analogue Value" />
+			<Text id="TN_PDI_Analogue_obj_Length" value="Object Length" />
+			<Text id="TN_PDI_Analogue_obj_Speed" value="Object Speed" />
+			<Text id="TN_PDI_Analogue_Diveder" value="Counter Value" />
+			<Text id="TN_PDI_SC" value="Short Circuit" />
+			<Text id="TN_PDI_TA1" value="Temperature alarm" />
+			<Text id="TN_PDI_DA2" value="Dust Alarm 2" />
+			<Text id="TN_PDI_DA1" value="Dust Alarm 1" />
+			<Text id="TN_PDI_SSC2" value="Switching Signal Channel 2" />
+			<Text id="TN_PDI_SSC1" value="Switching Signal Channel 1" />
+			<Text id="TN_PDI_SFO1" value="Application Function Output 1" />
+			<Text id="TN_PDI_WDA2" value="Water Drop Alarm 2" />
+			<Text id="TN_PDI_WDA1" value="Water Drop Alarm 1" />
+			<Text id="TN_PDI_SO2" value="Switching Output 2" />
+			<Text id="TN_PDI_SO1" value="Switching Output 1" />
+			<Text id="TN_Active" value="Active" />
+			<Text id="TN_Inactive" value="Inactive" />
+			<Text id="TI_PDI" value="Process-DataInput"/>
+			<!-- Events -->
+			<!-- Menus -->
+			<Text id="TN_ME_Observation_Diag_Operating" value="Operating Diagnostic" />
+			<Text id="TN_ME_Observation_Diag_Sensor" value="Sensor Diagnostic" />
+			<Text id="TN_ME_Observation_Diag_Temp" value="Temperature Diagnostic" />
+			<Text id="TN_ME_Observation_PD" value="ProcessData" />
+			<Text id="TN_ME_Parameter_Output_SIO_1" value="Channel 1 (SO1)" />
+			<Text id="TN_ME_Parameter_Output_SIO_1_Setup" value="Channel 1 (SO1) Setup" />
+			<Text id="TN_ME_Parameter_Output_SIO_2" value="Channel 2 (SO2)" />
+			<Text id="TN_ME_Parameter_Output_SIO_2_Setup" value="Channel 2 (SO2) Setup" />
+			<Text id="TN_ME_Parameter_Sensor Specific" value="Sensor Specific" />
+			<Text id="TN_ME_Parameter_Special_Func" value="Special Functions" />
+			<Text id="TN_ME_Parameter_Application_Functions" value="Application Functions" />
+			<Text id="TN_ME_Param_Temp" value="Temperature Alarm Setup" />
+			<Text id="TN_ME_Param_Measurment" value="Sensor Measurement Selection" />
+			<Text id="TN_ME_Param_Hyst_Auto" value="Automatically Hysteresis" />
+			<Text id="TN_ME_Param_Hyst_Man" value="Manually Hysteresis" />
+			<Text id="TN_ME_SSC1_TW_Single_P" value="Setpoint" />
+			<Text id="TN_ME_AA_Corrected_setpoint" value="Corrected Setpoints" />
+			<Text id="TN_ME_Param_PR" value="Pattern Recognition" />
+			<Text id="TN_ME_Param_PR_Smart" value="Pattern Recognition Main sensor" />
+			<Text id="TN_ME_Param_SAL" value="Speed and Length measurement" />
+			<Text id="TN_ME_Param_SAL_Smart" value="Speed and Length measurement Main sensor" />
+			<Text id="TN_ME_Param_DaC" value="Divider and counter" />
+			<Text id="TN_ME_Param_OaGM" value="Object and gap monitor" />
+			<Text id="TN_ME_PDConfiguration" value="Process data configuration" />
+			<Text id="TN_ME_Pattern" value="Reference Pattern" />
+			<Text id="TN_ME_EventConfiguration" value="Event configuration" />
+			<Text id="TN_ME_DeviceAccessLocks" value="Device Access Locks" />
+			<Text id="TN_ME_Parameter_Command" value="Command" />
+			<Text id="TN_ME_TI" value="Teach-in" />
+			<Text id="TN_ME_TI_SSC1" value="Teach-in SSC1" />
+			<Text id="TN_ME_TI_SSC2" value="Teach-in SSC2" />
+			<Text id="TN_ME_TI_SingleValue_SSC1" value="Teach-in Single Value SSC1" />
+			<Text id="TN_ME_TI_SingleValue_SSC2" value="Teach-in Single Value SSC2" />
+			<Text id="TN_ME_TI_TwoValue_SSC1" value="Teach-in Two Value SSC1" />
+			<Text id="TN_ME_TI_TwoValue_SSC2" value="Teach-in Two Value SSC2" />
+			<Text id="TN_ME_TI_Dynamic_SSC1" value="Teach-in Dynamic SSC1" />
+			<Text id="TN_ME_TI_Dynamic_SSC2" value="Teach-in Dynamic SSC2" />
+			<Text id="TN_ME_SSC1" value="Switching Signal Channel 1" />
+			<Text id="TN_ME_SSC1_Adjust_IOL1" value="Setpoint" />
+			<Text id="TN_ME_SSC1_SP" value="SSC1 Single Point" />
+			<Text id="TN_ME_SSC1_Window" value="SSC1 Window IOL adjust" />
+			<Text id="TN_ME_SSC1_TP" value="SSC1 Two Point IOL adjust" />
+			<Text id="TN_ME_SSC2" value="Switching Signal Channel 2" />
+			<Text id="TN_ME_SSC2_Single_P" value="Switching Signal Channel 2 Single point" />
+			<Text id="TN_ME_SSC2_Window" value="Switching Signal Channel 2 Window" />
+			<Text id="TN_ME_SSC2_two_P" value="Switching Signal Channel 2 Two point" />			
+			<Text id="TD_ME_TI_TeachApply" value="Teach Apply" />
+			<Text id="TD_ME_TI_TeachSP1" value="Teach SP1" />
+			<Text id="TD_ME_TI_TeachSP2" value="Teach SP2" />
+			<Text id="TD_ME_TI_TeachSP1TP1" value="Teach SP1 TP1" />
+			<Text id="TD_ME_TI_TeachSP1TP2" value="Teach SP1 TP2" />
+			<Text id="TD_ME_TI_TeachSP2TP1" value="Teach SP2 TP1" />
+			<Text id="TD_ME_TI_TeachSP2TP2" value="Teach SP2 TP2" />
+			<Text id="TD_ME_TI_TeachSP1Start" value="Teach SP1 Start" />
+			<Text id="TD_ME_TI_TeachSP1Stop" value="Teach SP1 Stop" />
+			<Text id="TD_ME_TI_TeachSP2Start" value="Teach SP2 Start" />
+			<Text id="TD_ME_TI_TeachSP2Stop" value="Teach SP2 Stop" />
+			<Text id="TD_ME_TI_TeachCancel" value="Teach Cancel" />
+		</PrimaryLanguage>
+	</ExternalTextCollection>
+	<Stamp crc="629648234"><Checker name="IODD-Checker V1.1.4" version="V1.1.4.0"/></Stamp>
+</IODevice>

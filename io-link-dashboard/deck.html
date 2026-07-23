@@ -1,0 +1,292 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IO-Link V1.0 vs V1.1 — Hamed Adefuwa</title>
+<style>
+  :root{--panel:#161b22;--line:#2a3441;--text:#e6edf3;--muted:#8b949e;
+    --accent:#2f81f7;--ok:#3fb950;--warn:#e8890c;--red:#ff4d4d;--pur:#a06bd6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--text);overflow:hidden;
+    background:radial-gradient(120% 120% at 14% 8%,#161c26 0%,#0b0f16 55%,#05070a 100%)}
+  .deck{position:fixed;inset:0}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:7vh 7vw 11vh;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .35s,transform .35s}
+  .slide.on{opacity:1;transform:none;pointer-events:auto}
+  .kick{font-size:2vh;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:2.4vh}
+  .kick.g{color:var(--ok)}.kick.w{color:var(--warn)}
+  h1{font-size:8.4vh;font-weight:900;line-height:1}
+  h2{font-size:5.6vh;font-weight:900;line-height:1.04;margin-bottom:1vh}
+  .lead{font-size:3vh;color:var(--muted);font-weight:600;margin-top:2.4vh;line-height:1.45;max-width:64ch}
+  .vok{color:var(--ok)}.vwn{color:var(--warn)}.vac{color:var(--accent)}
+  .row{display:grid;gap:3vw}
+  .c2{grid-template-columns:1fr 1fr}.c11{grid-template-columns:1.1fr .9fr}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:3vh 2.2vw}
+  .box.g{border-top:5px solid var(--ok)}.box.w{border-top:5px solid var(--warn)}.box.ac{border-top:5px solid var(--accent)}
+  .box.pu{border-top:5px solid var(--pur)}.box.s{border-top:5px solid #5b6879}
+  ul.big{list-style:none}
+  ul.big li{font-size:2.7vh;line-height:1.7;padding-left:3.2vh;position:relative}
+  ul.big li:before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:900}
+  ul.big.g li:before{color:var(--ok)}ul.big.w li:before{color:var(--warn)}
+  .dvbadge{display:inline-block;font-size:2.2vh;font-weight:900;padding:.6vh 1.4vw;border-radius:999px}
+  .b11{color:var(--ok);border:2px solid rgba(63,185,80,.5);background:rgba(63,185,80,.1)}
+  .b10{color:var(--warn);border:2px solid rgba(232,137,12,.5);background:rgba(232,137,12,.1)}
+  .devimg{width:100%;height:20vh;object-fit:contain;background:#fff;border-radius:12px;padding:1.4vh}
+
+  /* concept diagram */
+  .chain{display:flex;align-items:center;gap:1.4vw;flex-wrap:wrap;margin-top:2vh}
+  .node{background:#0b0f14;border:1px solid var(--line);border-radius:14px;padding:2vh 1.6vw;text-align:center;flex:1}
+  .node .t{font-size:2.6vh;font-weight:900}.node .s{font-size:1.9vh;color:var(--muted);margin-top:.5vh}
+  .wire{font-size:1.9vh;color:var(--accent);font-weight:900;white-space:nowrap}
+
+  /* live widget */
+  .live{background:#0b0f14;border:1px solid var(--line);border-radius:14px;padding:2.4vh 1.8vw}
+  .lvhead{display:flex;align-items:center;gap:1vw;margin-bottom:1.6vh}
+  .lvhead select{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;
+    padding:1.1vh 1vw;font-size:2.2vh;font-weight:800;font-family:inherit}
+  .demotag{font-size:1.6vh;font-weight:900;padding:.4vh .9vw;border-radius:999px;color:#ffb063;
+    border:1px solid rgba(232,137,12,.5);background:rgba(232,137,12,.16)}
+  .lvbody{display:flex;align-items:center;gap:1.4vw}
+  .led{width:8vh;height:8vh;border-radius:50%;flex:none;border:3px solid var(--line);
+    background:radial-gradient(circle at 35% 30%,#20262e,#0b0f14);transition:.12s}
+  .led.on{background:radial-gradient(circle at 35% 30%,#5ff08a,#1f9d43);border-color:var(--ok);box-shadow:0 0 4vh .8vh rgba(63,185,80,.55)}
+  .lvval{font-size:6.4vh;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+  .lvval small{font-size:2.4vh;color:var(--muted);font-weight:700;margin-left:.4vw}
+  .lvst{font-size:2.2vh;font-weight:900;color:var(--muted);margin-top:.4vh}.lvst.on{color:var(--ok)}
+  canvas.ch{width:100%;height:15vh;display:block;background:#0b0f14;border:1px solid var(--line);border-radius:12px;margin-top:1.6vh}
+  .lvcap{font-size:1.9vh;color:var(--muted);margin-top:1.2vh}
+
+  /* timeline */
+  .tl{display:flex;align-items:stretch;gap:0;margin-top:3vh}
+  .tlnode{flex:1;text-align:center;position:relative}
+  .tlnode .dot{width:2.4vh;height:2.4vh;border-radius:50%;margin:0 auto 1.6vh}
+  .tlnode.a .dot{background:var(--warn)}.tlnode.b .dot{background:var(--ok)}
+  .tlnode:after{content:"";position:absolute;top:1.2vh;left:50%;right:-50%;height:3px;background:var(--line);z-index:-1}
+  .tlnode:last-child:after{display:none}
+  .tlv{font-size:4vh;font-weight:900}.tlnode.a .tlv{color:var(--warn)}.tlnode.b .tlv{color:var(--ok)}
+  .tlt{font-size:2.2vh;font-weight:800;margin-top:.4vh}.tls{font-size:1.9vh;color:var(--muted);margin-top:.6vh;line-height:1.4;padding:0 1vw}
+  canvas.hist{width:100%;height:36vh;display:block;background:#0b0f14;border:1px solid var(--line);border-radius:14px;margin-top:3vh}
+
+  /* table */
+  table.diff{width:100%;border-collapse:collapse;margin-top:2.4vh;font-size:2.5vh}
+  table.diff th,table.diff td{padding:1.6vh 1.4vw;text-align:left;border-bottom:1px solid var(--line)}
+  table.diff thead th{font-size:2vh;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  table.diff th.aspect,table.diff td.aspect{color:var(--muted);font-weight:800;width:26%}
+  table.diff td.v10{color:#ffb063;font-weight:700}table.diff td.v11{color:#7ff0a2;font-weight:800}
+  table.diff thead .h10{color:var(--warn)}table.diff thead .h11{color:var(--ok)}
+  table.diff tbody tr:nth-child(even){background:rgba(255,255,255,.022)}
+
+  .huge{font-size:8vh;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+  .final{background:linear-gradient(180deg,#12331d,#0d1219);border:2px solid var(--ok);border-radius:16px;
+    padding:3vh 2.4vw;font-size:3vh;font-weight:900;margin-top:3vh;line-height:1.4}
+  .final b{color:var(--ok)}
+
+  /* chrome */
+  .brand{position:fixed;top:3vh;right:3.5vw;display:flex;align-items:center;gap:.7vw;font-size:1.9vh;font-weight:900;z-index:9}
+  .brand .h{color:var(--red)}
+  .conn{position:fixed;top:3vh;left:3.5vw;display:flex;align-items:center;gap:.6vw;font-size:1.7vh;font-weight:800;color:var(--muted);z-index:9}
+  .cdot{width:1.1vh;height:1.1vh;border-radius:50%;background:#2a3441}.cdot.ok{background:var(--ok);box-shadow:0 0 1.2vh var(--ok)}.cdot.bad{background:var(--red)}
+  .nav{position:fixed;bottom:2.4vh;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:1.2vw;z-index:9}
+  .nav button{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;width:5.6vh;height:5.6vh;font-size:2.8vh;cursor:pointer}
+  .nav button:hover{border-color:var(--accent)}
+  .dots{display:flex;gap:.8vh}.dots i{width:1.2vh;height:1.2vh;border-radius:50%;background:#2a3441;cursor:pointer}
+  .dots i.on{background:var(--accent);transform:scale(1.3)}
+  .count{position:fixed;bottom:3vh;right:3.5vw;font-size:1.9vh;color:var(--muted);font-weight:800;z-index:9}
+  .hint{position:fixed;bottom:3vh;left:3.5vw;font-size:1.5vh;color:#5b6879;z-index:9}
+</style>
+
+<div class="conn"><span class="cdot" id="cdot"></span><span id="conn">live · AL1350</span></div>
+<div class="brand"><svg width="24" height="17" viewBox="0 0 28 20"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 6l7 4-7 4z" fill="#fff"/></svg><span class="h">@hamedadefuwa</span></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide on">
+    <div class="kick">IO-Link Practical Course · #5</div>
+    <h1>IO-Link <span class="vwn">V1.0</span> <span style="color:var(--muted)">vs</span> <span class="vok">V1.1</span></h1>
+    <div class="lead">What changed between the two versions — and why it matters when you're specifying real hardware.</div>
+    <div class="row c2" style="margin-top:4vh;max-width:52vw">
+      <div class="box w" style="text-align:center"><img class="devimg" src="img/llr.png"><div style="font-size:2.4vh;font-weight:900;margin-top:1vh">Contrinex LLR</div><span class="dvbadge b10" style="margin-top:1vh">V1.0</span><div style="font-size:1.9vh;color:var(--muted);margin-top:.9vh">IODD dated 2016</div></div>
+      <div class="box g" style="text-align:center"><img class="devimg" src="img/pd30.png"><div style="font-size:2.4vh;font-weight:900;margin-top:1vh">Carlo Gavazzi PD30</div><span class="dvbadge b11" style="margin-top:1vh">V1.1</span><div style="font-size:1.9vh;color:var(--muted);margin-top:.9vh">IODD dated 2021</div></div>
+    </div>
+  </section>
+
+  <!-- 2 HISTORY -->
+  <section class="slide">
+    <div class="kick">How we got here</div>
+    <h2>A short history of IO-Link</h2>
+    <div class="tl" style="max-width:60vw">
+      <div class="tlnode a"><div class="dot"></div><div class="tlv">2006</div><div class="tlt">V1.0 released</div>
+        <div class="tls">The original interface spec — proved the concept.</div></div>
+      <div class="tlnode b"><div class="dot"></div><div class="tlv">2013</div><div class="tlt">V1.1 released</div>
+        <div class="tls">The practical standard — also standardised as IEC&nbsp;61131-9.</div></div>
+    </div>
+    <canvas class="hist" id="histCh"></canvas>
+    <div class="lvcap" style="text-align:center;margin-top:1vh">Installed IO-Link nodes worldwide, millions · source: IO-Link Community</div>
+  </section>
+
+  <!-- 4 KEY DIFFERENCES -->
+  <section class="slide">
+    <div class="kick">Side by side</div>
+    <h2>Key technical differences</h2>
+    <table class="diff">
+      <thead><tr><th class="aspect"></th><th class="h10">IO-Link V1.0</th><th class="h11">IO-Link V1.1</th></tr></thead>
+      <tbody>
+        <tr><td class="aspect">Communication</td><td class="v10">COM1 / COM2 · COM3 optional</td><td class="v11">COM3 (230.4k) required for masters</td></tr>
+        <tr><td class="aspect">IODD support</td><td class="v10">IODD 1.0.1 · smaller file</td><td class="v11">IODD 1.1 · richer descriptions</td></tr>
+        <tr><td class="aspect">Parameter storage</td><td class="v10">✘ none</td><td class="v11">✔ Data Storage — auto backup</td></tr>
+        <tr><td class="aspect">Data consistency</td><td class="v10">single writes</td><td class="v11">block parameterisation</td></tr>
+        <tr><td class="aspect">Diagnostics</td><td class="v10">basic events</td><td class="v11">standardised events &amp; status</td></tr>
+        <tr><td class="aspect">Device replacement</td><td class="v10">reconfigure by hand</td><td class="v11">automatic — settings restored</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 WHY IT MATTERS -->
+  <section class="slide">
+    <div class="kick g">On the factory floor</div>
+    <h2>Why V1.1 matters in practice</h2>
+    <div class="row c11">
+      <ul class="big g" style="font-size:2.9vh">
+        <li>Easier <b>sensor replacement</b> — plug &amp; go</li>
+        <li><b>Automatic parameter download</b> to the new device</li>
+        <li>Faster <b>commissioning</b></li>
+        <li>Less <b>downtime</b></li>
+        <li>Better <b>vendor interoperability</b></li>
+      </ul>
+      <div class="live">
+        <div class="lvhead">
+          <select id="cA" style="flex:1"></select><span style="color:var(--muted);font-weight:900">vs</span><select id="cB" style="flex:1"></select></div>
+        <div style="display:flex;gap:1.2vw;text-align:center">
+          <div style="flex:1"><div class="huge" id="rwA">--</div><div class="lvcap" id="lblA"></div></div>
+          <div style="flex:1"><div class="huge" id="rwB">--</div><div class="lvcap" id="lblB"></div></div>
+        </div>
+        <div style="display:flex;gap:1.2vw;margin-top:1.6vh">
+          <div style="flex:1;text-align:center"><div class="led" id="cLedA" style="margin:0 auto;width:6vh;height:6vh"></div><div class="lvst" id="cStA" style="font-size:1.8vh">—</div></div>
+          <div style="flex:1;text-align:center"><div class="led" id="cLedB" style="margin:0 auto;width:6vh;height:6vh"></div><div class="lvst" id="cStB" style="font-size:1.8vh">—</div></div>
+        </div>
+        <div class="lvcap">writable settings you get remotely — no screwdriver on either.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 CONCLUSION -->
+  <section class="slide">
+    <div class="kick">The takeaway</div>
+    <h2>Conclusion</h2>
+    <div class="row c2" style="margin-top:1vh">
+      <div class="box w"><div class="dvbadge b10">V1.0</div><div style="font-size:3vh;font-weight:900;margin-top:1.4vh">Proved the concept</div>
+        <div class="lead" style="font-size:2.3vh;margin-top:1vh">Identity, remote config and diagnostics over one cable — a real leap past a plain sensor.</div></div>
+      <div class="box g"><div class="dvbadge b11">V1.1</div><div style="font-size:3vh;font-weight:900;margin-top:1.4vh">Made it practical</div>
+        <div class="lead" style="font-size:2.3vh;margin-top:1vh">Data Storage, bigger process data and consistent diagnostics — ready for real industrial use.</div></div>
+    </div>
+    <div class="final">For new systems, use <b>V1.1</b> — unless legacy compatibility is required.</div>
+  </section>
+
+</div>
+
+<div class="count"><span id="cur">1</span> / 5</div>
+<div class="hint">← → or space · click · F = fullscreen</div>
+<div class="nav"><button id="prev">‹</button><div class="dots" id="dots"></div><button id="next">›</button></div>
+
+<script>
+const $=id=>document.getElementById(id);
+/* ---- device config ---- */
+const PORTS={
+ 1:{n:'X01 · OBD1000 (v1.1)',label:'Switching signal',unit:'',max:1,binary:true,rw:13,
+    dec:h=>({det:!!(parseInt(h,16)&1),val:(parseInt(h,16)&1)?1:0})},
+ 2:{n:'X02 · TP9237 (v1.1)',label:'Temperature',unit:'°C',max:80,rw:5,
+    dec:h=>({det:false,val:(parseInt(h,16)||0)/10})},
+ 3:{n:'X03 · Contrinex (v1.0)',label:'Beam signal',unit:'',max:1000,rw:10,simRx:true,
+    dec:h=>({det:false,val:0})},
+ 4:{n:'X04 · PD30 (v1.1)',label:'Measured value',unit:'',max:300,rw:26,
+    dec:h=>{const r=parseInt(h,16)>>>0;return{det:!!(r&0x1),val:(r>>>16)&0xFFFF};}}   // top 16 bits = value, bit0 = SSC1
+};
+function optlist(cur){return Object.entries(PORTS).map(([k,d])=>`<option value="${k}" ${k==cur?'selected':''}>${d.n}</option>`).join('');}
+$('cA').innerHTML=optlist(4);
+$('cB').innerHTML=optlist(3);
+
+/* ---- data ---- */
+async function al(b){try{const r=await fetch('/api/al',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});return await r.json();}catch(e){return null;}}
+let S={}; const push=(p,v)=>{(S[p]=S[p]||[]).push(v);if(S[p].length>70)S[p].shift();};
+let phase=0,failStreak=0;
+function setReach(ok){ if(ok){failStreak=0;$('cdot').className='cdot ok';$('conn').textContent='live · AL1350';}
+  else{failStreak++;if(failStreak>=4){$('cdot').className='cdot bad';$('conn').textContent='master unreachable';}} }
+async function pollPort(p){
+  const d=PORTS[p];
+  if(d.simRx){const t=phase*0.9,bl=Math.sin(t)>0.5;return{det:bl,val:bl?40+Math.random()*35:880+Math.sin(t*3)*30,ok:true,sim:true};}
+  const j=await al({code:'request',cid:1,adr:`/iolinkmaster/port[${p}]/iolinkdevice/pdin/getdata`});
+  if(!(j&&j.code===200&&j.data))return{ok:false};
+  return {...d.dec(j.data.value),ok:true};
+}
+function drawG(cv,arr,color,max){
+  if(!cv)return;const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;
+  if(cv.width!==w*dpr||cv.height!==h*dpr){cv.width=w*dpr;cv.height=h*dpr;}
+  const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+  c.strokeStyle='#1b2430';c.lineWidth=1;for(let k=1;k<4;k++){const y=h/4*k;c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
+  if(arr.length<2)return;const top=Math.max(max,...arr);const X=k=>k/(arr.length-1)*w,Y=v=>h-Math.max(0,Math.min(1,v/top))*(h-10)-5;
+  const g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,color+'55');g.addColorStop(1,color+'00');
+  c.beginPath();c.moveTo(0,h);arr.forEach((v,k)=>c.lineTo(X(k),Y(v)));c.lineTo(w,h);c.closePath();c.fillStyle=g;c.fill();
+  c.beginPath();arr.forEach((v,k)=>k?c.lineTo(X(k),Y(v)):c.moveTo(X(k),Y(v)));c.strokeStyle=color;c.lineWidth=3;c.lineJoin='round';c.stroke();
+}
+function valTxt(d,r){return d.binary?(r.det?'ON':'OFF'):(d.unit==='°C'?r.val.toFixed(1):Math.round(r.val));}
+
+/* ---- IO-Link history chart (installed nodes, millions) ---- */
+const HIST=[[2013,5],[2014,6],[2015,7.5],[2016,9],[2017,11.5],[2018,14],[2019,18.5],[2020,22.5],[2021,27.3],[2022,35.7],[2023,51.6],[2024,65]];
+function drawHist(){
+  const cv=$('histCh');if(!cv)return;
+  const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;
+  cv.width=w*dpr;cv.height=h*dpr;const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+  const padL=48,padB=30,padT=22,padR=18,maxY=70;
+  const x0=padL,x1=w-padR,y0=h-padB,y1=padT;
+  const X=yr=>x0+(yr-2013)/(2024-2013)*(x1-x0), Y=v=>y0-(v/maxY)*(y0-y1);
+  c.font='12px "Segoe UI"';
+  c.strokeStyle='#1b2430';c.fillStyle='#8b949e';c.textAlign='right';
+  for(let m=0;m<=60;m+=20){const y=Y(m);c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke();c.fillText(m+'m',x0-8,y+4);}
+  c.textAlign='center';HIST.forEach(([yr])=>{if(yr%2===1||yr===2024)c.fillText(yr,X(yr),y0+18);});
+  const g=c.createLinearGradient(0,y1,0,y0);g.addColorStop(0,'#e8890c99');g.addColorStop(1,'#e8890c00');
+  c.beginPath();c.moveTo(X(2013),y0);HIST.forEach(([yr,v])=>c.lineTo(X(yr),Y(v)));c.lineTo(X(2024),y0);c.closePath();c.fillStyle=g;c.fill();
+  c.beginPath();HIST.forEach(([yr,v],k)=>k?c.lineTo(X(yr),Y(v)):c.moveTo(X(yr),Y(v)));c.strokeStyle='#e8890c';c.lineWidth=3;c.lineJoin='round';c.stroke();
+  c.fillStyle='#fff';HIST.forEach(([yr,v])=>{c.beginPath();c.arc(X(yr),Y(v),3.2,0,7);c.fill();});
+  c.font='bold 14px "Segoe UI"';[[2021,27.3],[2022,35.7],[2023,51.6]].forEach(([yr,v])=>{c.textAlign='center';c.fillText(v+'m',X(yr),Y(v)-12);});
+  c.strokeStyle='rgba(63,185,80,.6)';c.setLineDash([5,5]);c.beginPath();c.moveTo(X(2013),y1);c.lineTo(X(2013),y0);c.stroke();c.setLineDash([]);
+  c.fillStyle='#3fb950';c.font='bold 13px "Segoe UI"';c.textAlign='left';c.fillText('V1.1 · 2013',X(2013)+7,y1+13);
+}
+window.addEventListener('resize',()=>{drawHist();});
+
+async function tick(){
+  phase+=0.09; let attempted=false,ok=false;
+  if(cur===3){                              // WHY slide
+    for(const side of ['A','B']){
+      const p=+$('c'+side).value,d=PORTS[p],r=await pollPort(p);
+      if(!r.sim){attempted=true;if(r.ok)ok=true;} else ok=true;
+      $('rw'+side).textContent=d.rw;$('rw'+side).style.color=d.rw>=13?'var(--ok)':'var(--warn)';
+      $('lbl'+side).textContent=d.n.split(' · ')[1]+' · settings';
+      if(r.ok){const det=d.simRx?(r.val<400):r.det;
+        $('cLed'+side).className='led'+(det?' on':'');
+        $('cSt'+side).textContent=det?'detected':'clear';$('cSt'+side).className='lvst'+(det?' on':'');}
+    }
+  }
+  if(attempted)setReach(ok);
+}
+['cA','cB'].forEach(id=>$(id).onchange=()=>{S={};tick();});
+
+/* ---- nav ---- */
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+$('dots').innerHTML=slides.map((_,n)=>`<i data-n="${n}" class="${n===0?'on':''}"></i>`).join('');
+const dots=[...document.querySelectorAll('.dots i')];
+function go(n){cur=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('on',k===cur));
+  dots.forEach((d,k)=>d.classList.toggle('on',k===cur));$('cur').textContent=cur+1;
+  if(cur===1)setTimeout(drawHist,60);}
+$('next').onclick=()=>go(cur+1);$('prev').onclick=()=>go(cur-1);
+dots.forEach(d=>d.onclick=()=>go(+d.dataset.n));
+document.addEventListener('keydown',e=>{const t=(e.target.tagName||'').toLowerCase();if(t==='select'||t==='input')return;
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(cur+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+  else if(e.key==='Home')go(0);else if(e.key==='End')go(slides.length-1);
+  else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}});
+document.addEventListener('click',e=>{if(e.target.closest('.nav')||e.target.closest('.live')||e.target.closest('a')||e.target.closest('select'))return;
+  go(e.clientX>innerWidth/2?cur+1:cur-1);});
+setInterval(tick,400);tick();setTimeout(drawHist,120);
+</script>

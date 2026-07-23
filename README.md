@@ -7,6 +7,7 @@ Hands-on video tutorials and reference materials for learning **IO-Link** — fr
 This repository supports the accompanying **YouTube tutorial series**. Each episode walks through practical steps using real industrial hardware so you can follow along at your own pace.
 
 **Repository:** [github.com/hadefuwa/io-link-tutorials](https://github.com/hadefuwa/io-link-tutorials)
+**YouTube:** [@hamedadefuwa](https://www.youtube.com/@hamedadefuwa)
 
 ---
 
@@ -30,7 +31,11 @@ Think of it as giving every sensor a small, standardized "data sheet" that your 
 | Role | Device | Description |
 |------|--------|-------------|
 | **IO-Link Master** | [ifm AL1350](https://www.ifm.com) | DataLine 4-port IO-Link master with built-in IoT interface |
-| **IO-Link Device** | [Pepperl+Fuchs OBD1000-R100-2EP-IO-V31](https://www.pepperl-fuchs.com/en/products-gp25581/69880) | Diffuse-mode photoelectric sensor with IO-Link |
+| **IO-Link Device** | [Pepperl+Fuchs OBD1000-R100-2EP-IO-V31](https://www.pepperl-fuchs.com/en/products-gp25581/69880) | Diffuse-mode photoelectric sensor with IO-Link 1.1 (main demo device) |
+| **IO-Link Device** | Carlo Gavazzi PD30CTDR10BPM5IO | Diffuse photoelectric sensor with IO-Link 1.1 |
+| **IO-Link Device** | Contrinex LLR-C23PA-NMS-400 | Photoelectric sensor with IO-Link **1.0** — used to demo 1.0 vs 1.1 differences (Lesson 5) |
+
+Datasheets and IODD files for all three sensors are in [docs/](docs/).
 
 ### ifm AL1350 — IO-Link Master (IoT)
 
@@ -93,21 +98,23 @@ A minimal bench setup looks like this:
 
 ---
 
-## Tutorial Series (Planned)
+## Tutorial Series
 
-| # | Topic | What you'll learn |
-|---|-------|-------------------|
-| 1 | **What is IO-Link?** | IO-Link vs standard digital I/O, master/device roles, when to use it |
-| 2 | **Hardware & Wiring** | Power, cabling, port modes, first physical connection |
-| 3 | **Master Setup** | AL1350 web interface, port configuration, device detection |
-| 4 | **SIO Mode** | Using the sensor as a normal digital input (no IO-Link stack) |
-| 5 | **IO-Link Mode** | Enabling IO-Link, reading process data, device identification |
-| 6 | **IODD & Parameters** | Loading the IODD, reading/writing device parameters |
-| 7 | **Diagnostics** | Device status, error codes, maintenance data |
-| 8 | **IoT Data Path** | MQTT/JSON from the AL1350 IoT port to a PC or dashboard |
-| 9 | **PLC Integration** | Connecting via PROFINET or EtherNet/IP (overview) |
+Each lesson has its own folder with a README, video script, and YouTube description.
 
-> YouTube playlist link: *coming soon*
+| # | Topic | Status | What you'll learn |
+|---|-------|--------|-------------------|
+| 1 | [What Is IO-Link?](Lesson%201%20-%20Overview/README.md) | ✅ Published | IO-Link vs standard digital I/O, master/device roles, when to use it |
+| 2 | [IO-Link Master Software (ifm moneo)](Lesson%202%20-%20IO-Link%20Master%20Software/README.md) | ✅ Published | Configuring smart devices with manufacturer software — no code |
+| 3 | [The IO-Link Master Web Server](Lesson%203%20-%20IO-Link%20Master%20Web%20Server/README.md) | 🔵 Planned | The AL1350's built-in web server — read live data with no software installed |
+| 4 | [IODD Files & the IODD Database](Lesson%204%20-%20IODD%20Files%20and%20Database/README.md) | 🔵 Planned | How software understands any sensor from any brand; reading the IODD XML |
+| 5 | [IO-Link Versions: 1.0 vs 1.1](Lesson%205%20-%20IO-Link%20Versions%201.0%20vs%201.1/README.md) | 🔵 Planned | What changed between versions and why it matters before you buy a sensor |
+| — | HTTP from an S7-1200 PLC (no Profinet) | 🔵 Planned | Reading IO-Link data over HTTP from a Siemens PLC |
+| — | MQTT from an S7-1200 PLC (no Profinet) | 🔵 Planned | Streaming IO-Link data over MQTT from a Siemens PLC |
+
+See [course-description.md](course-description.md) for the full playlist description and [course-plan.html](course-plan.html) for the visual course plan.
+
+> YouTube channel: [@hamedadefuwa](https://www.youtube.com/@hamedadefuwa)
 
 ---
 
@@ -115,21 +122,46 @@ A minimal bench setup looks like this:
 
 ```
 io-link-tutorials/
-├── README.md                          ← You are here
+├── README.md                              ← You are here
+├── course-description.md                  ← Playlist description (copy-paste ready)
+├── course-plan.html                       ← Visual course plan
+├── Lesson 1 - Overview/                   ← Per-lesson README, script, YouTube description
+├── Lesson 2 - IO-Link Master Software/
+├── Lesson 3 - IO-Link Master Web Server/
+├── Lesson 4 - IODD Files and Database/
+├── Lesson 5 - IO-Link Versions 1.0 vs 1.1/
 ├── docs/
-│   └── OBD1000-R100-2EP-IO-V31/
-│       └── Pepperl-Fuchs_OBD1000_R10x-20180815-IODD1.1.xml   ← Device description (IODD)
-├── wiring/                            ← Wiring diagrams and photos (planned)
-├── configs/                           ← Example master configs and exports (planned)
-└── scripts/                           ← Helper scripts for MQTT/JSON demos (planned)
+│   ├── OBD1000-R100-2EP-IO-V31/           ← Pepperl+Fuchs sensor: IODD 1.1, datasheet, images
+│   ├── Carlo Gavazzi PD30CTDR10BPM5IO/    ← Carlo Gavazzi sensor: IODD 1.1, datasheet
+│   ├── Contrinex LLR-C23PA-NMS-400/       ← Contrinex sensor: IODD 1.0.1, datasheets
+│   └── User Manual.pdf                    ← ifm AL1350 manual
+├── images/                                ← Thumbnails and screenshots
+└── io-link-dashboard/                     ← Live browser dashboard (see below)
 ```
 
-### IODD File
+### IODD Files
 
-The **IODD** (IO Device Description) XML file in `docs/` describes the Pepperl+Fuchs OBD1000 sensor — its parameters, process data layout, and text labels. Load this file into ifm's engineering software or compatible IO-Link tools to get human-readable parameter names instead of raw index numbers.
+Each sensor folder in `docs/` contains the **IODD** (IO Device Description) XML describing that device — its parameters, process data layout, and text labels. Load an IODD into ifm's engineering software or compatible IO-Link tools to get human-readable parameter names instead of raw index numbers.
+
+The main demo device is the Pepperl+Fuchs OBD1000:
 
 - Device ID: `1114369` (`0x110101`)
 - IO-Link revision: 1.1
+
+---
+
+## Live Dashboard App (`io-link-dashboard/`)
+
+A zero-install browser dashboard that reads and writes the sensor live through the AL1350's IoT Core (HTTP/JSON) interface. **Windows PowerShell + a browser only** — no Node, no admin rights.
+
+```
+Browser (index.html) ◄──► server.ps1 (loopback proxy) ◄──► AL1350 IoT Core (192.168.7.4)
+```
+
+- **Run it:** double-click `io-link-dashboard/start.bat` — it starts a small PowerShell web server (auto-picks a free port from 8088) and opens the dashboard.
+- Live process data, ISDU parameter read/write (signal level, temperatures, operating hours, SP1 threshold, switching logic, user tag), all decoded per the OBD1000 IODD.
+- Master IP and ports are configured in `config.json`, editable live in the UI.
+- Extras: `explorer.html` (IoT Core API explorer), `demo-dashboard.html` (offline demo), `deck.html` / `present.html` (presentation decks), `test-connection.ps1` and `plc-test.ps1` (CLI probes).
 
 ---
 
@@ -140,7 +172,8 @@ The **IODD** (IO Device Description) XML file in `docs/` describes the Pepperl+F
 | ifm AL1350 web interface | Configure ports, view connected devices | `http://<master-ip>` (default via DHCP or USB) |
 | ifm moneo configure | Device parameterization, IODD import | [ifm moneo](https://www.ifm.com) |
 | ifm IoT Core | Cloud/edge connectivity for AL1350 | [ifm IoT Core](https://www.ifm.com) |
-| IO-Link Community IODD finder | Download IODD files for other devices | [io-link.com](https://www.io-link.com) |
+| IO-Link Community IODD finder | Download IODD files for other devices | [ioddfinder.io-link.com](https://ioddfinder.io-link.com) |
+| Live dashboard (this repo) | Browser dashboard for live sensor data via IoT Core | [io-link-dashboard/](io-link-dashboard/) |
 
 ---
 
@@ -193,7 +226,7 @@ Found an error in the docs, have a wiring tip, or want to suggest a tutorial top
 
 ## License
 
-Documentation and tutorial materials in this repository are provided for educational purposes. Hardware trademarks belong to their respective owners (ifm electronic, Pepperl+Fuchs).
+Documentation and tutorial materials in this repository are provided for educational purposes. Hardware trademarks belong to their respective owners (ifm electronic, Pepperl+Fuchs, Carlo Gavazzi, Contrinex, Siemens).
 
 ---
 
@@ -202,4 +235,4 @@ Documentation and tutorial materials in this repository are provided for educati
 Created by [hadefuwa](https://github.com/hadefuwa) to help engineers, technicians, and automation enthusiasts understand IO-Link through practical, follow-along video tutorials.
 
 - **GitHub:** [hadefuwa/io-link-tutorials](https://github.com/hadefuwa/io-link-tutorials)
-- **YouTube:** *channel link coming soon*
+- **YouTube:** [@hamedadefuwa](https://www.youtube.com/@hamedadefuwa)
